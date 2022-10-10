@@ -1,0 +1,7 @@
+.nav-bar{
+    background-image: -webkit-image-set( url(images/banner/background-04-1920x60.jpg) 1x);
+    display: block;
+    background-position: center right;
+    background-size: cover;
+    text-align: center;
+}
