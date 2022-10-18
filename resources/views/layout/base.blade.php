@@ -10,10 +10,8 @@
 
         <link rel="stylesheet" type="text/css" href="/css/app.css">
         <link rel="stylesheet" type="text/css" href="/css/print.css">
-
-        <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/solid.js" integrity="sha384-+Ga2s7YBbhOD6nie0DzrZpJes+b2K1xkpKxTFFcx59QmVPaSA8c7pycsNaFwUK6l" crossorigin="anonymous"></script>
-        <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/regular.js" integrity="sha384-t7yHmUlwFrLxHXNLstawVRBMeSLcXTbQ5hsd0ifzwGtN7ZF7RZ8ppM7Ldinuoiif" crossorigin="anonymous"></script>
-        <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/fontawesome.js" integrity="sha384-7ox8Q2yzO/uWircfojVuCQOZl+ZZBg2D2J5nkpLqzH1HY0C1dHlTKIbpRz/LG23c" crossorigin="anonymous"></script>
+        <link href="{{asset('lib/datepicker/css/bootstrap-datepicker3.css') }}" rel="stylesheet">
+        <script type="text/javascript" src="{{asset('lib/datepicker/js/bootstrap-datepicker.js') }}"></script>
     </head>
     <body>
         @section('nav')
@@ -25,28 +23,6 @@
                 <div class="collapse navbar-collapse" id="navbarColor01">
                     @if (!Auth::guest())
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item @if (strstr('/', Request::path())) active @endif">
-                            <a class="nav-link" href="{{ route('welcome') }}">Home</a>
-                        </li>
-                        <li class="nav-item @if (strstr('planning', Request::path())) active @endif">
-                            <a class="nav-link" href="{{ route('planning') }}">Planning</a>
-                        </li>
-                        @can('edit.all')
-                        <li class="nav-item @if (strstr('kamers', Request::path())) active @endif">
-                            <a class="nav-link" href="{{ route('rooms') }}">Kamers</a>
-                        </li>
-                        <li class="nav-item @if (strstr('extras', Request::path())) active @endif">
-                            <a class="nav-link" href="{{ route('extra') }}">Extra's</a>
-                        </li>
-                        <li class="nav-item @if (strstr('stats', Request::path())) active @endif">
-                            <a class="nav-link" href="{{ route('stats') }}">Statistieken</a>
-                        </li>
-                        @endcan
-                        @can('access.admin')
-                        <li class="nav-item @if (strstr('admin', Request::path())) active @endif">
-                            <a class="nav-link" href="{{ route('admin') }}">Admin</a>
-                        </li>
-                        @endcan
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url('/logout') }}"
                                 onclick="event.preventDefault();
@@ -59,21 +35,14 @@
                             </form>
                         </li>
                     </ul>
-                    <form action="{{ route('booking.search') }}" method="GET" class="form-inline my-2 my-lg-0">
-                        {{-- {{ csrf_field() }} --}}
-                        <input class="form-control mr-sm-2 search__input" placeholder="Zoek boeking... (min. 3 karakters)" type="text" name="search" value="{{ app('request')->input('search') }}" pattern=".{3,}" title="min. 3 karakters" required>
-                        <button class="btn btn-secondary my-2 my-sm-0" type="submit">Zoek</button>
-                    </form>
                     @endif
                 </div>
             </nav>
         @show
-
         <div class="container">
             @yield('content')
         </div>
-
-
         <script type="text/javascript" src="/js/app.js" ></script>
+        @yield('javascript')
     </body>
 </html>
