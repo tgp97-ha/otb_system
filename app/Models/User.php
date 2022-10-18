@@ -2,15 +2,16 @@
 
 namespace App\Models;
 
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Spatie\Permission\Traits\HasRoles;
 use function abort;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -18,23 +19,20 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'role_id',
+        'name',
+        'email',
+        'password',
+        'role_id',
     ];
-
     /**
      * The attributes that should be hidden for arrays.
      *
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password',
+        'remember_token',
     ];
-
-    public function role(): BelongsTo
-    {
-        return $this->belongsTo(Role::class);
-    }
-
     /**
      * @param string|array $roles
      */
@@ -67,8 +65,8 @@ class User extends Authenticatable
         return $this->role->name === $role;
     }
 
-    public function roles(): BelongsToMany
+    public function tourist(): HasMany
     {
-        return $this->belongsToMany(Role::class);
+        return $this->hasMany(Tourist::class, 'user_serial', 'serial');
     }
 }
