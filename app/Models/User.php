@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use function abort;
 
 class User extends Authenticatable
@@ -37,7 +38,7 @@ class User extends Authenticatable
     /**
      * @param string|array $roles
      */
-    public function authorizeRoles($roles)
+    public function authorizeRoles($roles): bool
     {
         if (is_array($roles)) {
             return $this->hasAnyRole($roles) || abort(401, 'This action is unauthorized.');
@@ -51,7 +52,7 @@ class User extends Authenticatable
      *
      * @param array $roles
      */
-    public function hasAnyRole($roles)
+    public function hasAnyRole($roles): bool
     {
         return in_array($this->role->name, $roles);
     }
@@ -61,13 +62,13 @@ class User extends Authenticatable
      *
      * @param string $role
      */
-    public function hasRole($role)
+    public function hasRole($role): bool
     {
         return $this->role->name === $role;
     }
 
-    public function isSuperAdmin()
+    public function roles(): BelongsToMany
     {
-        return $this->role->name === 'superadmin';
+        return $this->belongsToMany(Role::class);
     }
 }

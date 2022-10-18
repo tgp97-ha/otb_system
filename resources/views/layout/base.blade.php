@@ -6,7 +6,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>@hasSection('title')@yield('title') - @endif{{ config('app.name') }} Booking System</title>
+        <title>{{ config('app.name', 'OTB System') }}</title>
 
         <link rel="stylesheet" type="text/css" href="/css/app.css">
         <link rel="stylesheet" type="text/css" href="/css/print.css">
