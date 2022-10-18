@@ -13,7 +13,12 @@ class CreateRolesTable extends Migration
      */
     public function up()
     {
-        //
+	    Schema::create('roles', function (Blueprint $table) {
+		    $table->primaryColumn();
+		    $table->string('name');
+		    $table->string('description');
+		    $table->defaultFields();
+	    });
     }
 
     /**
@@ -23,6 +28,6 @@ class CreateRolesTable extends Migration
      */
     public function down()
     {
-        //
+	    Schema::dropIfExists('roles');
     }
 }
