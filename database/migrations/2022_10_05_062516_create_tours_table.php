@@ -13,17 +13,17 @@ class CreateToursTable extends Migration{
 	public function up() {
 		Schema::create( 'tours', function ( Blueprint $table ) {
 			$table->primaryColumn();
-			$table->string( 'tour_tour_operator_serial' );
-			$table->string( 'tour_name' );
-			$table->string( 'tour_title' );
-			$table->string( 'tour_destination' );
-			$table->string( 'tour_day_length' );
-			$table->string( 'tour_night_length' );
-			$table->string( 'tour_start_date' );
-			$table->string( 'tour_detail' );
-			$table->string( 'tour_description' );
-			$table->string( 'tour_slots' );
-			$table->string( 'tour_slots_left' );
+			$table->string( 'tour_serial' );
+			$table->string( 'name' );
+			$table->string( 'title' );
+			$table->string( 'destination' );
+			$table->string( 'day_length' );
+			$table->string( 'night_length' );
+			$table->string( 'start_date' );
+			$table->string( 'detail' );
+			$table->string( 'description' );
+			$table->string( 'slots' );
+			$table->string( 'slots_left' );
 			$table->defaultFields();
 		} );
 	}

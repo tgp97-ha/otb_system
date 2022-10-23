@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,6 +12,7 @@
 
 use App\Events\BookingDeletedEvent;
 use App\Http\Controllers\PlanningController;
+use App\Http\Controllers\TourController;
 use App\Models\Booking;
 use App\Models\User;
 use Carbon\Carbon;
@@ -30,6 +30,25 @@ Route::prefix('admin')->group(function () {
     Route::get('/create', function () {
         return view('admin.create');
     });
+});
+Route::prefix('tour-operator')->group(function () {
+    // Show Create Form
+    Route::get('/tours/create', [TourController::class, 'create']);
+
+    // Store Tour Data
+    Route::post('/tours', [TourController::class], 'store');
+
+    // Show Edit Form
+    Route::get('/tours/{id}/edit', [TourController::class, 'edit']);
+
+    // Update Tour
+    Route::put('/tours/{tour}', [TourController::class, 'update']);
+
+    // Delete Tour
+    Route::delete('/tours/{tour}', [TourController::class, 'destroy']);
+
+    // All Tours
+    Route::get('/', [TourController::class, 'index']);
 });
 Route::middleware(['auth'])->group(function () {
     //Route::middleware('can:access.admin')->prefix('admin')->group(function () {
