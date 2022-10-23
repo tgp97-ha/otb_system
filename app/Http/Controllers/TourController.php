@@ -34,6 +34,13 @@ class TourController extends Controller{
 		if ( ! Auth::user() || Auth::user()->can( 'tourist' ) ) {
 			$tours->where( 'tour_is_verify', 1 );
 		}
+		if ( Auth::user() ) {
+			if ( Auth::user()->can( 'tour-operator' ) ) {
+				$tours->with( 'userTourist' )->whereHas( 'userTourist', function ( $user ) {
+					$user->where( 'id', auth()->user()->id );
+				} );
+			}
+		}
 		$tours = $tours->get();
 
 		return view( 'tour.index', [
@@ -65,7 +72,7 @@ class TourController extends Controller{
 			if ( $request->input( 'services' ) !== null && count( $request->input( 'services' ) ) ) {
 				$servicesRequest = $request->input( 'services' );
 				$tours->whereHas( 'services', function ( $service ) use ( $servicesRequest ) {
-					$service->whereIn( 'id', $servicesRequest );
+					$service->whereIn( 'services.id', $servicesRequest );
 				} );
 			}
 		}
@@ -181,12 +188,15 @@ class TourController extends Controller{
 			'place',
 			'comments.tourist.tourist',
 		] )->find( $id );
-		$booking = Booking::where( 'tour_serial', $item->serial )->where( 'user_id', auth()->user()->id )->first();
-		if ( $booking ) {
-			return view( 'tour.detail', [ 'tour' => $item, 'booking' => $booking ] );
-		} else {
-			return view( 'tour.detail', [ 'tour' => $item ] );
+		if ( Auth::user() ) {
+			$booking = Booking::where( 'tour_serial', $item->serial )->where( 'user_id', auth()->user()->id )->first();
+			if ( $booking ) {
+				return view( 'tour.detail', [ 'tour' => $item, 'booking' => $booking ] );
+			} else {
+				return view( 'tour.detail', [ 'tour' => $item ] );
+			}
 		}
+		return view( 'tour.detail', [ 'tour' => $item ] );
 	}
 
 	/**

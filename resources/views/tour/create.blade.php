@@ -64,9 +64,9 @@
                                     @foreach($services as $service)
                                             <div class="col-4">
                                                 <div class="row">
-                                                    <input id="{{'service'.$service->serial}}" type="checkbox"
-                                                           name="services[]" value="{{$service->serial}}">
-                                                    <label for="{{'service'.$service->serial}}" class="align-middle ml-2">{{$service->service_name}}</label>
+                                                    <input id="{{'service'.$service->id}}" type="checkbox"
+                                                           name="services[]" value="{{$service->id}}">
+                                                    <label for="{{'service'.$service->id}}" class="align-middle ml-2">{{$service->service_name}}</label>
                                                 </div>
                                             </div>
                                     @endforeach
