@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRolesTable extends Migration
+class CreateServiceTourTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,12 @@ class CreateRolesTable extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('service_tour', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('tour_serial');
+            $table->string('service_id');
+	        $table->defaultFields();
+        });
     }
 
     /**
@@ -23,6 +28,6 @@ class CreateRolesTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('service_tour');
     }
 }

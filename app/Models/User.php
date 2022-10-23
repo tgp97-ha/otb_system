@@ -2,72 +2,45 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use function abort;
+use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable
-{
-    use Notifiable;
+class User extends Authenticatable{
+	use HasRoles;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'name', 'email', 'password', 'role_id',
-    ];
+	/**
+	 * The attributes that are mass assignable.
+	 *
+	 * @var array
+	 */
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
+	public static $table_name = 'users';
+	protected $fillable = [
+		'username',
+		'email',
+		'password',
+	];
+	/**
+	 * The attributes that should be hidden for arrays.
+	 *
+	 * @var array
+	 */
+	protected $hidden = [
+		'password',
+		'remember_token',
+	];
 
-    public function role(): BelongsTo
-    {
-        return $this->belongsTo(Role::class);
-    }
+	public function tourist(): HasOne {
+		return $this->hasOne( Tourist::class, 'user_serial', 'id' );
+	}
 
-    /**
-     * @param string|array $roles
-     */
-    public function authorizeRoles($roles)
-    {
-        if (is_array($roles)) {
-            return $this->hasAnyRole($roles) || abort(401, 'This action is unauthorized.');
-        }
+	public function tourOperator(): HasOne {
+		return $this->hasOne( TourOperator::class, 'tour_operator_user_serial', 'id' );
+	}
 
-        return $this->hasRole($roles) || abort(401, 'This action is unauthorized.');
-    }
-
-    /**
-     * Check multiple roles
-     *
-     * @param array $roles
-     */
-    public function hasAnyRole($roles)
-    {
-        return in_array($this->role->name, $roles);
-    }
-
-    /**
-     * Check one role
-     *
-     * @param string $role
-     */
-    public function hasRole($role)
-    {
-        return $this->role->name === $role;
-    }
-
-    public function isSuperAdmin()
-    {
-        return $this->role->name === 'superadmin';
-    }
+	public function bookings(): HasMany {
+		return $this->hasMany( Booking::class, 'user_id', 'id' );
+	}
 }

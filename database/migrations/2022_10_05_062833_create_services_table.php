@@ -12,7 +12,7 @@ class CreateServicesTable extends Migration{
 	 */
 	public function up() {
 		Schema::create( 'services', function ( Blueprint $table ) {
-			$table->primaryColumn();
+			$table->bigInteger('id')->autoIncrement();
 			$table->string( 'service_name' );
 			$table->string( 'service_sub_name' );
 			$table->defaultFields();

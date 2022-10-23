@@ -13,10 +13,10 @@ class CreateTourServiceTable extends Migration
      */
     public function up()
     {
-        Schema::create('tour_service', function (Blueprint $table) {
+        Schema::create('service_id', function (Blueprint $table) {
 	        $table->primaryColumn();
 	        $table->bigInteger( 'tour_serial' );
-	        $table->bigInteger( 'service_serial' );
+	        $table->bigInteger( 'service_id' );
 	        $table->defaultFields();
         });
     }

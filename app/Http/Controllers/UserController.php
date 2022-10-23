@@ -15,8 +15,8 @@ class UserController extends Controller
     public function saveUser($request, $user)
     {
         $validatedData = $request->validate([
-            'username' => ['required', Rule::unique('users')->ignore($user->serial)],
-            'email' => ['required', 'email', Rule::unique('users')->ignore($user->serial)],
+            'username' => ['required', Rule::unique('users')->ignore($user->id)],
+            'email' => ['required', 'email', Rule::unique('users')->ignore($user->id)],
             'password' => 'sometimes|required|string|min:6|confirmed',
             'role' => 'sometimes|required|exists:roles,id',
         ]);

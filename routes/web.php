@@ -11,70 +11,59 @@
 |
 */
 
-use App\Events\BookingDeletedEvent;
-use App\Http\Controllers\PlanningController;
-use App\Models\Booking;
-use App\Models\User;
-use Carbon\Carbon;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\TourController;
+use App\Http\Controllers\TouristController;
+use App\Http\Controllers\TourOperatorController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
+Route::get( '/', [ TourController::class, 'index' ] );
+Route::prefix( 'tour' )->group( function () {
+	Route::get( '/detail/{id}', [ TourController::class, 'show' ] );
+});
+
 Auth::routes();
-Route::prefix('register')->group(function () {
-    Route::get('/tourist', function () {
-        return view('auth.registerTourist');
-    });
-});
-Route::prefix('admin')->group(function () {
-    Route::get('/create', function () {
-        return view('admin.create');
-    });
-});
-Route::middleware(['auth'])->group(function () {
-    //Route::middleware('can:access.admin')->prefix('admin')->group(function () {
-    //    Route::get('/', function () {
-    //        $rooms = Room::orderBy('sorting')->get();
-    //
-    //        $users = User::all();
-    //
-    //        return view('admin.index', ['user' => Auth::user(), 'users' => $users]);
-    //    })->name('admin')->middleware('can:access.admin');
-    //
-    //    Route::post('passwd', 'Auth\ChangePasswordController@ChangePassword')->name('passwd');
-    //
-    //    Route::prefix('user')->group(function () {
-    //        Route::get('create', function () {
-    //            return view('admin.user_create', ['roles' => Role::all()]);
-    //        })->name('user.create')->middleware('can:edit.users');
-    //
-    //        Route::post('create', 'UserController@createUser')->middleware('can:edit.users');
-    //
-    //        Route::get('update/{user}', function (User $user) {
-    //            return view('admin.user_create', ['roles' => Role::all(), 'user' => $user, 'update_me' => false]);
-    //        })->name('user.update')->middleware('can:edit.users');
-    //
-    //        Route::post('update/{user}', 'UserController@updateUser')->middleware('can:edit.users');
-    //
-    //        Route::get('update-me', function () {
-    //            return view('admin.user_create', ['roles' => Role::all(), 'user' => Auth::user(), 'update_me' => true]);
-    //        })->name('profile.update');
-    //
-    //        Route::post('update-me', 'UserController@updateMe');
-    //
-    //        Route::get('del/{user}', function (User $user) {
-    //            $user->delete();
-    //            return redirect()
-    //                ->route('admin', ['#users'])
-    //                ->with('success', 'User deleted sucessfully');
-    //        })->name('user.del');
-    //    });
-    //});
-    //
-    ///**
-    // * WEEKLY NOTES
-    // */
-    //Route::middleware(['can:edit.all'])->prefix('notes')->group(function () {
-    //    Route::post('save', 'AjaxController@saveNote');
-    //});
-});
+
+Route::prefix( '/register' )->group( function () {
+	Route::post( '/tour-operator', [ RegisterController::class, 'createTourOperator' ] )->name( 'register.operator' );
+	Route::post( '/tourist', [ RegisterController::class, 'createTourist' ] )->name( 'register.tourist' );
+	Route::get( '/tourist', function () {
+		return view( 'auth.register' );
+	} )->middleware( 'guest' );
+	Route::get( '/tour-operator', function () {
+		return view( 'auth.register-tourist' );
+	} )->middleware( 'guest' );
+} );
+Route::middleware( [ 'auth' ] )->group( function () {
+	Route::prefix( 'tourist' )->group( function () {
+		Route::post( '/edit-profile/{id}', [TouristController::class,'update']);
+		Route::get( '/profile/', [TouristController::class,'showCurrentUser']);
+		Route::get( '/detail/{id}', [TouristController::class,'show']);
+		Route::get( '/edit-profile', [TouristController::class,'editOwnProfile']);
+		Route::delete( '/delete/{id}', [ TouristController::class, 'destroy' ] );
+		Route::get( '/my-tours', [TouristController::class,'myTours'] );
+		Route::post( '/list', [TouristController::class,'list'] );
+	} );
+	Route::prefix( 'tour-operator' )->group( function () {
+		Route::post( '/edit-profile/{id}', [TourOperatorController::class,'update']);
+		Route::get( '/profile/', [TourOperatorController::class,'showProfile']);
+		Route::get( '/detail/{id}', [TourOperatorController::class,'show']);
+		Route::delete( '/delete/{id}', [ TourOperatorController::class, 'destroy' ] );
+		Route::get( '/edit-profile', [TourOperatorController::class,'editOwnProfile']);
+		Route::post( '/list/', [TourOperatorController::class,'list']);
+	} );
+	Route::prefix( 'tour' )->group( function () {
+		Route::post( '/list/', [ TourController::class, 'list' ] );
+		Route::post( '/edit/{id}', [ TourController::class, 'update' ] );
+		Route::delete( '/delete/{id}', [ TourController::class, 'destroy' ] );
+		Route::post( '/verify/{id}', [ TourController::class, 'verify' ] );
+		Route::post( '/book/{id}', [ TourController::class, 'book' ] );
+		Route::post( '/comment/{id}', [ TourController::class, 'comment' ] );
+	} );
+	Route::resource( 'tour-operator', 'TourOperatorController' );
+	Route::resource( 'tourist', 'TouristController' );
+	Route::resource( 'tour', 'TourController' );
+	;
+} );
+

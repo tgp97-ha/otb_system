@@ -10,12 +10,13 @@ class Tourist extends Model
     protected $fillable = [
         'user_serial',
         'tourist_name',
+        'address',
+        'date_of_birth',
         'tourist_phone_number',
         'tourist_personal_id',
     ];
-
-    public function userTourist(): BelongsTo
+	public function userTourist(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'user_serial', 'serial');
+        return $this->belongsTo(User::class, 'user_serial', 'id');
     }
 }
