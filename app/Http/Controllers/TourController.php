@@ -70,7 +70,7 @@ class TourController extends Controller{
 			}
 		}
 		if ( ! Auth::user() || Auth::user()->can( 'tourist' ) ) {
-			$tours->whereDate( 'tour_start_date', Carbon::today() )->where( 'tour_slots_left', '>', 0 )->where( 'tour_is_verify', '=', 1 );
+			$tours->whereDate( 'tour_start_date','>=', Carbon::today() )->where( 'tour_slots_left', '>', 0 )->where( 'tour_is_verify', '=', 1 );
 		}
 		if ( Auth::user() ) {
 			if ( Auth::user()->can( 'tour-operator' ) ) {

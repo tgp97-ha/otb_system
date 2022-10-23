@@ -59,7 +59,7 @@
                             @can('admin')
                                 <div class="form-group col-md-10 offset-md-1 row">
                                     <span class="col-form-label col-4 align-middle">Tour Operator Name</span>
-                                    <span class="col-form-label font-weight-normal align-middle col-8">{{ $tour->userTourist->tourOperator->tour_operator_name}}</span>
+                                    <a class="btn btn-primary" href="{{url('/tour-operator/detail/'.$tour->userTourist->tourOperator->tour_operator_name->serial)}}">{{$tour->userTourist->tourOperator->tour_operator_name}}</a>
                                 </div>
                             @endcan
                             <div class="form-group col-md-10 offset-md-1">

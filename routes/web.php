@@ -18,7 +18,7 @@ use App\Http\Controllers\TourOperatorController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Route::get( '/', [ TourController::class, 'list' ] );
+Route::get( '/', [ TourController::class, 'index' ] );
 Route::prefix( 'tour' )->group( function () {
 	Route::get( '/detail/{id}', [ TourController::class, 'show' ] );
 });
