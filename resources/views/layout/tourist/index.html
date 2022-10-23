@@ -1,0 +1,64 @@
+<!-- edit/delete tourist -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tourist</title>
+    <link rel ="stylesheet" href ="style.css"/>
+</head>
+<body>
+    <div>
+        <h1> TOURIST LIST </h1>
+        <h2></h2>
+        <h3><input type="search" placeholder=" tìm id, tên...">
+            <button>tìm kiếm</button>
+        </h3>
+        <table>
+            <thead>   
+                <tr>
+                    <th>ID</th>
+                    <th>Tên</th>
+                    <th>CCCD</th>
+                    <th>Địa Chỉ</th>
+                    <th>SDT</th>
+                    <th>Email</th>
+                    <th>Chức Năng</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>tran dinh minh hieu</td>
+                    <td>223456788</td>
+                    <td>đà nẵng</td>
+                    <td>0788579323</td>
+                    <td>trandminhhieu@dtu.edu.vn</td>
+                    <td class="btn">
+                        <div class="btn-xoa">Xoá</div>
+                        ||
+                        <div class="btn-sua">Sửa</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="modal">
+        <div class="modal-container">
+            <h4> Sửa </h4>
+            <div class="modal-list">Id:     <input type="text"></div>
+            <div class="modal-list">Tên:    <input type="text"></div>
+            <div class="modal-list">CCCD:   <input type="text"></div>
+            <div class="modal-list">Địa Chỉ:<input type="text"></div>
+            <div class="modal-list">SDT:    <input type="text"></div>
+            <div class="modal-list">Email:  <input type="text"></div>       
+            <div class="modal-sua-btn">Cap nhat</div>    
+        </div>
+
+        
+    </div>
+</body>
+</html>
+<!-- edit/delete tourist -->

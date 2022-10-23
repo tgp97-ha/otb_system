@@ -1,0 +1,78 @@
+<!-- edit/delete tour -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tour</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div>
+        <h1>TOUR LIST</h1>
+        <h2></h2>
+        <h3><input type="search" placeholder=" tìm id, tên tour...">
+            <button>tìm kiếm</button>
+        </h3>
+        <table>
+            <thead>   
+                <tr>
+                    <th>ID</th>
+                    <th>Phương tiện</th>
+                    <th>Điểm khởi hành</th>
+                    <th>Tên tour/Lịch trình</th>
+                    <th>Số ngày/Số đêm</th>
+                    <th>Giá</th>
+                    <th>Ghi chú</th>
+                    <th>Chức năng</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>11</td>
+                    <td>Xe bus</td>
+                    <td>Tp hải phòng</td>
+                    <td>đà nẵng</td>
+                    <td>0788579323</td>
+                    <td>trandminhhieu@dtu.edu.vn</td>
+                    <td></td>
+                    <td class="btn">
+                        <div class="btn-xoa">Xoá</div>
+                        ||
+                        <div class="btn-sua">Sửa</div>
+                        ||
+                        <div class="dropdown">
+                            <div class="dropdown-select">
+                                <span class="select">Verify Tour</span>
+                                <i class="fa fa-caret-down icon"></i>
+                            </div>
+                            <div class="dropdown-list">
+                            <div class="dropdown-list-iem">Pending</div>
+                            <div class="dropdown-list-iem">Done</div>
+                            </div>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+     <div class="modal">
+        <div class="modal-container">
+            <h4> Sửa </h4>
+            <div class="modal-list">Id:     <input type="text"></div>
+            <div class="modal-list">Phương tiện:    <input type="text"></div>
+            <div class="modal-list">Điểm khởi hành:   <input type="text"></div>
+            <div class="modal-list">Điểm khởi hành:<input type="text"></div>
+            <div class="modal-list">Tên tour/Lịch trình:    <input type="text"></div>
+            <div class="modal-list">Số ngày/Số đêm :  <input type="text"></div>
+            <div class="modal-list">Giá :  <input type="text"></div>
+            <div class="modal-list">Ghi chú :  <input type="text"></div>       
+            <div class="modal-sua-btn">Cap nhat</div>    
+        </div>
+    </div> 
+
+</body>
+</html>
+<!-- edit/delete tour -->
