@@ -57,7 +57,7 @@ Route::middleware( [ 'auth' ] )->group( function () {
 		Route::post( '/list/', [ TourController::class, 'list' ] );
 		Route::post( '/edit/{id}', [ TourController::class, 'update' ] );
 		Route::delete( '/delete/{id}', [ TourController::class, 'destroy' ] );
-		Route::get( '/verify/{id}', [ TourController::class, 'verify' ] );
+		Route::post( '/verify/{id}', [ TourController::class, 'verify' ] );
 		Route::post( '/book/{id}', [ TourController::class, 'book' ] );
 		Route::post( '/comment/{id}', [ TourController::class, 'comment' ] );
 	} );

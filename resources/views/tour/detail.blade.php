@@ -21,7 +21,11 @@
                         </div>
                         <div class="form-group col-md-10 offset-md-1 row">
                             <span class="col-form-label col-4 align-middle">Tour Description</span>
-                            <span class="col-form-label font-weight-normal  col-8 align-middle">{{ $tour->tour_destination }}</span>
+                            <span class="col-form-label font-weight-normal  col-8 align-middle d-inline-block">{{ $tour->tour_description }}</span>
+                        </div>
+                        <div class="form-group col-md-10 offset-md-1 row">
+                            <span class="col-form-label col-4 align-middle">Tour Detail</span>
+                            <span class="col-form-label font-weight-normal  col-8 align-middle d-inline-block">{{ $tour->tour_detail }}</span>
                         </div>
                         <div class="form-group col-md-10 offset-md-1 row">
                             <span class="col-form-label col-4 align-middle">Tour Length</span>
@@ -34,13 +38,13 @@
                         <div class="form-group col-md-10 offset-md-1 row">
                             <span class="col-form-label col-4 align-middle">Tour Services</span>
                             <div class="col-8">
-                            @foreach($tour->services as $service)
-                                <div class="row">
-                                    <div class="col">
-                                        <span class="col-form-label font-weight-normal align-middle">{{ $service->service_name}}</span>
+                                @foreach($tour->services as $service)
+                                    <div class="row">
+                                        <div class="col">
+                                            <span class="col-form-label font-weight-normal align-middle">{{ $service->service_name}}</span>
+                                        </div>
                                     </div>
-                                </div>
-                            @endforeach
+                                @endforeach
                             </div>
                         </div>
                         @canany(['admin', 'tour-operator'])
@@ -52,13 +56,16 @@
                                 <span class="col-form-label col-4 align-middle">Tour Slot Left</span>
                                 <span class="col-form-label font-weight-normal align-middle col-8">{{ $tour->tour_slots_left}}</span>
                             </div>
-                            <div class="form-group col-md-10 offset-md-1 row">
-                                <span class="col-form-label col-4 align-middle">Tour Operator Name</span>
-                                <span class="col-form-label font-weight-normal align-middle col-8">{{ $tour->userTourist->tourOperator->tour_operator_name}}</span>
-                            </div>
+                            @can('admin')
+                                <div class="form-group col-md-10 offset-md-1 row">
+                                    <span class="col-form-label col-4 align-middle">Tour Operator Name</span>
+                                    <span class="col-form-label font-weight-normal align-middle col-8">{{ $tour->userTourist->tourOperator->tour_operator_name}}</span>
+                                </div>
+                            @endcan
                             <div class="form-group col-md-10 offset-md-1">
                                 <div class="row d-flex justify-content-center">
-                                    <a class="btn btn-primary" href="{{url('/tour/'.$tour->serial.'/edit')}}">Edit Tours</a>
+                                    <a class="btn btn-primary" href="{{url('/tour/'.$tour->serial.'/edit')}}">Edit
+                                        Tours</a>
                                 </div>
                             </div>
                         @endcan
@@ -91,7 +98,8 @@
                         @endcan
 
                         @if(isset($booking))
-                            <form class="form-horizontal" method="POST" action="{{ url('tour/comment/'.$tour->serial) }}"
+                            <form class="form-horizontal" method="POST"
+                                  action="{{ url('tour/comment/'.$tour->serial) }}"
                                   enctype="multipart/form-data">
                                 {{ csrf_field() }}
                                 <div class="form-group col-md-10 offset-md-1 row">

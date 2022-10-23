@@ -8,6 +8,7 @@
         @can('tour-operator')
             <a href="{{url('/tour-operator/profile/')}}" class="w3-bar-item w3-button">Profiles</a>
             <a href="{{url('/tour/')}}" class="w3-bar-item w3-button">Tours Management</a>
+            <a href="{{url('/tour/create')}}" class="w3-bar-item w3-button">Create Tour</a>
             <a href="#" class="w3-bar-item w3-button">Tours analysis</a>
         @endcan
         @can('admin')

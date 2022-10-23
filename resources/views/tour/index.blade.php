@@ -129,14 +129,6 @@
                                         </div>
                                     </div>
                                     <div class="row form-group">
-                                        <div class="col-1 p-0">
-                                            <span class="form-control border-0">Detail</span>
-                                        </div>
-                                        <div class="col-11">
-                                            <span class="form-control border-0">{{$tour->tour_detail}}</span>
-                                        </div>
-                                    </div>
-                                    <div class="row form-group">
                                         <div class="col-2 p-0">
                                             <span class="form-control border-0">Tour Description</span>
                                         </div>
@@ -165,7 +157,7 @@
                                                 </form>
                                             @endcan
                                             @canany(['admin'])
-                                                @if($tour->is_verify==0)
+                                                @if($tour->tour_is_verify==0)
                                                     <form class="pl-3" action="{{ url('/tour/verify/'.$tour->serial) }}"
                                                           method="POST">
                                                         @csrf

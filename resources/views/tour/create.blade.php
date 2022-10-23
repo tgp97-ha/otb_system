@@ -25,14 +25,14 @@
                                 </div>
                             </div>
                             <div class="form-group col-md-10 offset-md-1" {{ $errors->has('title') ? ' has-error' : '' }}>
-                                <label for="username" class="control-label">Tour title</label>
+                                <label for="title" class="control-label">Tour title</label>
                                 <div>
-                                    <input id="username" type="text" class="form-control" name="title" required
+                                    <input id="title" type="text" class="form-control" name="title" required
                                            autofocus>
 
-                                    @if ($errors->has('address'))
+                                    @if ($errors->has('title'))
                                         <span class="help-block">
-                                        <strong>{{ $errors->first('address') }}</strong>
+                                        <strong>{{ $errors->first('title') }}</strong>
                                     </span>
                                     @endif
                                 </div>

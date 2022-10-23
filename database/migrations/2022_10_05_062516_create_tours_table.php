@@ -20,11 +20,10 @@ class CreateToursTable extends Migration{
 			$table->string( 'tour_day_length' );
 			$table->string( 'tour_night_length' );
 			$table->string( 'tour_start_date' );
-			$table->string( 'tour_detail' );
+			$table->longText( 'tour_detail' );
 			$table->string( 'tour_description' );
 			$table->string( 'tour_slots' );
 			$table->string( 'tour_slots_left' );
-			$table->string( 'tour_places_serial' );
 			$table->string( 'tour_prices' );
 			$table->string( 'tour_place' );
 			$table->string( 'tour_is_verify' );
