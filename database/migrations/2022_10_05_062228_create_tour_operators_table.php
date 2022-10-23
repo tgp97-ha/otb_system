@@ -13,13 +13,13 @@ class CreateTourOperatorsTable extends Migration{
 	public function up() {
 		Schema::create( 'tour_operators', function ( Blueprint $table ) {
 			$table->primaryColumn();
-			$table->string( 'tour_operator_user_serial' )->unique();
-			$table->string( 'tour_operator_name' );
-			$table->string( 'tour_operator_phone_number' )->nullable();
-			$table->string( 'tour_operator_bank_account' )->nullable();
-			$table->string( 'tour_operator_tax_number' )->nullable();
-			$table->string( 'tour_operator_address' )->nullable();
-			$table->string( 'tour_operator_description' )->nullable();
+			$table->string( 'operator_serial' )->unique();
+			$table->string( 'name' );
+			$table->string( 'phone_number' )->nullable();
+			$table->string( 'bank_account' )->nullable();
+			$table->string( 'tax_number' )->nullable();
+			$table->string( 'address' )->nullable();
+			$table->string( 'description' )->nullable();
 			$table->defaultFields();
 		} );
 	}
