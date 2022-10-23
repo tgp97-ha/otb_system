@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTourServiceTable extends Migration
+class CreateBookingTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateTourServiceTable extends Migration
      */
     public function up()
     {
-        Schema::create('service_id', function (Blueprint $table) {
-	        $table->primaryColumn();
-	        $table->bigInteger( 'tour_serial' );
-	        $table->bigInteger( 'service_id' );
+        Schema::create('booking', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('user_id');
+            $table->string('tour_serial');
+            $table->boolean('isPaid');
 	        $table->defaultFields();
         });
     }
@@ -28,6 +29,6 @@ class CreateTourServiceTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tour_service');
+        Schema::dropIfExists('booking');
     }
 }

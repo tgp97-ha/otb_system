@@ -4,17 +4,18 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateServicesTable extends Migration{
+class CreatePlacesTable extends Migration{
 	/**
 	 * Run the migrations.
 	 *
 	 * @return void
 	 */
 	public function up() {
-		Schema::create( 'services', function ( Blueprint $table ) {
-			$table->bigInteger('id')->autoIncrement();
-			$table->string( 'service_name' );
-			$table->string( 'service_sub_name' );
+		Schema::create( 'places', function ( Blueprint $table ) {
+			$table->primaryColumn();
+			$table->string( 'place_name' );
+			$table->string( 'place_full_name' );
+			$table->string( 'place_short_name' )->nullable();
 			$table->defaultFields();
 		} );
 	}
@@ -25,6 +26,6 @@ class CreateServicesTable extends Migration{
 	 * @return void
 	 */
 	public function down() {
-		Schema::dropIfExists( 'services' );
+		Schema::dropIfExists( 'places' );
 	}
 }

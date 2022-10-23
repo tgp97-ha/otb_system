@@ -24,6 +24,10 @@ class CreateToursTable extends Migration{
 			$table->string( 'tour_description' );
 			$table->string( 'tour_slots' );
 			$table->string( 'tour_slots_left' );
+			$table->string( 'tour_places_serial' );
+			$table->string( 'tour_prices' );
+			$table->string( 'tour_place' );
+			$table->string( 'tour_is_verify' );
 			$table->defaultFields();
 		} );
 	}

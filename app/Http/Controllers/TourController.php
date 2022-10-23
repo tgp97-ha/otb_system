@@ -2,171 +2,339 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Tourist;
+use App\Models\Booking;
+use App\Models\Comment;
+use App\Models\Place;
+use App\Models\Service;
+use App\Models\Tour;
+use App\Models\TourOperator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 
-class TourController extends Controller
-{
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-    }
+class TourController extends Controller{
+	/**
+	 * Create a new controller instance.
+	 *
+	 * @return void
+	 */
+	public function __construct() {
+	}
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return Response
-     */
-    public function index(Request $request)
-    {
-        //search
-        $list = Tourist::all();
+	/**
+	 * Display a listing of the resource.
+	 *
+	 * @return Response
+	 */
+	public function index() {
+		//search
+		$tours    = Tour::with( 'place', 'services' );
+		$tours    = $tours->get();
+		$places   = Place::all();
+		$services = Service::all();
 
-        return view('tour.list', [ 'tours' => $list, 'search_details' => $request ]);
-    }
+		return view( 'tour.index', [
+			'tours'    => $tours,
+			'places'   => $places,
+			'services' => $services,
+		] );
+	}
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
-    public function create()
-    {
-        return view('tour.create');
-    }
+	public function list( Request $request ) {
+		//search
+		$tours = Tour::with( 'place', 'services' );
+		if ( $request ) {
+			if ( $request->input( 'destination' ) !== null ) {
+				$tours->where( 'tour_place', '=', $request->input( 'destination' ) );
+			}
+			if ( $request->input( 'start_date_range_begin' ) !== null ) {
+				$tours->whereDate( 'tour_start_date', '>=', $request->input( 'start_date_range_begin' ) );
+			}
+			if ( $request->input( 'start_date_range_end' ) !== null ) {
+				$tours->whereDate( 'tour_start_date', '<=', $request->input( 'start_date_range_begin' ) );
+			}
+			if ( $request->input( 'price_range_begin' ) !== null ) {
+				$tours->where( 'tour_prices', '>=', $request->input( 'price_range_begin' ) );
+			}
+			if ( $request->input( 'price_range_end' ) !== null ) {
+				$tours->where( 'tour_prices', '>=', $request->input( 'price_range_end' ) );
+			}
+			if ( $request->input( 'services' ) !== null && count( $request->input( 'services' ) ) ) {
+				$servicesRequest = $request->input( 'services' );
+				$tours->whereHas( 'services', function ( $service ) use ( $servicesRequest ) {
+					$service->whereIn( 'id', $servicesRequest );
+				} );
+			}
+		}
+		if ( Auth::user() ) {
+			if ( Auth::user()->can( 'tourist' ) ) {
+				$tours->whereDate( 'tour_start_date', Carbon::today() )->where( 'tour_slots_left', '>', 0 )->where( 'tour_is_verify', '=', 1 );
+			}
+			if ( Auth::user()->can( 'tour-operator' ) ) {
+				$tours->with( 'userTourist' )->whereHas( 'userTourist', function ( $user ) {
+					$user->where( 'id', auth()->user()->id );
+				} );
+			}
+			if ( Auth::user()->can( 'admin' ) ) {
+				if ( $request->input( 'is_verify' ) !== null && count( $request->input( 'is_verify' ) ) ) {
+					$tours->whereIn( 'tour_is_verify', $request->input( 'is_verify' ) );
+				}
+			}
+		}
+		$tours    = $tours->get();
+		$places   = Place::all();
+		$services = Service::all();
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param Request $request
-     *
-     * @return Response
-     */
-    public function store(Request $request)
-    {
-        if (! Auth::user()->can('companies_management')) {
-            abort(403);
-        }
-        $request->validate([
-            'tourist_name' => 'required|min:2|max:64',
-            'dob'          => 'nullable|string',
-            'address'      => 'nullable|string|max:100',
-            'phone_number' => 'nullable|string|max:10',
-            'personal_id'  => 'nullable|regex:/^([0-9\s\-\+\(\)]*)$/|min:9|max:15',
-        ]);
-        $user                       = auth()->user();
-        $item                       = new Tourist();
-        $item->tourist_name         = $request->input('tourist_name');
-        $item->date_of_birth        = $request->input('dob');
-        $item->address              = $request->input('address');
-        $item->tourist_phone_number = $request->input('phone_number');
-        $item->tourist_personal_id  = $request->input('personal_id');
-        $item->user_serial          = $user->serial;
-        $item->save();
-        $request->session()->flash('message', 'Successfully created');
+		return view( 'tour.index', [
+			'tours'          => $tours,
+			'search_details' => $request,
+			'places'         => $places,
+			'services'       => $services,
+		] );
+	}
 
-        return redirect()->route('welcome');
-    }
+	/**
+	 * Show the form for creating a new resource.
+	 *
+	 * @return Response
+	 */
+	public function create() {
+		$services = Service::all();
+		$places   = Place::all();
+		$item     = TourOperator::where( 'tour_operator_user_serial', auth()->user()->id );
 
-    /**
-     * Display the specified resource.
-     *
-     * @param int $id
-     *
-     * @return Response
-     */
-    public function show($id)
-    {
-        if (! Auth::user()->can('companies_management')) {
-            abort(403);
-        }
-        $item = Tourist::find($id);
+		return view( 'tour.create', [ 'tourOperator' => $item, 'services' => $services, 'places' => $places ] );
+	}
 
-        return view('tourist.detail', [ 'tourist' => $item ]);
-    }
+	/**
+	 * Store a newly created resource in storage.
+	 *
+	 * @param Request $request
+	 *
+	 * @return Response
+	 */
+	public function store( Request $request ) {
+		$request->validate( [
+			'tour_name'        => 'required|min:2|max:64',
+			'title'            => 'required|string',
+			'destination'      => 'required',
+			'start_date'       => 'required',
+			'tour_description' => 'required',
+			'tour_detail'      => 'required',
+			'phone_number'     => 'nullable|regex:/^([0-9\s\-\+\(\)]*)$/|min:9|max:15',
+			'night_length'     => 'required',
+			'day_length'       => 'required',
+			'tour_slot'        => 'required',
+			'tour_price'       => 'required',
+			'tour_image_1'     => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
+			'tour_image_2'     => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
+			'tour_image_3'     => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
+			'tour_image_4'     => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
+			'tour_image_5'     => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
+		] );
+		$user                            = auth()->user();
+		$item                            = Tour::where( 'serial', $user->id )->first();
+		$item->tour_name                 = $request->input( 'tour_name' );
+		$item->tour_title                = $request->input( 'title' );
+		$item->tour_destination          = $request->input( 'destination' );
+		$item->tour_detail               = $request->input( 'tour_detail' );
+		$item->tour_description          = $request->input( 'tour_description' );
+		$item->tour_start_date           = $request->input( 'start_date' );
+		$item->tour_night_length         = $request->input( 'night_length' );
+		$item->tour_day_length           = $request->input( 'day_length' );
+		$item->tour_slots                = $request->input( 'tour_slot' );
+		$item->tour_slots_left           = $request->input( 'tour_slot' );
+		$item->tour_prices               = $request->input( 'tour_price' );
+		$item->tour_tour_operator_serial = $user->id;
+		$item->tour_is_verify            = 0;
+		$item->save();
+		$serial = $item->serial;
+		$item->services()->sync( $request->input( 'services' ) );
+		for ( $i = 1; $i <= 5; $i ++ ) {
+			if ( $request->input( 'tour_image_' . $i ) !== null ) {
+				$imageName = $serial . '.' . $i . $request->image->extension();
+				$request->input( 'tour_image_' . $i )->move( public_path( 'images/' . $serial . '/' ), $imageName );
+			}
+		}
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param int $id
-     *
-     * @return Response
-     */
-    public function edit($id)
-    {
-        if (! Auth::user()->can('companies_management')) {
-            abort(403);
-        }
-        try {
-            $item = Tourist::findOrFail($id);
-        } catch (\Exception $exception) {
-            return back()->withError($exception->getMessage())->withInput();
-        }
+		$request->session()->flash( 'message', 'Successfully created' );
 
-        return view('tourist.edit', [ 'tourist' => $item ]);
-    }
+		return redirect( '/tour/detail/' . $item->serial );
+	}
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param Request $request
-     * @param int $id
-     *
-     * @return Response
-     */
-    public function update(Request $request, $id)
-    {
-        if (! Auth::user()->can('companies_management')) {
-            abort(403);
-        }
-        $request->validate([
-            'tourist_name' => 'required|min:2|max:64',
-            'dob'          => 'nullable|string',
-            'address'      => 'nullable|string|max:100',
-            'phone_number' => 'nullable|string|max:10',
-            'personal_id'  => 'nullable|regex:/^([0-9\s\-\+\(\)]*)$/|min:9|max:15',
-        ]);
-        $user = auth()->user();
-        $item = Tourist::find($id);
-        if ($item) {
-            $item->tourist_name         = $request->input('tourist_name');
-            $item->date_of_birth        = $request->input('dob');
-            $item->address              = $request->input('address');
-            $item->tourist_phone_number = $request->input('phone_number');
-            $item->tourist_personal_id  = $request->input('personal_id');
-            $item->save();
-            $request->session()->flash('message', 'Successfully edited');
+	/**
+	 * Display the specified resource.
+	 *
+	 * @param int $id
+	 *
+	 * @return Response
+	 */
+	public function show( $id ) {
+		$item    = Tour::with( [
+			'userTourist.tourOperator',
+			'services',
+			'place',
+			'comments.tourist.tourist',
+		] )->find( $id );
+		$booking = Booking::where( 'tour_serial', $item->serial )->where( 'user_id', auth()->user()->id )->first();
+		if ( $booking ) {
+			return view( 'tour.detail', [ 'tour' => $item, 'booking' => $booking ] );
+		} else {
+			return view( 'tour.detail', [ 'tour' => $item ] );
+		}
+	}
 
-            return redirect()->route('tourist.edit');
-        } else {
-            return back()->withInput()->withErrors([ 'msg', 'This company not found.' ]);
-        }
-    }
+	/**
+	 * Show the form for editing the specified resource.
+	 *
+	 * @param int $id
+	 *
+	 * @return Response
+	 */
+	public function edit( $id ) {
+		if ( ! Auth::user()->can( 'admin' ) && ! Auth::user()->can( 'tour-operator' ) ) {
+			return view( 'welcome' );
+		}
+		try {
+			$item     = Tour::with( [ 'place', 'services' ] )->findOrFail( $id );
+			$place    = Place::all();
+			$services = Service::all();
+		} catch ( \Exception $exception ) {
+			return back()->withError( $exception->getMessage() )->withInput();
+		}
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     *
-     * @return Response
-     */
-    public function destroy($id)
-    {
-        if (! Auth::user()->can('companies_management')) {
-            abort(403);
-        }
-        $item    = Tourist::with('userTourist')->find($id);
-        $account = $item->userTourist;
-        if ($item) {
-            $item->delete();
-            $account->delete();
-        }
+		return view( 'tour.edit', [ 'tour' => $item, 'places' => $place, 'services' => $services ] );
+	}
 
-        return redirect()->route('tourist.list');
-    }
+	/**
+	 * Update the specified resource in storage.
+	 *
+	 * @param Request $request
+	 * @param int $id
+	 *
+	 * @return Response
+	 */
+	public function update( Request $request, $id ) {
+		//if ( ! Auth::user()->can( 'admin' ) && ! Auth::user()->can( 'tour-operator' ) ) {
+		//	return view( 'welcome' );
+		//}
+		$request->validate( [
+			'tour_name'        => 'required|min:2|max:64',
+			'title'            => 'required|string',
+			'destination'      => 'required',
+			'start_date'       => 'required',
+			'tour_description' => 'required',
+			'tour_detail'      => 'required',
+			'phone_number'     => 'nullable|regex:/^([0-9\s\-\+\(\)]*)$/|min:9|max:15',
+			'night_length'     => 'required',
+			'day_length'       => 'required',
+			'tour_slot'        => 'required',
+			'services'         => 'array|min:1',
+			'tour_image_1'     => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
+			'tour_image_2'     => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
+			'tour_image_3'     => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
+			'tour_image_4'     => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
+			'tour_image_5'     => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
+		] );
+		$item                    = Tour::with( 'services' )->find( $id );
+		$item->tour_name         = $request->input( 'tour_name' );
+		$item->tour_title        = $request->input( 'title' );
+		$item->tour_destination  = $request->input( 'destination' );
+		$item->tour_detail       = $request->input( 'tour_detail' );
+		$item->tour_description  = $request->input( 'tour_description' );
+		$item->tour_start_date   = $request->input( 'start_date' );
+		$item->tour_night_length = $request->input( 'night_length' );
+		$item->tour_day_length   = $request->input( 'day_length' );
+		$item->tour_slots        = $request->input( 'tour_slot' );
+		$item->tour_slots_left   = $request->input( 'tour_slot' );
+		$item->tour_prices       = $request->input( 'tour_price' );
+		$item->tour_is_verify    = 0;
+		$item->save();
+		$serial         = $item->serial;
+		$services       = $item->services;
+		$serviceRequest = $request->input( 'services' );
+		foreach ( $services as $service ) {
+			if ( ! in_array( $service->serial, $serviceRequest ) ) {
+				$item->services()->detach( $service->serial );
+				array_filter( $serviceRequest, function ( $serviceItem ) use ( $service ) {
+					return $serviceItem !== $service->serial;
+				} );
+			}
+		}
+		$item->services()->sync( $request->input( 'services' ) );
+		for ( $i = 1; $i <= 5; $i ++ ) {
+			if ( $request->input( 'tour_image_' . $i ) !== null ) {
+				$imageName = $serial . '.' . $i . $request->image->extension();
+				$request->input( 'tour_image_' . $i )->move( public_path( 'images/' . $serial . '/' ), $imageName );
+			}
+		}
+
+		$request->session()->flash( 'message', 'Successfully created' );
+
+		return redirect( '/tour/detail/' . $item->serial );
+	}
+
+	/**
+	 * Remove the specified resource from storage.
+	 *
+	 * @param int $id
+	 *
+	 * @return Response
+	 */
+	public function destroy( $id ) {
+		$item = Tour::find( $id );
+		if ( $item ) {
+			$item->delete();
+		}
+
+		return redirect()->route( 'tour.index' );
+	}
+
+	public function verify( $id ) {
+		if ( ! Auth::user() ) {
+			$item = Tour::find( $id );
+		}
+		$item->tour_is_verify = 1;
+		$item->save();
+
+		return redirect()->route( 'tour.index' );
+	}
+
+	public function book( $id ) {
+		if ( ! Auth::user() ) {
+			return redirect( route( 'login' ) );
+		}
+		$tour    = Tour::find( $id );
+		$user    = auth()->user();
+		$booking = new Booking();
+
+		$booking->user_id     = $user->id;
+		$booking->tour_serial = $tour->serial;
+		$booking->isPaid      = 0;
+
+		$booking->save();
+
+		$tour->tour_slots_left = (int) $tour->tour_slots_left - 1;
+		$tour->save();
+
+		return view( 'tour.payment', [ 'booking' => $booking ] );
+	}
+
+	public function comment( $id, Request $request ) {
+		$tour = Tour::find( $id );
+		$user = auth()->user();
+
+		$comment                  = new Comment();
+		$comment->comment_content = $request->input( 'comment' );
+		$comment->tour_serial     = $id;
+		$comment->user_id         = $user->id;
+
+		$comment->save();
+
+		return redirect( '/tour/detail/' . $id );
+	}
+
+	public function listVerify() {
+
+	}
 }

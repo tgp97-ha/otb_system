@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRoleUserTable extends Migration
+class CreateCommentTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,13 @@ class CreateRoleUserTable extends Migration
      */
     public function up()
     {
-	    Schema::create('role_user', function (Blueprint $table) {
-		    $table->primaryColumn();
-		    $table->integer('role_serial')->unsigned();
-		    $table->integer('user_serial')->unsigned();
-		    $table->defaultFields();
-	    });
+        Schema::create('comment', function (Blueprint $table) {
+            $table->bigIncrements('id');
+			$table->string('comment_content');
+			$table->string('tour_serial');
+			$table->string('user_id');
+	        $table->defaultFields();
+        });
     }
 
     /**
@@ -28,6 +29,6 @@ class CreateRoleUserTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('comment');
     }
 }
