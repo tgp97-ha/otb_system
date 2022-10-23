@@ -47,6 +47,12 @@
                                 @endforeach
                             </div>
                         </div>
+                        <div class="form-group col-md-10 offset-md-1 row">
+                            <span class="col-form-label col-4 align-middle">Tour Operator Name</span>
+                            <div class="col-8">
+                            <a href="{{url('/tour-operator/detail/'.$tour->userTourist->tourOperator->serial)}}">{{$tour->userTourist->tourOperator->tour_operator_name}}</a>
+                            </div>
+                        </div>
                         @canany(['admin', 'tour-operator'])
                             <div class="form-group col-md-10 offset-md-1 row">
                                 <span class="col-form-label col-4 align-middle">Tour Slots</span>
@@ -56,12 +62,7 @@
                                 <span class="col-form-label col-4 align-middle">Tour Slot Left</span>
                                 <span class="col-form-label font-weight-normal align-middle col-8">{{ $tour->tour_slots_left}}</span>
                             </div>
-                            @can('admin')
-                                <div class="form-group col-md-10 offset-md-1 row">
-                                    <span class="col-form-label col-4 align-middle">Tour Operator Name</span>
-                                    <a class="btn btn-primary" href="{{url('/tour-operator/detail/'.$tour->userTourist->tourOperator->tour_operator_name->serial)}}">{{$tour->userTourist->tourOperator->tour_operator_name}}</a>
-                                </div>
-                            @endcan
+
                             <div class="form-group col-md-10 offset-md-1">
                                 <div class="row d-flex justify-content-center">
                                     <a class="btn btn-primary" href="{{url('/tour/'.$tour->serial.'/edit')}}">Edit
