@@ -78,7 +78,7 @@ class TourOperatorController extends Controller{
 		$item->save();
 		$request->session()->flash( 'message', 'Successfully created' );
 
-		return redirect()->route( 'tour-operator.show' );
+		return redirect('/' );
 	}
 
 	/**
