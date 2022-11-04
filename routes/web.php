@@ -32,7 +32,8 @@ Route::prefix( '/register' )->group( function () {
 		return view( 'auth.register-tourist' );
 	} );
 	Route::get( '/tour-operator', function () {
-		return view( 'auth.register' );
+		return view( 'auth.register
+		' );
 	} );
 } );
 Route::middleware( [ 'auth' ] )->group( function () {
