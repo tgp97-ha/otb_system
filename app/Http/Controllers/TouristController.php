@@ -71,7 +71,7 @@ class TouristController extends Controller
         $item->save();
         $request->session()->flash('message', 'Successfully created');
 
-        return redirect()->route('/tourist/detail');
+        return redirect('/');
     }
 
     /**

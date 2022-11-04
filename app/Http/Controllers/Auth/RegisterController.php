@@ -49,10 +49,11 @@ class RegisterController extends Controller{
 			'email'    => $request['email'],
 			'password' => bcrypt( $request['password'] ),
 		] );
+		$user->save();
 		$user->assignRole( 'tourist' );
 		Auth::login( $user );
 
-		return view( '/welcome' );
+		return redirect( route('tourist.create'));
 	}
 
 	protected function createTourOperator( Request $request ) {
@@ -69,6 +70,6 @@ class RegisterController extends Controller{
 		$user->assignRole( 'tour-operator' );
 		Auth::login( $user );
 
-		return view( '/welcome' );
+		return redirect( route('tour-operator.create'));
 	}
 }

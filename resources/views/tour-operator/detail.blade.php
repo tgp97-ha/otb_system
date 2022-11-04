@@ -25,7 +25,7 @@
                         </div>
                         <div class="form-group col-md-10 offset-md-1 row">
                             <span class="col-form-label col-4 align-middle">Phone Number</span>
-                            <span class="col-form-label font-weight-normal align-middle col-8">{{ $tourOperator->tourist_phone_number }}</span>
+                            <span class="col-form-label font-weight-normal align-middle col-8">{{ $tourOperator->tour_operator_phone_number }}</span>
                         </div>
                         <div class="form-group col-md-10 offset-md-1 row">
                             <span  class="col-form-label col-4 align-middle">Description</span>

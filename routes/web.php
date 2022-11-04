@@ -29,11 +29,12 @@ Route::prefix( '/register' )->group( function () {
 	Route::post( '/tour-operator', [ RegisterController::class, 'createTourOperator' ] )->name( 'register.operator' );
 	Route::post( '/tourist', [ RegisterController::class, 'createTourist' ] )->name( 'register.tourist' );
 	Route::get( '/tourist', function () {
-		return view( 'auth.register' );
-	} )->middleware( 'guest' );
-	Route::get( '/tour-operator', function () {
 		return view( 'auth.register-tourist' );
-	} )->middleware( 'guest' );
+	} );
+	Route::get( '/tour-operator', function () {
+		return view( 'auth.register
+		' );
+	} );
 } );
 Route::middleware( [ 'auth' ] )->group( function () {
 	Route::prefix( 'tourist' )->group( function () {
