@@ -53,8 +53,12 @@
 
     </div>
 
-    {{-- Flowbite --}}
-    <script src="../path/to/flowbite/dist/flowbite.js"></script>
+    {{-- Flowbite datepicker cdn --}}
+
+    <script src="https://unpkg.com/flowbite@1.5.4/dist/datepicker.js"></script>
+    {{-- <script src="../path/to/flowbite/dist/datepicker.js"></script> --}}
+
+
 </body>
 
 </html>
