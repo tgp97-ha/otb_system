@@ -53,6 +53,16 @@
                             <a href="{{url('/tour-operator/detail/'.$tour->userTourist->tourOperator->serial)}}">{{$tour->userTourist->tourOperator->tour_operator_name}}</a>
                             </div>
                         </div>
+                        <div class="form-group col-md-10 offset-md-1 row">
+                            <span class="col-form-label col-4 align-middle">Tour Image</span>
+                            @if(count($tour->images))
+                                <div class="col-8">
+                                    @foreach($tour->images as $image)
+                                        <img src="{{ asset('storage/tour/'.$image->file_path) }}" alt="" title=""></img>
+                                    @endforeach
+                                </div>
+                            @endif
+                        </div>
                         @canany(['admin', 'tour-operator'])
                             <div class="form-group col-md-10 offset-md-1 row">
                                 <span class="col-form-label col-4 align-middle">Tour Slots</span>

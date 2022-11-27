@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Booking;
 use App\Models\Comment;
+use App\Models\Image;
 use App\Models\Place;
 use App\Models\Service;
 use App\Models\Tour;
@@ -77,7 +78,7 @@ class TourController extends Controller{
 			}
 		}
 		if ( ! Auth::user() || Auth::user()->can( 'tourist' ) ) {
-			$tours->whereDate( 'tour_start_date','>=', Carbon::today() )->where( 'tour_slots_left', '>', 0 )->where( 'tour_is_verify', '=', 1 );
+			$tours->whereDate( 'tour_start_date', '>=', Carbon::today() )->where( 'tour_slots_left', '>', 0 )->where( 'tour_is_verify', '=', 1 );
 		}
 		if ( Auth::user() ) {
 			if ( Auth::user()->can( 'tour-operator' ) ) {
@@ -136,12 +137,17 @@ class TourController extends Controller{
 			'day_length'       => 'required',
 			'tour_slot'        => 'required',
 			'tour_price'       => 'required',
-			'tour_image_1'     => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
-			'tour_image_2'     => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
-			'tour_image_3'     => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
-			'tour_image_4'     => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
-			'tour_image_5'     => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
+			'tour_image.*'     => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
 		] );
+		$imageData = [];
+		foreach ( $request->file( 'tour_image' ) as $image ) {
+			$image->store( 'tour', 'public' );
+
+			$imageData[] = [
+				"description"      => $request->input( 'tour_name' ).count($imageData),
+				"file_path"         => $image->hashName()
+			];
+		}
 		$user                    = auth()->user();
 		$item                    = new Tour();
 		$item->tour_name         = $request->input( 'tour_name' );
@@ -160,6 +166,10 @@ class TourController extends Controller{
 		$item->tour_tour_operator_serial = $user->id;
 		$item->tour_is_verify            = 0;
 		$item->save();
+
+		$item->images()->createMany($imageData);
+
+
 		$serial = $item->serial;
 		$item->services()->sync( $request->input( 'services' ) );
 		for ( $i = 1; $i <= 5; $i ++ ) {
@@ -182,11 +192,12 @@ class TourController extends Controller{
 	 * @return Response
 	 */
 	public function show( $id ) {
-		$item    = Tour::with( [
+		$item = Tour::with( [
 			'userTourist.tourOperator',
 			'services',
 			'place',
 			'comments.tourist.tourist',
+			'images'
 		] )->find( $id );
 		if ( Auth::user() ) {
 			$booking = Booking::where( 'tour_serial', $item->serial )->where( 'user_id', auth()->user()->id )->first();
@@ -196,6 +207,7 @@ class TourController extends Controller{
 				return view( 'tour.detail', [ 'tour' => $item ] );
 			}
 		}
+
 		return view( 'tour.detail', [ 'tour' => $item ] );
 	}
 
