@@ -155,18 +155,18 @@
                                 </div>
                             </div>
 
-                            <div class="form-group col-md-10 offset-md-1" {{ $errors->has('tour_image_1') ? ' has-error' : '' }}>
+                            <div class="form-group col-md-10 offset-md-1" {{ $errors->has('tour_image[]') ? ' has-error' : '' }}>
                                 <label for="tour_detail" class="control-label">Tour Image</label>
                                 <div>
-                                    <input id="tour_image_1" type="file" class="form-control" name="tour_image_1">
-                                    <input id="tour_image_2" type="file" class="form-control" name="tour_image_2">
-                                    <input id="tour_image_3" type="file" class="form-control" name="tour_image_3">
-                                    <input id="tour_image_4" type="file" class="form-control" name="tour_image_4">
-                                    <input id="tour_image_5" type="file" class="form-control" name="tour_image_5">
+                                    <input id="tour_image_1" type="file" class="form-control" name="tour_image[]">
+                                    <input id="tour_image_2" type="file" class="form-control" name="tour_image[]">
+                                    <input id="tour_image_3" type="file" class="form-control" name="tour_image[]">
+                                    <input id="tour_image_4" type="file" class="form-control" name="tour_image[]">
+                                    <input id="tour_image_5" type="file" class="form-control" name="tour_image[]">
 
-                                @if ($errors->has('tour_image_1'))
+                                @if ($errors->has('tour_image[]'))
                                         <span class="help-block">
-                                        <strong>{{ $errors->first('tour_image_1') }}</strong>
+                                        <strong>{{ $errors->first('tour_image[]') }}</strong>
                                     </span>
                                     @endif
                                 </div>
