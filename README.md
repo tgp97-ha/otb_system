@@ -15,12 +15,12 @@ DB_PASSWORD=
 
 - Install app's dependencies
 ```sh
-$ composer install
+composer install
 ```
 
 - Install app's dependencies
 ```sh
-$ npm install
+npm install
 ```
 
 - Generate laravel APP_KEY
@@ -30,18 +30,24 @@ php artisan key:generate
 
 - Run database migration
 ```sh
-$ php artisan migrate:refresh
+php artisan migrate:refresh
 ```
 
 - Seed database
 ```sh
-$ php artisan db:seed
+php artisan db:seed
 ```
 
 
 - Start server localhost:8000
 ```sh
 php artisan serve
+```
+
+
+- Run Tailwindcss
+```sh
+npm run watch
 ```
 
 
@@ -53,7 +59,7 @@ php artisan cache:clear && php artisan view:clear &&  php artisan config:cache
 
 - Route list
 ```sh
-$ php artisan route:list
+php artisan route:list
 ```
 
 - Reload class
