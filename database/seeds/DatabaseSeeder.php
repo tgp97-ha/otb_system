@@ -1,5 +1,6 @@
 <?php
 
+use Database\Seeders\TourSeeder;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -15,5 +16,6 @@ class DatabaseSeeder extends Seeder
 		$this->call(UserSeeder::class);
 		$this->call(PlacesSeeder::class);
 		$this->call(ServiceSeeder::class);
+		$this->call(TourSeeder::class);
 	}
 }
