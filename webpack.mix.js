@@ -1,5 +1,5 @@
-let mix = require('laravel-mix');
-let webpack = require('webpack');
+let mix = require("laravel-mix");
+let webpack = require("webpack");
 
 /*
  |--------------------------------------------------------------------------
@@ -15,12 +15,15 @@ let webpack = require('webpack');
 mix.webpackConfig({
     plugins: [
         new webpack.ProvidePlugin({
-            $: 'jquery',
-            jQuery: 'jquery',
-            'window.jQuery': 'jquery',
-            Popper: ['popper.js', 'default']
-        })
-    ]})
-   .js('resources/js/app.js', 'public/js')
-   .sass('resources/sass/app.scss', 'public/css')
-   .sass('resources/sass/print.scss', 'public/css');
+            $: "jquery",
+            jQuery: "jquery",
+            "window.jQuery": "jquery",
+            Popper: ["popper.js", "default"],
+        }),
+    ],
+})
+    .js("resources/js/app.js", "public/js")
+    .sass("resources/sass/app.scss", "public/css")
+    .sass("resources/sass/print.scss", "public/css")
+    .postCss("resources/css/app.css", "public/css", [require("tailwindcss")])
+    .browserSync('http://localhost:8000');
