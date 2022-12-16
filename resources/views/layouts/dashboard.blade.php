@@ -10,13 +10,13 @@
 </head>
 
 <body>
-    <div class="container">
+    <div class="">
         {{-- Navbar --}}
-        {{-- @include('common.navbar') --}}
+        @include('common.navbar')
         {{-- Sidebar --}}
-        {{-- @include('common.sidebar') --}}
+        @include('common.sidebar')
         {{-- Content --}}
-        <div>
+        <div class="h-full mt-20 ml-64 px-2 z-0 py-2 border-2 border-red-500">
             @yield('content')
         </div>
     </div>
