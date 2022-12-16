@@ -44,6 +44,10 @@ class LoginController extends Controller{
 	protected function authenticated( Request $request, $user ) {
 		if($user->hasRole( 'admin' ))
 			return redirect( '/');
+		if ($user->hasRole( 'tour-operator'))
+			return redirect( '/tour-operator');
+		if ($user->hasRole( 'tourist'))
+			return redirect( '/tourist');
 		if ( ( $request->login_type == 1 && ! $user->hasRole( 'tourist' ) ) || ( $request->login_type == 2 && ! $user->hasRole( 'tour-operator' ) ) ) {
 			$this->guard()->logout();
 			$request->session()->invalidate();
