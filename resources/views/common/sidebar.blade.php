@@ -19,7 +19,7 @@
     </div> --}}
 
     @if (!Auth::guest())
-        <aside class="fixed w-64 h-screen">
+        <aside class="fixed w-64 h-screen z-50">
             <div class="h-full overflow-y-auto py-4 px-3 bg-gray-800">
                 <ul class="space-y-2">
                     <li>

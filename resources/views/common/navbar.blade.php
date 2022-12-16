@@ -1,4 +1,4 @@
-<nav class="fixed top-0 left-0 w-full h-20 px-2 pt-1 bg-gray-900 border-gray-700">
+<nav class="fixed top-0 left-0 z-50 w-full h-20 px-2 pt-1 bg-gray-900 border-gray-700">
     <div class="flex flex-wrap items-center justify-between">
         <a href="#" class="w-32 flex items-center">
             <img src="https://upload.wikimedia.org/wikipedia/commons/f/f1/Pornhub-logo.svg" alt="OTB Logo" />
