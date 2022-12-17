@@ -1,4 +1,4 @@
-@extends('layout.base')
+@extends('layouts.dashboard')
 
 @section('content')
 <div class="container">
@@ -80,7 +80,7 @@
                         <div class="form-group">
                             <div class="col-md-10 offset-md-1">
                                 <button type="submit" class="btn btn-primary float-right">
-                                    Login
+                                    Sign in
                                 </button>
                             </div>
                         </div>
