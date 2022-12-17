@@ -10,6 +10,7 @@ require("./bootstrap-datepicker");
 require("./bootstrap-datepicker.nl-BE.min");
 require("./jquery.floatThead");
 require("tw-elements");
+require("flowbite");
 
 const moment = require("moment");
 

@@ -26,4 +26,6 @@ mix.webpackConfig({
     .sass("resources/sass/app.scss", "public/css")
     .sass("resources/sass/print.scss", "public/css")
     .postCss("resources/css/app.css", "public/css", [require("tailwindcss")])
-    .browserSync('http://localhost:8000');
+    .js("./node_modules/flowbite/dist/datepicker.js", "public/js")
+
+    .browserSync("http://localhost:8000");
