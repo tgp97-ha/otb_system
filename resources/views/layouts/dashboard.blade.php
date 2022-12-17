@@ -10,17 +10,20 @@
 </head>
 
 <body>
-    <div class="">
+    <div class="w-full h-screen">
         {{-- Navbar --}}
         @include('common.navbar')
         {{-- Sidebar --}}
         @include('common.sidebar')
         {{-- Content --}}
-        <div class="h-full mt-20 ml-64 px-2 z-0 py-2 border-2 border-red-500">
-            @yield('content')
+        <div class="pt-20 pl-64">
+            <div class="px-6 py-2">
+                @yield('content')
+            </div>
         </div>
     </div>
     <script src="{{ asset('js/navbar.js') }}"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
 </body>
 
 </html>
