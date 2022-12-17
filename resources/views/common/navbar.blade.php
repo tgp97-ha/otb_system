@@ -32,11 +32,11 @@
                 <!-- Right elements -->
                 <div class="flex items-center relative">
                     <!-- Icon -->
-                    <span>{{ 'Hello ' . auth()->user()->username }}</span>
-                    <div class="dropdown relative ml-3">
+                    <div class="dropdown relative">
                         <a class="dropdown-toggle flex items-center hidden-arrow" href="#"
                             id="dropdownMenuButton2" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="https://mdbootstrap.com/img/new/avatars/2.jpg" class="rounded-full"
+                            <span>{{ 'Hello ' . auth()->user()->username }}</span>
+                            <img src="https://mdbootstrap.com/img/new/avatars/2.jpg" class="rounded-full ml-3"
                                 style="height: 25px; width: 25px" alt="" loading="lazy" />
                         </a>
                         <ul class="dropdown-menu min-w-max absolute bg-white text-base z-50 float-left py-2 list-none text-left rounded-lg shadow-lg mt-1 hidden m-0 bg-clip-padding border-none left-auto right-0"

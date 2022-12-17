@@ -15,6 +15,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\TourController;
 use App\Http\Controllers\TouristController;
 use App\Http\Controllers\TourOperatorController;
+use App\Models\TourOperator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -55,6 +56,7 @@ Route::middleware( [ 'auth' ] )->group( function () {
 		Route::post( '/list/', [TourOperatorController::class,'list']);
 		Route::get( '/tours', [TourOperatorController::class, 'showAllTours']);
 		Route::get( '/tours/{id}', [TourOperatorController::class, 'showTour']);
+		Route::get( '/', [TourOperatorController::class, 'showDashboard']);
 	} );
 	Route::prefix( 'tour' )->group( function () {
 		Route::post( '/list/', [ TourController::class, 'list' ] );
@@ -63,6 +65,8 @@ Route::middleware( [ 'auth' ] )->group( function () {
 		Route::post( '/verify/{id}', [ TourController::class, 'verify' ] );
 		Route::post( '/book/{id}', [ TourController::class, 'book' ] );
 		Route::post( '/comment/{id}', [ TourController::class, 'comment' ] );
+		Route::get( '/detail/{id}', [TourController::class, 'show']);
+		Route::get( '/create', [TourController::class], 'create');
 	} );
 	Route::resource( 'tour-operator', 'TourOperatorController' );
 	Route::resource( 'tourist', 'TouristController' );

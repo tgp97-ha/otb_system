@@ -2,9 +2,12 @@
 
 @section('content')
     <div class="h-[90%] mb-3 overflow-y-scroll">
-        <table class="text-sm text-left text-gray-500">
+        <table class="border-collapse text-sm text-left text-gray-500">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                 <tr>
+                    <th scope="col" class="py-3 px-6">
+                        Thumb
+                    </th>
                     <th scope="col" class="py-3 px-6">
                         Title
                     </th>
@@ -12,10 +15,7 @@
                         Destination
                     </th>
                     <th scope="col" class="py-3 px-6">
-                        Day
-                    </th>
-                    <th scope="col" class="py-3 px-6">
-                        Night
+                        Duration
                     </th>
                     <th scope="col" class="py-3 px-6">
                         Start Date
@@ -28,17 +28,21 @@
             <tbody>
                 @foreach ($tours as $tour)
                     <tr class="bg-white border-b border-gray-700">
-                        <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-wrap">
+                        <td class="py-4 px-6 -pr-50">
+                            <img src="https://mdbootstrap.com/img/new/standard/city/041.jpg"
+                                class="block p-1 bg-white border rounded w-40 h-auto" alt="..." />
+                            {{-- <img src="{{ $tour->tour_image }}" class="block p-1 bg-white border rounded w-40 h-auto"
+                                alt="..." /> --}}
+                        </td>
+                        <td class="py-4 px-6 font-medium text-gray-900 whitespace-wrap">
                             {{ $tour->tour_name }}
-                        </th>
+                        </td>
                         <td class="py-4 px-6">
                             {{ $tour->tour_destination }}
                         </td>
                         <td class="py-4 px-6">
-                            {{ $tour->tour_day_length }}
-                        </td>
-                        <td class="py-4 px-6">
-                            {{ $tour->tour_night_length }}
+                            {{ $tour->tour_day_length > 1 ? $tour->tour_day_length . ' days' : $tour->tour_day_length . ' day' }}
+                            {{ $tour->tour_night_length > 1 ? $tour->tour_night_length . ' nights' : $tour->tour_day_length . ' night' }}
                         </td>
                         <td class="py-4 px-6">
                             {{ $tour->tour_start_date }}
@@ -64,5 +68,4 @@
     </div>
 
     {{ $tours->onEachSide(3)->links() }}
-
 @endsection

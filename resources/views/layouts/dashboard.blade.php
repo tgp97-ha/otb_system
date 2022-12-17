@@ -16,11 +16,19 @@
         {{-- Sidebar --}}
         @include('common.sidebar')
         {{-- Content --}}
-        <div class="pt-16 pl-64 w-full h-full">
-            <div class="w-full h-full px-6 py-2">
-                @yield('content')
+        @if (!Auth::guest())
+            <div class="w-full h-full pt-16 pl-64">
+                <div class="w-full h-full px-6 py-2">
+                    @yield('content')
+                </div>
             </div>
-        </div>
+        @else
+            <div class="w-full h-full pt-16">
+                <div class="w-full h-full px-6 py-2">
+                    @yield('content')
+                </div>
+            </div>
+        @endif
     </div>
     <script src="{{ asset('js/navbar.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>

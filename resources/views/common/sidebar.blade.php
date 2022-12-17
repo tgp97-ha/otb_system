@@ -24,7 +24,20 @@
                 <ul class="space-y-2">
                     @can('tourist')
                         <li>
-                            <a href="#"
+                            <a href="{{ url('/') }}"
+                                class="flex items-center p-2 text-base font-normal rounded-lg text-white hover:bg-gray-700">
+                                <svg aria-hidden="true"
+                                    class="flex-shrink-0 w-6 h-6 transition duration-75 text-gray-400 group-hover:text-white"
+                                    fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z">
+                                    </path>
+                                </svg>
+                                <span class="ml-3 whitespace-nowrap">Home page</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ url('tourist/my-tours') }}"
                                 class="flex items-center p-2 text-base font-normal rounded-lg text-white hover:bg-gray-700">
                                 <svg aria-hidden="true"
                                     class="flex-shrink-0 w-6 h-6 transition duration-75 text-gray-400 group-hover:text-white"
@@ -34,19 +47,6 @@
                                     </path>
                                 </svg>
                                 <span class="ml-3 whitespace-nowrap">My Tours</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#"
-                                class="flex items-center p-2 text-base font-normal rounded-lg text-white hover:bg-gray-700">
-                                <svg aria-hidden="true"
-                                    class="flex-shrink-0 w-6 h-6 transition duration-75 text-gray-400 group-hover:text-white"
-                                    fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z">
-                                    </path>
-                                </svg>
-                                <span class="ml-3 whitespace-nowrap">Profile</span>
                             </a>
                         </li>
                     @endcan
@@ -77,7 +77,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#"
+                            <a href="{{ url('tour/create') }}"
                                 class="flex items-center p-2 text-base font-normal rounded-lg text-white hover:bg-gray-700">
                                 {{-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
                                     class="flex-shrink-0 w-6 h-6 transition duration-75 text-gray-400 group-hover:text-white">
@@ -91,18 +91,6 @@
                                         d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z" />
                                 </svg>
                                 <span class="ml-3 whitespace-nowrap">New Tour</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#"
-                                class="flex items-center p-2 text-base font-normal rounded-lg text-white hover:bg-gray-700">
-                                <svg aria-hidden="true"
-                                    class="flex-shrink-0 w-6 h-6 transition duration-75 text-gray-400 group-hover:text-white"
-                                    fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-                                        clip-rule="evenodd"></path>
-                                </svg>
-                                <span class="ml-3 whitespace-nowrap">Profile</span>
                             </a>
                         </li>
                     @endcan
@@ -136,7 +124,7 @@
                 </ul>
                 <ul class="pt-4 mt-4 space-y-2 border-t border-gray-700">
                     <li>
-                        <a href="#"
+                        <a href="https://github.com/tgp97-ha/otb_system"
                             class="flex items-center p-2 text-base font-normal rounded-lg transition duration-75 hover:bg-gray-700 text-white group">
                             <svg aria-hidden="true"
                                 class="flex-shrink-0 w-6 h-6 transition duration-75 text-gray-400 group-hover:text-white"
@@ -150,7 +138,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#"
+                        <a href="https://github.com/tgp97-ha/otb_system/issues"
                             class="flex items-center p-2 text-base font-normal rounded-lg transition duration-75 hover:bg-gray-700 text-white group">
                             <svg aria-hidden="true"
                                 class="flex-shrink-0 w-6 h-6 transition duration-75 text-gray-400 group-hover:text-white"

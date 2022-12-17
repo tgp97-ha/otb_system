@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tour;
 use App\Models\TourOperator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -170,5 +171,21 @@ class TourOperatorController extends Controller{
 		}
 
 		return redirect()->route( 'tour-operator.index' );
+	}
+
+	public function showDashboard() {
+		return view('tour-operator.index', []);
+	}
+
+	public function showAllTours() {
+		$tours = Tour::where('tour_tour_operator_serial', auth()->user()->id)->paginate(10);
+		return view('tour-operator.tours', [
+			'tours' => $tours
+		]);
+	}
+	public function showTour($id) {
+		// $tour = Tour::find($id);
+		// return view('tour.detail')
+		return redirect('/tour/edit/'. $id);
 	}
 }
