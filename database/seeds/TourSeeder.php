@@ -31,7 +31,7 @@ class TourSeeder extends Seeder
                 'tour_night_length' => $faker->numberBetween(1, 99),
                 'tour_slots' => $faker->numberBetween(1, 99),
                 'tour_slots_left' => $faker->numberBetween(1, 99),
-                'tour_place' => $faker->sentence(5, true),
+                'tour_place' => $faker->numberBetween(1, 3),
                 'tour_prices' => $faker->numberBetween(1, 99) .  $faker->numerify(',###.###'),
                 'tour_is_verify' => $faker->boolean(),
             ]);
