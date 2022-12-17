@@ -19,8 +19,8 @@
     </div> --}}
 
     @if (!Auth::guest())
-        <aside class="fixed w-64 h-screen z-50">
-            <div class="h-full overflow-y-auto py-4 px-3 bg-gray-800">
+        <aside class="fixed w-64 h-screen">
+            <div class="h-full pt-20 px-3 bg-gray-800 overflow-y-auto">
                 <ul class="space-y-2">
                     @can('tourist')
                         <li>
