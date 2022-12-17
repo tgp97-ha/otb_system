@@ -22,18 +22,6 @@
         <aside class="fixed w-64 h-screen z-50">
             <div class="h-full overflow-y-auto py-4 px-3 bg-gray-800">
                 <ul class="space-y-2">
-                    <li>
-                        <a href="#"
-                            class="flex items-center p-2 text-base font-normal rounded-lg text-white hover:bg-gray-700">
-                            <svg aria-hidden="true"
-                                class="w-6 h-6 transition duration-75 text-gray-400 group-hover:text-white"
-                                fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
-                                <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
-                            </svg>
-                            <span class="ml-3">Dashboard</span>
-                        </a>
-                    </li>
                     @can('tourist')
                         <li>
                             <a href="#"
@@ -64,7 +52,19 @@
                     @endcan
                     @can('tour-operator')
                         <li>
-                            <a href="#"
+                            <a href="{{ url('/tour-operator') }}"
+                                class="flex items-center p-2 text-base font-normal rounded-lg text-white hover:bg-gray-700">
+                                <svg aria-hidden="true"
+                                    class="w-6 h-6 transition duration-75 text-gray-400 group-hover:text-white"
+                                    fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
+                                    <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
+                                </svg>
+                                <span class="ml-3">Dashboard</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ url('/tour-operator/tours') }}"
                                 class="flex items-center p-2 text-base font-normal rounded-lg text-white hover:bg-gray-700">
                                 <svg aria-hidden="true"
                                     class="flex-shrink-0 w-6 h-6 transition duration-75 text-gray-400 group-hover:text-white"
@@ -74,6 +74,23 @@
                                     </path>
                                 </svg>
                                 <span class="ml-3 whitespace-nowrap">Tours Management</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#"
+                                class="flex items-center p-2 text-base font-normal rounded-lg text-white hover:bg-gray-700">
+                                {{-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                    class="flex-shrink-0 w-6 h-6 transition duration-75 text-gray-400 group-hover:text-white">
+                                    <path
+                                        d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z" />
+                                </svg> --}}
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"
+                                    class="flex-shrink-0 w-6 h-6 transition duration-75 text-gray-400 group-hover:text-white">
+                                    >
+                                    <path
+                                        d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z" />
+                                </svg>
+                                <span class="ml-3 whitespace-nowrap">New Tour</span>
                             </a>
                         </li>
                         <li>
