@@ -2,9 +2,10 @@
 
 namespace App\Providers;
 
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\ServiceProvider;
 use Carbon\Carbon;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\ServiceProvider;
+use Illuminate\Database\Schema\Blueprint;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -17,6 +18,7 @@ class AppServiceProvider extends ServiceProvider
     {
         setlocale(LC_TIME, app()->getLocale());
         Carbon::setLocale(app()->getLocale());
+        Paginator::useBootstrap();
     }
 
     /**
@@ -26,17 +28,18 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-	    $this->_registerBlueprintMacro();
+        $this->_registerBlueprintMacro();
     }
 
-	protected function _registerBlueprintMacro() {
-		Blueprint::macro( 'primaryColumn', function () {
-			$this->bigIncrements( 'serial' )->comment( 'Primary column.' );
-			// Add more primary columns
-		} );
-		Blueprint::macro( 'defaultFields', function () {
-			$this->timestamps();
-			$this->softDeletes();
-		} );
-	}
+    protected function _registerBlueprintMacro()
+    {
+        Blueprint::macro('primaryColumn', function () {
+            $this->bigIncrements('serial')->comment('Primary column.');
+            // Add more primary columns
+        });
+        Blueprint::macro('defaultFields', function () {
+            $this->timestamps();
+            $this->softDeletes();
+        });
+    }
 }
