@@ -163,7 +163,9 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#"
+                        <a href="{{ url('/logout') }}"
+                            onclick="event.preventDefault();
+                                         document.getElementById('logout-form').submit();"
                             class="flex items-center p-2 text-base font-normal rounded-lg text-white hover:bg-gray-700">
                             <svg aria-hidden="true"
                                 class="flex-shrink-0 w-6 h-6 transition duration-75 text-gray-400 group-hover:text-white"
@@ -172,8 +174,11 @@
                                     d="M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z"
                                     clip-rule="evenodd"></path>
                             </svg>
-                            <span class="flex-1 ml-3 whitespace-nowrap">Sign In</span>
+                            <span class="flex-1 ml-3 whitespace-nowrap">Sign Out</span>
                         </a>
+                        <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                            {{ csrf_field() }}
+                        </form>
                     </li>
                 </ul>
             </div>
