@@ -314,6 +314,14 @@ class TourController extends Controller{
 			$item->delete();
 		}
 
+		$user = Auth::user();
+
+		if($user->hasRole( 'admin' ))
+			return redirect( '/tours');
+		if ($user->hasRole( 'tour-operator'))
+			return redirect( '/tour-operator/tours');
+		if ($user->hasRole( 'tourist'))
+			return redirect( '/tourist/tours');
 		return redirect()->route( 'tour.index' );
 	}
 
