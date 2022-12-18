@@ -32,6 +32,11 @@
     </div>
     <script src="{{ asset('js/navbar.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/datepicker.js') }}"></script>
+
+
+
+
 </body>
 
 </html>
