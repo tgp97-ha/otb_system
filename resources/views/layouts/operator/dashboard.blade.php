@@ -25,7 +25,7 @@
 
         {{-- Content --}}
         <div class="w-full h-full pt-20 pl-64">
-            <div class="w-full h-full">
+            <div class="w-full h-full px-6 py-3">
                 @yield('content')
             </div>
         </div>
