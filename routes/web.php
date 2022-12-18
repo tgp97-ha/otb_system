@@ -53,6 +53,8 @@ Route::middleware( [ 'auth' ] )->group( function () {
 		Route::delete( '/delete/{id}', [ TourOperatorController::class, 'destroy' ] );
 		Route::get( '/edit-profile', [TourOperatorController::class,'editOwnProfile']);
 		Route::post( '/list/', [TourOperatorController::class,'list']);
+		Route::get( '/dashboard', [TourOperatorController::class, 'showDashboard']);
+		Route::get( '/tours', [TourOperatorController::class, 'showAllTours']);
 	} );
 	Route::prefix( 'tour' )->group( function () {
 		Route::post( '/list/', [ TourController::class, 'list' ] );
