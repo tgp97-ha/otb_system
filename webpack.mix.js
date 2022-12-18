@@ -28,5 +28,7 @@ mix.webpackConfig({
     .postCss("resources/css/tailwind.css", "public/css", [
         require("tailwindcss"),
     ])
+    .postCss("./node_modules/flowbite/dist/flowbite.css", "public/css")
+    .js("./node_modules/flowbite/dist/flowbite.js", "public/js")
     .js("./node_modules/flowbite/dist/datepicker.js", "public/js")
     .browserSync("http://localhost:8000/");
