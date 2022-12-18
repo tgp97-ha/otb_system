@@ -1,5 +1,7 @@
 {
     "/js/app.js": "/js/app.js",
+    "/js/datepicker.js": "/js/datepicker.js",
     "/css/app.css": "/css/app.css",
+    "/css/tailwind.css": "/css/tailwind.css",
     "/css/print.css": "/css/print.css"
 }
