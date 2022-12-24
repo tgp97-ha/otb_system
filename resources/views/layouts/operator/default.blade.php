@@ -22,7 +22,7 @@
 
 
     {{-- Content --}}
-    <div class="container mx-auto pt-20 px-96">
+    <div class="container mx-auto pt-16">
         <div class="w-full">
             @yield('content')
         </div>

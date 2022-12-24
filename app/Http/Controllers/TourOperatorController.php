@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tour;
+use App\Models\Place;
+use App\Models\Service;
 use App\Models\TourOperator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -23,7 +26,7 @@ class TourOperatorController extends Controller{
 	public function index() {
 		$tourOperators = TourOperator::all();
 
-		return view( 'tour-operator.index', [
+		return view( 'tour-operator.index1', [
 			'tourOperators' => $tourOperators,
 		] );
 	}
@@ -98,7 +101,7 @@ class TourOperatorController extends Controller{
 
 		$operator = TourOperator::where( 'tour_operator_user_serial', auth()->user()->id )->first();
 
-		return view( 'tour-operator.detail', [ 'tourOperator' => $operator ] );
+		return view( 'tour-operator.detail1', [ 'tourOperator' => $operator ] );
 	}
 
 	/**
@@ -127,11 +130,11 @@ class TourOperatorController extends Controller{
 	 */
 	public function update( Request $request, $id ) {
 		$request->validate( [
-			'tourist_name' => 'required|min:2|max:64',
-			'dob'          => 'nullable|string',
+			'name' => 'required|min:2|max:64',
 			'address'      => 'nullable|string|max:100',
+			'description'          => 'nullable|string',
 			'phone_number' => 'nullable|string|max:10',
-			'personal_id'  => 'nullable|regex:/^([0-9\s\-\+\(\)]*)$/|min:9|max:15',
+			'tax_number'  => 'nullable|min:9|max:15',
 		] );
 		$item = TourOperator::find( $id );
 		if ( $item ) {
@@ -143,7 +146,7 @@ class TourOperatorController extends Controller{
 			$item->save();
 			$request->session()->flash( 'message', 'Successfully edited' );
 
-			return redirect()->route( 'tour-operator.show', [ $id => $id ] );
+			return view( 'tour-operator.detail1', [ 'tourOperator' => $item ] );
 		} else {
 			return back()->withInput()->withErrors( [ 'msg', 'Can\'t update tour' ] );
 		}
@@ -153,7 +156,7 @@ class TourOperatorController extends Controller{
 		$user = Auth::user();
 		$item = TourOperator::where( 'tour_operator_user_serial', $user->id )->first();
 
-		return view( 'tour-operator.edit', [ 'tourOperator' => $item ] );
+		return view( 'tour-operator.edit1', [ 'tourOperator' => $item ] );
 	}
 
 	/**
@@ -170,5 +173,33 @@ class TourOperatorController extends Controller{
 		}
 
 		return redirect()->route( 'tour-operator.index' );
+	}
+
+	public function showDashboard() {
+		return view('tour-operator.dashboard');
+	}
+
+	public function showAllTours() {
+		$tours    = Tour::with( 'place', 'services' );
+		$places   = Place::all();
+		$services = Service::all();
+		if ( ! Auth::user() || Auth::user()->can( 'tourist' ) ) {
+			$tours->where( 'tour_is_verify', 1 );
+		}
+		if ( Auth::user() ) {
+			if ( Auth::user()->can( 'tour-operator' ) ) {
+				$tours->with( 'userTourist' )->whereHas( 'userTourist', function ( $user ) {
+					$user->where( 'id', auth()->user()->id );
+				} );
+			}
+		}
+		// $tours = $tours->get();
+		$tours = $tours->paginate(10);
+
+		return view( 'tour-operator.tours', [
+			'tours'    => $tours,
+			'places'   => $places,
+			'services' => $services,
+		] );
 	}
 }

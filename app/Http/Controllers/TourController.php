@@ -314,7 +314,9 @@ class TourController extends Controller{
 			$item->delete();
 		}
 
-		return redirect()->route( 'tour.index' );
+		return redirect()->action(
+			[TourOperatorController::class, 'showAllTours']
+		);
 	}
 
 	public function verify( $id ) {

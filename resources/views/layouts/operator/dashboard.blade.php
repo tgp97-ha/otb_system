@@ -12,7 +12,7 @@
 
 <body>
 
-    <div class="w-full h-screen">
+    <div class="w-full h-auto min-h-screen overflow-y-auto bg-gray-200">
         {{-- Navbar --}}
         @include('components.operator.navbar')
         {{-- /Navbar --}}
@@ -24,8 +24,8 @@
 
 
         {{-- Content --}}
-        <div class="w-full h-full pt-20 pl-64">
-            <div class="w-full h-full px-6 py-3">
+        <div class="w-full h-full pt-16 pl-64">
+            <div class="w-full h-full px-6 py-4">
                 @yield('content')
             </div>
         </div>

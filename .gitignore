@@ -12,5 +12,5 @@ yarn-error.log
  .phpunit.result.cache
 
 .DS_Store
-/public/css/*.css
-/public/js/*.js
+/public/css
+/public/js

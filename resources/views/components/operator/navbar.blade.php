@@ -1,5 +1,5 @@
-<nav class="fixed top-0 left-0 w-full h-20 z-20 bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-900">
-    <div class="container flex flex-wrap items-center justify-between mx-auto">
+<nav class="fixed top-0 left-0 w-full h-16 z-20 bg-white border-gray-200 px-2 sm:px-4 py-2.5 dark:bg-gray-900">
+    <div class="flex flex-wrap items-center justify-between">
         <a href="{{ url('tour-operator') }}" class="flex items-center">
             <img src="https://upload.wikimedia.org/wikipedia/commons/f/f1/Pornhub-logo.svg" class="h-6 mr-3 sm:h-9"
                 alt="Online Tour Booking Logo" />
@@ -33,9 +33,8 @@
                             class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Dashboard</a>
                     </li>
                     <li>
-                        <a href="{{ url('/tour-operator/edit-profile/') }}"
-                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Edit
-                            Profile</a>
+                        <a href="{{ url('/tour-operator/profile') }}"
+                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Profile</a>
                     </li>
                     <li>
                         <a href="#"
