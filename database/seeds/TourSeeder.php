@@ -18,7 +18,7 @@ class TourSeeder extends Seeder
         $faker = Factory::create();
         for ($i = 0; $i < 1000; $i++) {
             DB::table('tours')->insert([
-                'tour_tour_operator_serial' => $faker->numberBetween(1, 10),
+                'tour_tour_operator_serial' => $faker->numberBetween(12, 21),
                 'tour_name' => $faker->sentence(15, true),
                 'tour_title' => $faker->sentence(15, true),
                 'tour_destination' => $faker->city(),
