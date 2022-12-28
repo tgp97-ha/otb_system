@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Tour;
 use App\Models\Tourist;
+use App\Models\TourOperator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -218,10 +219,14 @@ class TouristController extends Controller
 	public function myTours() {
 		$user  = auth()->user();
 		$tours = Tour::with( 'bookings' )->whereHas( 'bookings', function ( $bookings ) use ( $user ) {
-			$bookings->where( 'user_id', $user->id );
+            $bookings->where( 'user_id', $user->id );
 		} );
+        $operators = TourOperator::all();
 
-		return view('tourist.myTours',['tours'=> $tours->get()]);
+		return view('tourist.myTours',[
+            'tours'=> $tours->get(),
+            'operators' => $operators
+        ]);
 	}
 
 	public function list( Request $request ) {

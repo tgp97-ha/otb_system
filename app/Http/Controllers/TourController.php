@@ -32,6 +32,8 @@ class TourController extends Controller{
 		$tours    = Tour::with( 'place', 'services' );
 		$places   = Place::all();
 		$services = Service::all();
+		$operators = TourOperator::all();
+
 		if ( ! Auth::user() || Auth::user()->can( 'tourist' ) ) {
 			$tours->where( 'tour_is_verify', 1 );
 		}
@@ -42,12 +44,13 @@ class TourController extends Controller{
 				} );
 			}
 		}
-		$tours = $tours->get();
+		$tours = $tours->paginate(10);
 
 		return view( 'tour.index', [
 			'tours'    => $tours,
 			'places'   => $places,
 			'services' => $services,
+			'operators'=> $operators,
 		] );
 	}
 
@@ -95,6 +98,7 @@ class TourController extends Controller{
 		$tours    = $tours->get();
 		$places   = Place::all();
 		$services = Service::all();
+		dd($tours);
 
 		return view( 'tour.index', [
 			'tours'          => $tours,
@@ -136,6 +140,7 @@ class TourController extends Controller{
 			'night_length'     => 'required',
 			'day_length'       => 'required',
 			'tour_slot'        => 'required',
+			'tour_slot_left'   => 'required',
 			'tour_price'       => 'required',
 			'tour_image.*'     => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
 		] );
@@ -159,7 +164,7 @@ class TourController extends Controller{
 		$item->tour_night_length = $request->input( 'night_length' );
 		$item->tour_day_length   = $request->input( 'day_length' );
 		$item->tour_slots        = $request->input( 'tour_slot' );
-		$item->tour_slots_left   = $request->input( 'tour_slot' );
+		$item->tour_slots_left   = $request->input( 'tour_slot_left' );
 		$item->tour_prices       = $request->input( 'tour_price' );
 		$item->tour_place        = $request->input( 'destination' );
 
@@ -180,6 +185,8 @@ class TourController extends Controller{
 		}
 
 		$request->session()->flash( 'message', 'Successfully created' );
+		
+		dd($item);
 
 		return redirect( '/tour/detail/' . $item->serial );
 	}
@@ -198,12 +205,13 @@ class TourController extends Controller{
 			'place',
 			'comments.tourist.tourist',
 			'images'
-		] )->find( $id );
+			] )->find( $id );
 		if ( Auth::user() ) {
 			$booking = Booking::where( 'tour_serial', $item->serial )->where( 'user_id', auth()->user()->id )->first();
 			if ( $booking ) {
 				return view( 'tour.detail', [ 'tour' => $item, 'booking' => $booking ] );
 			} else {
+				// dd($item);
 				return view( 'tour.detail', [ 'tour' => $item ] );
 			}
 		}
@@ -256,6 +264,7 @@ class TourController extends Controller{
 			'night_length'     => 'required',
 			'day_length'       => 'required',
 			'tour_slot'        => 'required',
+			'tour_slot_left'   => 'required',
 			'services'         => 'array|min:1',
 			'tour_image_1'     => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
 			'tour_image_2'     => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
@@ -273,7 +282,7 @@ class TourController extends Controller{
 		$item->tour_night_length = $request->input( 'night_length' );
 		$item->tour_day_length   = $request->input( 'day_length' );
 		$item->tour_slots        = $request->input( 'tour_slot' );
-		$item->tour_slots_left   = $request->input( 'tour_slot' );
+		$item->tour_slots_left   = $request->input( 'tour_slot_left' );
 		$item->tour_prices       = $request->input( 'tour_price' );
 		$item->tour_is_verify    = 0;
 		$item->save();
