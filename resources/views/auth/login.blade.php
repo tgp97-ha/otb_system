@@ -1,93 +1,93 @@
 @extends('layout.base')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+    <div style="height: 100vh">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">{{ __('Login') }}</div>
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
+                    <div class="card-body">
+                        <form method="POST" action="{{ route('login') }}">
+                            @csrf
 
-                        <div class="form-group col-md-10 offset-md-1" {{ $errors->has('username') ? ' has-error' : '' }}>
-                            <label for="username" class="control-label">Username</label>
+                            <div class="form-group col-md-10 offset-md-1" {{ $errors->has('username') ? ' has-error' : '' }}>
+                                <label for="username" class="control-label">Username</label>
 
-                            <div>
-                                <input id="username" type="username" class="form-control" name="username"
-                                       value="{{ old('username') }}" required autofocus>
+                                <div>
+                                    <input id="username" type="username" class="form-control" name="username"
+                                           value="{{ old('username') }}" required autofocus>
 
-                                @if ($errors->has('username'))
-                                    <span class="help-block  text-danger">
+                                    @if ($errors->has('username'))
+                                        <span class="help-block  text-danger">
                                         <strong>{{ $errors->first('username') }}</strong>
                                     </span>
-                                @endif
-                                @if (session('errors') && session('errors')->has('message'))
-                                    <span class="help-block text-danger">
+                                    @endif
+                                    @if (session('errors') && session('errors')->has('message'))
+                                        <span class="help-block text-danger">
                                         <strong>{{ session('errors')->first('message') }}</strong>
                                     </span>
-                                @endif
+                                    @endif
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="form-group col-md-10 offset-md-1" {{ $errors->has('password') ? ' has-error' : '' }}>
-                            <label for="password" class="control-label">Password</label>
+                            <div class="form-group col-md-10 offset-md-1" {{ $errors->has('password') ? ' has-error' : '' }}>
+                                <label for="password" class="control-label">Password</label>
 
-                            <div>
-                                <input id="password" type="password" class="form-control" name="password" required>
+                                <div>
+                                    <input id="password" type="password" class="form-control" name="password" required>
 
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
+                                    @if ($errors->has('password'))
+                                        <span class="help-block">
                                         <strong>{{ $errors->first('password') }}</strong>
                                     </span>
-                                @endif
+                                    @endif
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="form-group col-md-10 offset-md-1">
-                            <div class="row">
-                                <div class="col-6">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="radio" name="login_type" value="1" checked
-                                                    {{ old('remember') ? 'checked' : '' }}> As tourist
-                                        </label>
+                            <div class="form-group col-md-10 offset-md-1">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="radio" name="login_type" value="1" checked
+                                                        {{ old('remember') ? 'checked' : '' }}> As tourist
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="radio" name="login_type" value="2"
+                                                        {{ old('remember') ? 'checked' : '' }}> As tour operator
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-6">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="radio" name="login_type" value="2"
-                                                    {{ old('remember') ? 'checked' : '' }}> As tour operator
-                                        </label>
+                            </div>
+
+                            <div class="form-group col-md-10 offset-md-1">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <a href="{{url('/register/tourist/')}}">Register as Tourist</a>
+                                    </div>
+                                    <div class="col-6">
+                                        <a href="{{url('/register/tour-operator')}}">Register as Tour Operator</a>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="form-group col-md-10 offset-md-1">
-                            <div class="row">
-                                <div class="col-6">
-                                    <a href="{{url('/register/tourist/')}}">Register as Tourist</a>
-                                </div>
-                                <div class="col-6">
-                                    <a href="{{url('/register/tour-operator')}}">Register as Tour Operator</a>
+                            <div class="form-group">
+                                <div class="col-md-10 offset-md-1">
+                                    <button type="submit" class="btn btn-primary float-right">
+                                        Login
+                                    </button>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-10 offset-md-1">
-                                <button type="submit" class="btn btn-primary float-right">
-                                    Login
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 @endsection

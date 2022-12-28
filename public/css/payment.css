@@ -1,0 +1,112 @@
+.overview-content-icon {
+    font-size: 2.4rem;
+    color: rgb(4, 140, 245);
+    margin: 0 8px;
+}
+
+.overview-content-title {
+    font-size: 2.4rem;
+}
+
+.overview-content-address {
+    font-size: 2.4rem;
+    font-weight: bold;
+}
+
+.card-title-heading {
+    padding: 10px;
+    font-size: 2.4rem;
+    font-weight: bold;
+}
+
+.money {
+    max-width: 250px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.money-heading {
+    font-size: 2.2rem;
+    font-weight: bold;
+}
+
+.money-price {
+    font-size: 2.2rem;
+    font-weight: bold;
+    color: #FF0000;
+}
+
+.info-heading-title {
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+.info-heading {
+    font-size: 2.4rem;
+    font-weight: bold;
+    margin: 8px 20px;
+}
+
+.info-input {
+    width: 100%;
+    height: 46px;
+    padding: 0 10px;
+    font-size: 1.8rem;
+}
+
+.info-textarea {
+    width: 100%;
+    min-height: 70px;
+    max-height: 120px;
+    font-size: 1.6rem;
+    line-height: 2rem;
+    padding: 8px 12px;
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px
+}
+
+.type-payment {
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+.form-check-payment {
+    margin: 10px 150px;
+}
+
+.method-payment {
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+.info-banking {
+    margin: 20px 40px;
+}
+
+.banking-title {
+    font-size: 2.4rem;
+    font-weight: bold;
+}
+
+.banking-img {
+    border: 2px solid #6c757d;
+}
+
+.card-title-info {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin: 10px;
+}
+
+.submit-input {
+    text-align: center;
+    width: 200px;
+    height: 46px;
+    padding: 0 10px;
+    font-size: 2rem;
+    font-weight: bold;
+    background-color: #139DEA;
+    border: none;
+    margin: 30px 350px;
+
+}

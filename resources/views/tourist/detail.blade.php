@@ -2,34 +2,37 @@
 
 @section('content')
     <div class="container">
-        <div class="row pt-5">
-            <div class="col-md-8 offset-md-2">
-                <div class="card">
-                    <div class="card-header">Tourist Detail</div>
+        <div class="row pt-5 d-flex justify-content-center">
+            <div class="col-md-9">
+                <div class="card border-0">
+                    <div class="card-header border-0 bg-white font-weight-bold" style="font-size: 20px">MY PROFILE</div>
                     <div class="card-body">
-                        <div class="form-group col-md-10 offset-md-1 row">
-                            <span for="email" class="col-form-label col-4 align-middle">Tourist Name</span>
-                            <span class="col-form-label font-weight-normal col-8 align-middle">{{ $tourist->tourist_name }}</span>
+                        <div class="form-group col-md-10 row px-4">
+                            <span class="col-form-label col-4 align-middle font-weight-bold font-italic">Tourist Name: </span>
+                            <span class="col-form-label font-weight-normal  col-8 align-middle">{{ $tourist->tourist_name }}</span>
                         </div>
-                        <div class="form-group col-md-10 offset-md-1 row">
-                            <span class="col-form-label col-4 align-middle">Address</span>
+                        <div class="form-group col-md-10 row px-4">
+                            <span class="col-form-label col-4 align-middle font-weight-bold font-italic">Address: </span>
                             <span class="col-form-label font-weight-normal  col-8 align-middle">{{ $tourist->address }}</span>
                         </div>
-                        <div class="form-group col-md-10 offset-md-1 row">
-                            <span class="col-form-label col-4 align-middle">Date of Birth</span>
+                        <div class="form-group col-md-10 row px-4">
+                            <span class="col-form-label col-4 align-middle font-weight-bold font-italic">Date Of Birth: </span>
                             <span class="col-form-label font-weight-normal  col-8 align-middle">{{ $tourist->date_of_birth }}</span>
                         </div>
-                        <div class="form-group col-md-10 offset-md-1 row">
-                            <span class="col-form-label col-4 align-middle">Phone Number</span>
-                            <span class="col-form-label font-weight-normal align-middle col-8">{{ $tourist->tourist_phone_number }}</span>
+                        <div class="form-group col-md-10 row px-4">
+                            <span class="col-form-label col-4 align-middle font-weight-bold font-italic">Phone Number: </span>
+                            <span class="col-form-label font-weight-normal  col-8 align-middle">{{ $tourist->tourist_phone_number }}</span>
                         </div>
-                        <div class="form-group col-md-10 offset-md-1 row">
-                            <span  class="col-form-label col-4 align-middle">Personal Id</span>
-                            <span class="col-form-label font-weight-normal align-middle col-8">{{ $tourist->tourist_personal_id }}</span>
+                        <div class="form-group col-md-10 row px-4">
+                            <span class="col-form-label col-4 align-middle font-weight-bold font-italic">Personal Id: </span>
+                            <span class="col-form-label font-weight-normal  col-8 align-middle">{{ $tourist->tourist_personal_id }}</span>
                         </div>
-                        <div class="form-group col-md-10 offset-md-1">
-                            <div class="row d-flex justify-content-center">
+                        <div class="row mt-4 d-flex justify-content-end">
+                            <div class="col-3">
+                                <div class="form-group col-md-10 offset-md-1">
                                     <a class="btn btn-primary" href="{{url('/tourist/edit-profile')}}">Edit profile</a>
+
+                                </div>
                             </div>
                         </div>
                     </div>

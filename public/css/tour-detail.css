@@ -1,0 +1,255 @@
+.slider-tour-detail {
+    position: relative;
+    padding-top: 30%;
+    background: url('../public/css/images/capublic/i/assets/img/cau-vang.jpg') center center / cover no-repeat;
+}
+
+.list-menu {
+    height: 50px;
+    display: flex;
+    list-style: none;
+    justify-content: space-between;
+    padding-left: 0;
+    margin: 10px 32px 20px 0;
+    border-bottom: 1px solid #e1e1e1;
+}
+
+.border-bot {
+    border-bottom: 1px solid #e1e1e1;
+    padding-bottom: 10px;
+}
+
+.list-menu-item-link {
+    text-decoration: none;
+    color: #000;
+    font-size: 2.6rem;
+    font-weight: bold;
+}
+
+.content-section-heading {
+    padding-top: 30px;
+    font-size: 2.4rem;
+    font-weight: bold;
+}
+
+.rating-btn{
+    color: #ffce3e;
+    margin: 10px 0;
+    font-size: 1.6rem;
+}
+
+.rating-sum {
+    font-size: 1.6rem;
+    margin-left: 4px;
+}
+
+.overview-content-icon {
+    font-size: 2.4rem;
+    color: rgb(4, 140, 245);
+    margin: 0 8px;
+}
+
+.overview-content-title {
+    font-size: 2.4rem;
+}
+
+.overview-content-address {
+    font-size: 2.4rem;
+    font-weight: bold;
+}
+
+.content-section-day {
+    padding: 23px 25px 22px;
+    color: #f97150;
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+.content-section-text {
+    font-size: 1.6rem;
+    line-height: 2.4rem;
+    text-align: justify;
+}
+
+.reviews-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.reviews-rating-sum {
+    font-size: 2rem;
+    font-weight: bold;
+    padding: 10px;
+}
+
+.reviews-header-btn {
+    padding: 0 4px;
+    color: #ffce3e;
+    font-size: 1.8rem;
+}
+
+.sort {
+    text-align: end;
+}
+
+.reviews-sort-heading {
+    font-size: 2rem;
+    margin: 0;
+    font-weight: bold;
+    line-height: 2.4rem;
+}
+
+.reviews-sort-title {
+    margin: 0 8px;
+}
+
+.select-sort {
+    margin: 0 8px;
+    border-radius: 6px;
+    padding: 0 4px;
+    width: 150px;
+    height: 30px;
+}
+
+.reviews-body {
+    height: 100px;
+}
+
+.user-icon {
+    font-size: 6rem;
+    padding: 20px 40px;
+}
+
+.reviews-rating-btn {
+    color: #ffce3e;
+}
+
+.reviews-cmt {
+    width: 100%;
+    min-height: 70px;
+    max-height: 120px;
+    font-size: 1.6rem;
+    line-height: 2rem;
+    padding: 8px 12px;
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px
+}
+
+.reviews-feedback {
+    display: flex;
+    justify-content: space-between;
+}
+
+.reviews-feedback-name {
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+.reviews-feedback-time {
+    font-size: 1.6rem;
+    color: #a3a3a3;
+    font-weight: 500;
+}
+
+.rate {
+    font-size: 1.6rem;
+    margin: 4px 0;
+}
+
+.book-tour {
+    background-color: rgba(247, 247, 247, 0.9) !important;
+    width: 100%;
+    border-radius: 5px;
+}
+
+.book-tour-heading {
+    font-size: 2.6rem;
+    font-weight: bold;
+    padding: 20px;
+    margin: 0;
+}
+
+.book-tour-body {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #fff;
+    height: 40px;
+    border-radius: 40px;
+    margin: 0 40px;
+}
+
+.calendar-btn {
+    font-size: 2rem;
+    padding: 8px;
+}
+
+.book-tour-title {
+    font-size: 2rem;
+}
+
+.book-tour-down-btn {
+    font-size: 2rem;
+    padding: 10px;
+}
+
+.book-tour-tickets {
+    margin: 20px 16px;
+}
+
+.book-tour-tickets-heading {
+    font-size: 2.4rem;
+    font-weight: bold;
+}
+
+.book-tour-tickets-body {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px;
+}
+
+.book-tour-tickets-title {
+    font-size: 2rem;
+    font-style: italic;
+}
+
+.price {
+    font-weight: bold;
+
+}
+
+.book-tour-tickets-adults {
+    min-width: 100px;
+    border-radius: 5px;
+    border-style: none;
+    padding: 5px 10px;
+    font-size: 1.4rem;
+
+}
+
+.book-tour-total {
+    margin: 20px 30px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.book-tour-total-heading {
+    font-size: 2.4rem;
+    font-weight: bold;
+}
+
+.book-tour-total-price {
+    font-size: 2.4rem;
+    font-weight: bold;
+}
+
+.book-now-btn {
+    height: 50px;
+    border-radius: 50px;
+    width: 192px;
+    margin: 10px 50px;
+    background-color: #000;
+    color: #fff;
+    font-size: 2.4rem;
+    font-weight: bold;
+}
