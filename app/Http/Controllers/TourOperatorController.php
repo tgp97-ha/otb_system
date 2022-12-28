@@ -90,6 +90,7 @@ class TourOperatorController extends Controller{
 	 */
 	public function show( $id ) {
 		$operator = TourOperator::find( $id );
+		dd(($operator));
 
 		return view( 'tour-operator.detail', [ 'tourOperator' => $operator ] );
 	}
