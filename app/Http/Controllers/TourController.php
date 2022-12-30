@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Booking;
 use App\Models\Comment;
-use App\Models\Image;
 use App\Models\Place;
 use App\Models\Service;
 use App\Models\Tour;
@@ -29,7 +28,7 @@ class TourController extends Controller{
 	 */
 	public function index() {
 		//search
-		$tours    = Tour::with( 'place', 'services' );
+		$tours    = Tour::with( 'place', 'services', 'images' );
 		$places   = Place::all();
 		$services = Service::all();
 		$operators = TourOperator::all();
@@ -44,7 +43,7 @@ class TourController extends Controller{
 				} );
 			}
 		}
-		$tours = $tours->paginate(10);
+		$tours = $tours->paginate( 10, [ '*' ] );
 
 		return view( 'tour.index', [
 			'tours'    => $tours,
@@ -95,10 +94,9 @@ class TourController extends Controller{
 				}
 			}
 		}
-		$tours    = $tours->get();
+		$tours    = $tours->paginate(10);
 		$places   = Place::all();
 		$services = Service::all();
-		dd($tours);
 
 		return view( 'tour.index', [
 			'tours'          => $tours,
@@ -140,7 +138,7 @@ class TourController extends Controller{
 			'night_length'     => 'required',
 			'day_length'       => 'required',
 			'tour_slot'        => 'required',
-			'tour_slot_left'   => 'required',
+			//'tour_slot_left'   => 'required',
 			'tour_price'       => 'required',
 			'tour_image.*'     => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
 		] );
@@ -164,7 +162,7 @@ class TourController extends Controller{
 		$item->tour_night_length = $request->input( 'night_length' );
 		$item->tour_day_length   = $request->input( 'day_length' );
 		$item->tour_slots        = $request->input( 'tour_slot' );
-		$item->tour_slots_left   = $request->input( 'tour_slot_left' );
+		//$item->tour_slots_left   = $request->input( 'tour_slot_left' );
 		$item->tour_prices       = $request->input( 'tour_price' );
 		$item->tour_place        = $request->input( 'destination' );
 
@@ -185,8 +183,6 @@ class TourController extends Controller{
 		}
 
 		$request->session()->flash( 'message', 'Successfully created' );
-		
-		dd($item);
 
 		return redirect( '/tour/detail/' . $item->serial );
 	}
@@ -264,14 +260,19 @@ class TourController extends Controller{
 			'night_length'     => 'required',
 			'day_length'       => 'required',
 			'tour_slot'        => 'required',
-			'tour_slot_left'   => 'required',
+			//'tour_slot_left'   => 'required',
 			'services'         => 'array|min:1',
-			'tour_image_1'     => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
-			'tour_image_2'     => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
-			'tour_image_3'     => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
-			'tour_image_4'     => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
-			'tour_image_5'     => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
+			'tour_image.*'     => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
 		] );
+		$imageData = [];
+		foreach ( $request->file( 'tour_image' ) as $image ) {
+			$image->store( 'tour', 'public' );
+
+			$imageData[] = [
+				"description"      => $request->input( 'tour_name' ).count($imageData),
+				"file_path"         => $image->hashName()
+			];
+		}
 		$item                    = Tour::with( 'services' )->find( $id );
 		$item->tour_name         = $request->input( 'tour_name' );
 		$item->tour_title        = $request->input( 'title' );
@@ -284,7 +285,6 @@ class TourController extends Controller{
 		$item->tour_slots        = $request->input( 'tour_slot' );
 		$item->tour_slots_left   = $request->input( 'tour_slot_left' );
 		$item->tour_prices       = $request->input( 'tour_price' );
-		$item->tour_is_verify    = 0;
 		$item->save();
 		$serial         = $item->serial;
 		$services       = $item->services;
@@ -298,12 +298,7 @@ class TourController extends Controller{
 			}
 		}
 		$item->services()->sync( $request->input( 'services' ) );
-		for ( $i = 1; $i <= 5; $i ++ ) {
-			if ( $request->input( 'tour_image_' . $i ) !== null ) {
-				$imageName = $serial . '.' . $i . $request->image->extension();
-				$request->input( 'tour_image_' . $i )->move( public_path( 'images/' . $serial . '/' ), $imageName );
-			}
-		}
+		$item->images()->createMany($imageData);
 
 		$request->session()->flash( 'message', 'Successfully created' );
 
@@ -351,7 +346,7 @@ class TourController extends Controller{
 		$tour->tour_slots_left = (int) $tour->tour_slots_left - 1;
 		$tour->save();
 
-		return view( 'tour.payment', [ 'booking' => $booking ] );
+		return view( 'tour.payment', [ 'tour'=>$tour, 'booking' => $booking ] );
 	}
 
 	public function comment( $id, Request $request ) {
@@ -370,5 +365,13 @@ class TourController extends Controller{
 
 	public function listVerify() {
 
+	}
+
+	public function payment($id){
+		$booking = Booking::find($id);
+
+		$booking->isPaid = true;
+		$booking->save();
+		return redirect( '/tourist//my-tours/' . $id );
 	}
 }

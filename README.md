@@ -60,3 +60,8 @@ $ php artisan route:list
 ```shell
 $ composer dump-autoload
 ```
+
+- Link storage to public
+```shell
+$ php artisan storage:link
+```

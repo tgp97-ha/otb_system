@@ -1,0 +1,23 @@
+.container-tour-heading {
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+.container-tour-view-btn {
+    height: 40px;
+    width: 200px;
+    border-radius: 50px;
+    background-color: #000;
+    color: #fff;
+    font-size: 2rem;
+}
+
+.container-tour-view-btn:hover {
+    background-color: var(--hover-color);
+    cursor: pointer;
+}
+
+.rating-btn{
+    color: #ffce3e;
+    margin: 10px 0;
+}
