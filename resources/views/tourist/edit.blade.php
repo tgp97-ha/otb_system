@@ -1,91 +1,111 @@
 @extends('layout.base')
 
 @section('content')
-    <div class="container">
-        <div class="row pt-5">
-            <div class="col-md-8 offset-md-2">
-                <div class="card">
-                    <div class="card-header">Tourist Edit</div>
+    <div class="">
+        <h4 class="mb-6 text-2xl font-bold dark:text-white">Edit Profile</h4>
 
-                    <div class="card-body">
-                        <form class="form-horizontal" method="POST" action="{{ url('tourist/edit-profile/'.$tourist->serial)}}">
-                            {{ csrf_field() }}
+        <div class="bg-white p-6 rounded-md">
+            <form class="" method="POST" action="{{ url('tourist/edit-profile/' . $tourist->serial) }}">
+                {{ csrf_field() }}
 
-                            <div class="form-group col-md-10 offset-md-1" {{ $errors->has('tourist_name') ? ' has-error' : '' }}>
-                                <label for="email" class="control-label">Tourist Name</label>
-                                <div>
-                                    <input id="email" type="text" class="form-control" name="tourist_name"
-                                           value="{{ $tourist->tourist_name ?? '' }}" required autofocus>
+                {{-- Grid Container --}}
+                <div class="grid grid-cols-1 gap-6">
+                    <div class="w-full flex items-center justify-center">
+                        <img src="{{ asset('images/avatar_default.png') }}" alt="avatar"
+                            class="w-[150px] h-[150px] rounded-full">
+                    </div>
+                    <div>
+                        <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tourist
+                            Name</label>
+                        <div>
+                            <input id="email" type="text"
+                                class="{{ $errors->has('tourist_name') ? 'border-red-600 focus:ring-red-600 focus:border-red-600 dark:focus:ring-red-500 dark:focus:border-red-500' : 'border-gray-300 focus:ring-blue-500 focus:border-blue-500  dark:border-gray-600 dark:focus:ring-blue-500 dark:focus:border-blue-500' }} bg-gray-50 border  text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white"
+                                name="tourist_name" value="{{ $tourist->tourist_name ?? '' }}" required autofocus>
 
-                                    @if ($errors->has('tourist_name'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('tourist_name') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="form-group col-md-10 offset-md-1" {{ $errors->has('address') ? ' has-error' : '' }}>
-                                <label for="username" class="control-label">Address</label>
-                                <div>
-                                    <input id="username" type="text" class="form-control" name="address"
-                                           value="{{$tourist->address??''}}" required autofocus>
+                            @if ($errors->has('tourist_name'))
+                                <p class="text-red-600">
+                                    <strong>{{ $errors->first('tourist_name') }}</strong>
+                                </p>
+                            @endif
+                        </div>
+                    </div>
+                    <div>
+                        <label for="username"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Address</label>
+                        <div>
+                            <input id="username" type="text"
+                                class="{{ $errors->has('address') ? 'border-red-600 focus:ring-red-600 focus:border-red-600 dark:focus:ring-red-500 dark:focus:border-red-500' : 'border-gray-300 focus:ring-blue-500 focus:border-blue-500  dark:border-gray-600 dark:focus:ring-blue-500 dark:focus:border-blue-500' }}
+                                bg-gray-50 border text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700
+                                dark:placeholder-gray-400 dark:text-white"
+                                name="address" value="{{ $tourist->address ?? '' }}" required autofocus>
 
-                                    @if ($errors->has('address'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('address') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="form-group col-md-10 offset-md-1" {{ $errors->has('dob') ? ' has-error' : '' }}>
-                                <label for="password" class="control-label">Date of Birth</label>
-                                <div class="input-group date" data-provide="datepicker">
-                                    <input type="text" class="form-control" value="{{$tourist->date_of_birth??''}}"
-                                           placeholder="day/month/year"
-                                           name="dob" required autocomplete="off">
-                                    <div class="input-group-append">
-                                                            <span class="input-group-text"><i
-                                                                        class="fa fa-calendar"></i></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group col-md-10 offset-md-1" {{ $errors->has('phone_number') ? ' has-error' : '' }}>
-                                <label for="phone_number" class="control-label">Phone Number</label>
-                                <div>
-                                    <input id="phone_number" type="number" class="form-control" name="phone_number"
-                                           value="{{$tourist->tourist_phone_number??''}}" required>
+                            @if ($errors->has('address'))
+                                <p class="text-red-600">
+                                    <strong>{{ $errors->first('address') }}</strong>
+                                </p>
+                            @endif
+                        </div>
+                    </div>
+                    <div>
+                        <label for="dob" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Date of
+                            Birth</label>
 
-                                    @if ($errors->has('phone_number'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('phone_number') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
+                        <div class="relative">
+                            <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+                                <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor"
+                                    viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                        d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
                             </div>
-                            <div class="form-group col-md-10 offset-md-1" {{ $errors->has('personal_id') ? ' has-error' : '' }}>
-                                <label for="personal_id" class="control-label">Personal ID</label>
-                                <div>
-                                    <input id="personal_id" type="number" class="form-control"
-                                           value="{{$tourist->tourist_personal_id??''}}" name="personal_id" required>
+                            <input datepicker datepicker-autohide type="text" id="dob"
+                                class="{{ $errors->has('dob') ? 'border-red-600 focus:ring-red-600 focus:border-red-600' : 'border-gray-300 focus:ring-blue-500 focus:border-blue-500' }}bg-gray-50 border  text-gray-900 text-sm rounded-lg  block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                value="{{ $tourist->date_of_birth ?? '' }}" placeholder="Select date">
+                        </div>
+                    </div>
+                    <div>
+                        <label for="phone_number" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Phone
+                            Number</label>
+                        <div>
+                            <input id="phone_number" type="number"
+                                class="{{ $errors->has('phone_number') ? 'border-red-600 focus:ring-red-600 focus:border-red-600 dark:focus:ring-red-500 dark:focus:border-red-500' : 'border-gray-300 focus:ring-blue-500 focus:border-blue-500  dark:border-gray-600 dark:focus:ring-blue-500 dark:focus:border-blue-500' }}
+                                bg-gray-50 border text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700
+                                dark:placeholder-gray-400 dark:text-white"
+                                name="phone_number" value="{{ $tourist->tourist_phone_number ?? '' }}" required>
 
-                                    @if ($errors->has('personal_id'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('personal_id') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-10 offset-md-1">
-                                    <button type="submit" class="btn btn-primary float-right">
-                                        Update Tourist
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
+                            @if ($errors->has('phone_number'))
+                                <p class="text-red-600">
+                                    <strong>{{ $errors->first('phone_number') }}</strong>
+                                </p>
+                            @endif
+                        </div>
+                    </div>
+                    <div>
+                        <label for="personal_id"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Personal ID</label>
+                        <div>
+                            <input id="personal_id" type="number"
+                                class="{{ $errors->has('personal_id') ? 'border-red-600 focus:ring-red-600 focus:border-red-600 dark:focus:ring-red-500 dark:focus:border-red-500' : 'border-gray-300 focus:ring-blue-500 focus:border-blue-500  dark:border-gray-600 dark:focus:ring-blue-500 dark:focus:border-blue-500' }} bg-gray-50 border  text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white"
+                                value="{{ $tourist->tourist_personal_id ?? '' }}" name="personal_id" required>
+
+                            @if ($errors->has('personal_id'))
+                                <p class="text-red-600">
+                                    <strong>{{ $errors->first('personal_id') }}</strong>
+                                </p>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-end">
+                        <button type="submit"
+                            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                            Update Profile
+                        </button>
                     </div>
                 </div>
-            </div>
+                {{-- /Grid Container --}}
+
+            </form>
         </div>
     </div>
 @endsection

@@ -65,6 +65,7 @@ Route::middleware(['auth'])->group(function () {
 		Route::post('/verify/{id}', [TourController::class, 'verify']);
 		Route::post('/book/{id}', [TourController::class, 'book']);
 		Route::post('/comment/{id}', [TourController::class, 'comment']);
+		Route::post('/payment/{id}', [TourController::class, 'payment']);
 	});
 	Route::resource('tour-operator', 'TourOperatorController');
 	Route::resource('tourist', 'TouristController');

@@ -28,7 +28,7 @@
 
 .content-section-heading {
     padding-top: 30px;
-    font-size: 2.4rem;
+    font-size: 1.8rem;
     font-weight: bold;
 }
 
@@ -44,17 +44,17 @@
 }
 
 .overview-content-icon {
-    font-size: 2.4rem;
+    font-size: 1.8rem;
     color: rgb(4, 140, 245);
     margin: 0 8px;
 }
 
 .overview-content-title {
-    font-size: 2.4rem;
+    font-size: 1.8rem;
 }
 
 .overview-content-address {
-    font-size: 2.4rem;
+    font-size: 1.8rem;
     font-weight: bold;
 }
 
@@ -67,7 +67,7 @@
 
 .content-section-text {
     font-size: 1.6rem;
-    line-height: 2.4rem;
+    line-height: 1.8rem;
     text-align: justify;
 }
 
@@ -96,7 +96,7 @@
     font-size: 2rem;
     margin: 0;
     font-weight: bold;
-    line-height: 2.4rem;
+    line-height: 1.8rem;
 }
 
 .reviews-sort-title {
@@ -163,7 +163,7 @@
 }
 
 .book-tour-heading {
-    font-size: 2.6rem;
+    font-size: 1.5rem;
     font-weight: bold;
     padding: 20px;
     margin: 0;
@@ -198,7 +198,7 @@
 }
 
 .book-tour-tickets-heading {
-    font-size: 2.4rem;
+    font-size: 1.8rem;
     font-weight: bold;
 }
 
@@ -234,12 +234,12 @@
 }
 
 .book-tour-total-heading {
-    font-size: 2.4rem;
+    font-size: 1.8rem;
     font-weight: bold;
 }
 
 .book-tour-total-price {
-    font-size: 2.4rem;
+    font-size: 1.8rem;
     font-weight: bold;
 }
 
@@ -250,6 +250,6 @@
     margin: 10px 50px;
     background-color: #000;
     color: #fff;
-    font-size: 2.4rem;
+    font-size: 1rem;
     font-weight: bold;
 }

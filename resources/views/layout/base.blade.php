@@ -1,11 +1,14 @@
 <!doctype html>
-<html lang="{{ app()->getLocale() }}">
+<html lang="{{ app()->getLocale() }}" class="scroll-smooth">
+
 <head>
     <meta charset="utf-8">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ config('app.name', 'OTB System') }}</title>
+    <link rel="stylesheet" href="{{ asset('css/tailwind.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/flowbite.css') }}">
     <link rel="stylesheet" type="text/css" href="/css/app.css">
     <link rel="stylesheet" type="text/css" href="/css/print.css">
     <link href="{{asset('lib/datepicker/css/bootstrap-datepicker3.css') }}" rel="stylesheet">
@@ -15,26 +18,46 @@
     @livewireStyles
     @include('layout.css')
 </head>
-<body>
-{{--@include('common.sidebar.sidebar')--}}
-@include('share.header')
-<div class="wrapper pb-5">
-    @yield('content')
-</div>
-<script type="text/javascript" src="./public/js/app.js"></script>
-@if(Route::currentRouteName()!=='login' && !str_contains(Route::currentRouteName() ,'register'))
-    @include('share.footer')
+@if(Auth::user() &&( Auth::user()->can( 'tour-operator' ) || Auth::user()->can('admin')))
+
+    <body class="bg-gray-100">
+    @include('common.navbar')
+
+    @include('common.sidebar')
+
+    <div id="content" class="w-[60%] mx-auto pt-20 pb-6">
+        @yield('content')
+    </div>
+
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/flowbite.js') }}"></script>
+    <script src="{{ asset('js/datepicker.js') }}"></script>
+    {{-- @yield('javascript') --}}
+    </body>
+@else
+    <body>
+    {{--@include('common.sidebar.sidebar')--}}
+    @include('share.header')
+    <div class="wrapper pb-5">
+        @yield('content')
+    </div>
+    <script type="text/javascript" src="./public/js/app.js"></script>
+    @if(Route::currentRouteName()!=='login' && !str_contains(Route::currentRouteName() ,'register'))
+        @include('share.footer')
+    @endif
+    @yield('javascript')
+    @livewireStyles
+    </body>
 @endif
-@yield('javascript')
-@livewireStyles
-</body>
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/botman-web-widget@0/build/assets/css/chat.min.css">
+<link rel="stylesheet" type="text/css"
+      href="https://cdn.jsdelivr.net/npm/botman-web-widget@0/build/assets/css/chat.min.css">
 <script>
     var ChatBot = {
-        aboutText: 'ssdsd',
+        aboutText   : 'ssdsd',
         introMessage: "✋ Hi! I'm form ItSolutionStuff.com"
     };
 </script>
 
 <script src='https://cdn.jsdelivr.net/npm/botman-web-widget@0/build/js/widget.js'></script>
+
 </html>

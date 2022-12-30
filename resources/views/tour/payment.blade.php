@@ -73,13 +73,13 @@
                 <div class="payment mt-5">
                     <h1 class="type-payment">LOẠI HÌNH THANH TOÁN</h1>
                     <div class="form-check-payment">
-                        <div class="form-check mt-3" style="font-size: 2.4rem; font-weight: 500;">
+                        <div class="form-check mt-3" style="font-size: 1.8rem; font-weight: 500;">
                             <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
                             <label class="form-check-label" for="flexRadioDefault1">
                                 Thanh toán toàn bộ (100% giá trị tour)
                             </label>
                         </div>
-                        <div class="form-check mt-3" style="font-size: 2.4rem; font-weight: 500;">
+                        <div class="form-check mt-3" style="font-size: 1.8rem; font-weight: 500;">
                             <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
                             <label class="form-check-label" for="flexRadioDefault2">
                                 Đặt cọc trước (20% giá trị tour)
@@ -90,7 +90,7 @@
                 <div class="banking mt-5">
                     <h1 class="method-payment">PHƯƠNG THỨC THANH TOÁN</h1>
                     <div class="form-check-payment">
-                        <div class="form-check mt-3" style="font-size: 2.4rem; font-weight: 500;">
+                        <div class="form-check mt-3" style="font-size: 1.8rem; font-weight: 500;">
                             <input class="form-check-input" type="radio" name="flexRadioDefaultMethodPayment" id="flexRadioDefaultMethodPayment1">
                             <label class="form-check-label" for="flexRadioDefaultMethodPayment1">
                                 Thanh toán trực tuyến bằng thẻ ngân hàng
@@ -129,7 +129,7 @@
                             </div>
                         </div>
 
-                        <div class="form-check mt-3" style="font-size: 2.4rem; font-weight: 500;">
+                        <div class="form-check mt-3" style="font-size: 1.8rem; font-weight: 500;">
                             <input class="form-check-input" type="radio" name="flexRadioDefaultMethodPayment" id="flexRadioDefaultMethodPayment2" checked>
                             <label class="form-check-label" for="flexRadioDefaultMethodPayment2">
                                 Thanh toán trực tiếp tại OBTS
