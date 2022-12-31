@@ -48,4 +48,8 @@ class Tour extends Model{
 	public function images(): HasMany {
 		return $this->hasMany(Image::class,'tour_serial', 'serial');
 	}
+
+	public function tourDetails(){
+		return $this->hasMany(TourDetail::class,'tour_serial','serial');
+	}
 }
