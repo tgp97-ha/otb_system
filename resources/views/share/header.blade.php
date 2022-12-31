@@ -11,12 +11,12 @@
                 <div style="width:60%" class="d-flex justify-content-around align-items-center">
                     <a href="{{url('/tour/')}}" class="item-header item-header-tourist">TOURS</a>
                     <a href="{{url('/tourist/my-tours')}}" class="item-header item-header-tourist">MY TOURS</a>
-                    <a href="{{url('tourist/profile')}}" class="item-header item-header-tourist">MY PROFILES</a>
+                    <a href="{{url('tourist/profile')}}" class="item-header item-header-tourist">MY PROFILE</a>
                 </div>
             @endcan
-            <div class="d-flex justify-content-between align-items-center" style="width: 15%">
-                <span class="col-form-label align-middle">{{'Hello '.auth()->user()->username}}</span>
-                <a style="text-decoration:none" class="header__navbar-book-btn text-center" href="{{ url('/logout') }}"
+            <div class="d-flex justify-content-around py-2 align-items-center flex-column" style="width: 15%">
+                <span class="col-form-label align-middle col-9 text-center">{{'Hello '.auth()->user()->username}}</span>
+                <a style="text-decoration:none" class="header__navbar-book-btn text-center col-6" href="{{ url('/logout') }}"
                    onclick="event.preventDefault();
                                          document.getElementById('logout-form').submit();">
                     Logout

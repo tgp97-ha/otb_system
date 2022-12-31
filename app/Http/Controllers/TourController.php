@@ -330,7 +330,7 @@ class TourController extends Controller{
 		return redirect()->route( 'tour.index' );
 	}
 
-	public function book( $id ) {
+	public function book( $id, Request $request) {
 		if ( ! Auth::user() ) {
 			return redirect( route( 'login' ) );
 		}
@@ -338,9 +338,11 @@ class TourController extends Controller{
 		$user    = auth()->user();
 		$booking = new Booking();
 
-		$booking->user_id     = $user->id;
-		$booking->tour_serial = $tour->serial;
-		$booking->isPaid      = 0;
+		$booking->user_id          = $user->id;
+		$booking->tour_serial      = $tour->serial;
+		$booking->date             = $request->input['tour_date'];
+		$booking->number_of_people = $request->input['people_number'];
+		$booking->isPaid           = 0;
 
 		$booking->save();
 
@@ -375,6 +377,9 @@ class TourController extends Controller{
 			$tour->tour_rating = $rating/count($comments);
 			$tour->save();
 		}
+
+		$sentiment = new Sentiment();
+		$scores = $sentiment->score($request->comment);
 
 
 		return redirect( '/tour/detail/' . $id );

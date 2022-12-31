@@ -3,7 +3,7 @@
         @can('tourist')
             <a href="{{url('/tour/')}}" class="w3-bar-item w3-button">Tours</a>
             <a href="{{url('/tourist/my-tours')}}" class="w3-bar-item w3-button">My Tours</a>
-            <a href="{{url('tourist/profile')}}" class="w3-bar-item w3-button">My Profiles</a>
+            <a href="{{url('tourist/profile')}}" class="w3-bar-item w3-button">My Profile</a>
         @endcan
         @can('tour-operator')
             <a href="{{url('/tour-operator/profile/')}}" class="w3-bar-item w3-button">Profiles</a>

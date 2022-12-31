@@ -63,7 +63,7 @@
                         class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
                         data-carousel-prev>
                 <span
-                    class="inline-flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                        class="inline-flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
                     <svg aria-hidden="true" class="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-gray-800" fill="none"
                          stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -360,7 +360,8 @@
                                         <span>{{ $comment->tourist->tourist->tourist_name }}</span>
                                         <span class="">{{ $comment->created_at }}</span>
                                     </div>
-                                </div>="">
+                                </div>
+                                ="">
                                 <span> {{ $comment->comment_content }}</span>
                             </div>
                         </div>
@@ -395,7 +396,8 @@
 
             @canany(['tourist'])
                 @if (isset($booking))
-                    <form method="POST" action="{{ url('tour/comment/' . $tour->serial) }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ url('tour/comment/' . $tour->serial) }}"
+                          enctype="multipart/form-data">
                         {{ csrf_field() }}
                         <div class="w-full mb-4 border border-gray-200 rounded bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
                             <div class="px-4 py-2 bg-white rounded-t-lg dark:bg-gray-800">
@@ -614,15 +616,20 @@
                                     <div class="col-md-10">
                                         <h2 class="reviews-rating">
                                             Rating:
-                                            <input class="star star-5" value="5" id="star-5" type="radio" name="rating"/>
+                                            <input class="star star-5" value="5" id="star-5" type="radio"
+                                                   name="rating"/>
                                             <label class="star star-5" for="star-5"></label>
-                                            <input class="star star-4" value="4" id="star-4" type="radio" name="rating"/>
+                                            <input class="star star-4" value="4" id="star-4" type="radio"
+                                                   name="rating"/>
                                             <label class="star star-4" for="star-4"></label>
-                                            <input class="star star-3" value="3" id="star-3" type="radio" name="rating"/>
+                                            <input class="star star-3" value="3" id="star-3" type="radio"
+                                                   name="rating"/>
                                             <label class="star star-3" for="star-3"></label>
-                                            <input class="star star-2" value="2" id="star-2" type="radio" name="rating"/>
+                                            <input class="star star-2" value="2" id="star-2" type="radio"
+                                                   name="rating"/>
                                             <label class="star star-2" for="star-2"></label>
-                                            <input class="star star-1" value="1" id="star-1" type="radio" name="rating"/>
+                                            <input class="star star-1" value="1" id="star-1" type="radio"
+                                                   name="rating"/>
                                             <label class="star star-1" for="star-1"></label>
                                         </h2>
                                         <textarea id="comment"
@@ -637,7 +644,7 @@
                             </form>
                         @endif
 
-                    @if(isset($tour->comments)&& count($tour->comments))
+                        @if(isset($tour->comments)&& count($tour->comments))
                             <div id="reviews" class="content-section my-5">
                                 <h1 class="content-section-heading">
                                     Reviews
@@ -701,105 +708,60 @@
                         @endif
 
                     </div>
-                    <div class="col-md-4">
-                        <div class="book-tour">
-                            <h1 class="book-tour-heading">BOOK THIS TOUR</h1>
-                            <div class="book-tour-body">
-                                <i class="fa-regular fa-calendar-days calendar-btn"></i>
-                                <input class="book-tour-tickets-adults" placeholder="dd/mm/yyyy">
-                                <i class="fa-solid fa-caret-down book-tour-down-btn"></i>
-                            </div>
-                            <div class="book-tour-tickets">
-                                <h1 class="book-tour-tickets-heading">Number of People</h1>
-                                <div class="book-tour-tickets-body">
-                                    <div class="book-tour-tickets-title">Adult (18+ years)
+                    @if(((\Illuminate\Support\Facades\Auth::user() ) || !\Illuminate\Support\Facades\Auth::user() ))
+                        {{--                        @canany(['tourist'])--}}
+                        <div class="col-md-4 pr-0">
+                            <form action="{{url('/tour/book/'.$tour->serial)}}"
+                                  method="POST">
+                                <div class="book-tour">
+                                    <h1 class="book-tour-heading">BOOK THIS TOUR</h1>
+                                    <div class="book-tour-body">
+                                        <i class="fa-regular fa-calendar-days calendar-btn"></i>
+                                        <input class="book-tour-tickets-adults" name="tour_date" placeholder="dd/mm/yyyy">
+                                        <i class="fa-solid fa-caret-down book-tour-down-btn"></i>
                                     </div>
-                                    <input type="number" min="0" max="200" value="0" class="book-tour-tickets-adults">
-                                </div>
-                                <div class="book-tour-tickets-body">
-                                    <div class="book-tour-tickets-title">Youth (13-17 years)
+                                    <div class="book-tour-tickets">
+                                        <div class="book-tour-tickets-body">
+                                            <div class="book-tour-tickets-title">Choose the number of people</div>
+                                            <input type="number" min="0" max="200" value="0" name="people_number"
+                                                   class="book-tour-tickets-adults">
+                                        </div>
                                     </div>
-                                    <input type="number" min="0" max="200" value="0" class="book-tour-tickets-adults">
+                                    <div class="text-center">
+                                        <button class="book-now-btn" type="submit">BOOK NOW</button>
+                                    </div>
+                                    @csrf
                                 </div>
-                            </div>
-
-                            @if(\Illuminate\Support\Facades\Auth::user())
-                                @canany(['tourist'])
-                                    {{--                                @if(!isset($booking))--}}
-                                    <form class="pl-3" action="{{url('/tour/book/'.$tour->serial)}}"
-                                          style="margin-left: 35px;"
-                                          method="POST">
-                                        @csrf
-                                        <button class="book-now-btn">BOOK NOW</button>
-                                    </form>
-                                    {{--                                @else--}}
-
-                                    {{--                                @endif--}}
-                                @endcan
-                            @else
-                                <a href="{{url('/login')}}" style="margin-left: 35px;">
-                                    <button class="book-now-btn">BOOK NOW</button>
-                                </a>
-                            @endif
+                            </form>
                         </div>
-                    </div>
+                    @else
+                        <div class="col-md-4 pr-0">
+                            <div class="book-tour">
+                                <h1 class="book-tour-heading">BOOK THIS TOUR</h1>
+                                <div class="book-tour-body">
+                                    <i class="fa-regular fa-calendar-days calendar-btn"></i>
+                                    <input class="book-tour-tickets-adults" placeholder="dd/mm/yyyy">
+                                    <i class="fa-solid fa-caret-down book-tour-down-btn"></i>
+                                </div>
+                                <div class="book-tour-tickets">
+                                    <h1 class="book-tour-tickets-heading">Number of People</h1>
+                                    <div class="book-tour-tickets-body">
+                                        <div class="book-tour-tickets-title">Adult (18+ years)
+                                        </div>
+                                        <input type="number" min="0" max="200" value="0"
+                                               class="book-tour-tickets-adults">
+                                    </div>
+                                </div>
+                                @csrf
+                                <button class="book-now-btn">BOOK NOW</button>
+                            </div>
+                        </div>
+                        <a href="{{url('/login')}}">
+                            <button class="book-now-btn">BOOK NOW</button>
+                        </a>
+                    @endif
                 </div>
-
-                {{--            <div class="row pt-5">--}}
-                {{--                <div class="col-md-8 offset-md-2">--}}
-                {{--                    <div class="card">--}}
-                {{--                        <div class="card-header">Tour Detail</div>--}}
-                {{--                        <div class="card-body">--}}
-                {{--                            <div class="form-group col-md-10 offset-md-1 row">--}}
-                {{--                                <span class="col-form-label col-4 align-middle">Tour Services</span>--}}
-                {{--                                <div class="col-8">--}}
-                {{--                                    @foreach($tour->services as $service)--}}
-                {{--                                        <div class="row">--}}
-                {{--                                            <div class="col">--}}
-                {{--                                                <span class="col-form-label font-weight-normal align-middle">{{ $service->service_name}}</span>--}}
-                {{--                                            </div>--}}
-                {{--                                        </div>--}}
-                {{--                                    @endforeach--}}
-                {{--                                </div>--}}
-                {{--                            </div>--}}
-                {{--                            @canany(['admin', 'tour-operator'])--}}
-                {{--                                <div class="form-group col-md-10 offset-md-1 row">--}}
-                {{--                                    <span class="col-form-label col-4 align-middle">Tour Slots</span>--}}
-                {{--                                    <span class="col-form-label font-weight-normal align-middle col-8">{{$tour->tour_slots}}</span>--}}
-                {{--                                </div>--}}
-                {{--                                <div class="form-group col-md-10 offset-md-1 row">--}}
-                {{--                                    <span class="col-form-label col-4 align-middle">Tour Slot Left</span>--}}
-                {{--                                    <span class="col-form-label font-weight-normal align-middle col-8">{{ $tour->tour_slots_left}}</span>--}}
-                {{--                                </div>--}}
-
-                {{--                                <div class="form-group col-md-10 offset-md-1">--}}
-                {{--                                    <div class="row d-flex justify-content-center">--}}
-                {{--                                        <a class="btn btn-primary" href="{{url('/tour/'.$tour->serial.'/edit')}}">Edit--}}
-                {{--                                            Tours</a>--}}
-                {{--                                    </div>--}}
-                {{--                                </div>--}}
-                {{--                            @endcan--}}
-                {{--                            @if(isset($booking))--}}
-                {{--                                <form class="form-horizontal" method="POST"--}}
-                {{--                                      action="{{ url('tour/comment/'.$tour->serial) }}"--}}
-                {{--                                      enctype="multipart/form-data">--}}
-                {{--                                    {{ csrf_field() }}--}}
-                {{--                                    <div class="form-group col-md-10 offset-md-1 row">--}}
-                {{--                                        <label for="comment" class="col-form-label col-4 align-middle">Comment</label>--}}
-                {{--                                        <textarea id="comment"--}}
-                {{--                                                  class="col-form-label font-weight-normal align-middle col-8"--}}
-                {{--                                                  name="comment"></textarea>--}}
-                {{--                                    </div>--}}
-                {{--                                    <div class="col d-flex justify-content-end pr-5">--}}
-                {{--                                        <button type="submit" class="btn btn-dark align-right">Leave Comment</button>--}}
-                {{--                                    </div>--}}
-                {{--                                </form>--}}
-                {{--                            @endif--}}
-                {{--                        </div>--}}
-                {{--                    </div>--}}
-                {{--                </div>--}}
-                {{--            </div>--}}
             </div>
+            @endif
         </div>
-    @endif
 @endsection

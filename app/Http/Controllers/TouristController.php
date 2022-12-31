@@ -154,7 +154,6 @@ class TouristController extends Controller
             'phone_number' => 'nullable|string|max:10',
             'personal_id'  => 'nullable|regex:/^([0-9\s\-\+\(\)]*)$/|min:9|max:15',
         ]);
-        $user = auth()->user();
         $item = Tourist::find($id);
         if ($item) {
             $item->tourist_name         = $request->input('tourist_name');

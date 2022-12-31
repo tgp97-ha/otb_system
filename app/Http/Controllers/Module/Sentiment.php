@@ -165,7 +165,6 @@ class Sentiment {
 					if (isset($this->dictionary[$token][$class])) {
 						//Set count equal to it
 						$count = $this->dictionary[$token][$class];
-						dd(1);
 					} else {
 						$count = 0;
 					}
