@@ -2,6 +2,7 @@
 <html lang="{{ app()->getLocale() }}" class="scroll-smooth">
 
 <head>
+    <link rel="icon" href="{{URL::asset('/css/images/logo1.jpg')}}">
     <meta charset="utf-8">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">

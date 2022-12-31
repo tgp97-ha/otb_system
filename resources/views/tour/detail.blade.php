@@ -66,7 +66,8 @@
                         class="inline-flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
                     <svg aria-hidden="true" class="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-gray-800" fill="none"
                          stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M15 19l-7-7 7-7"></path>
                     </svg>
                     <span class="sr-only">Previous</span>
                 </span>
@@ -123,35 +124,40 @@
                         <div class="flex items-center">
                             {{-- Rating --}}
                             <div class="flex items-center mr-3">
-                                <svg aria-hidden="true" class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"
+                                <svg aria-hidden="true" class="w-5 h-5 text-yellow-400" fill="currentColor"
+                                     viewBox="0 0 20 20"
                                      xmlns="http://www.w3.org/2000/svg">
                                     <title>First star</title>
                                     <path
                                             d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
                                     </path>
                                 </svg>
-                                <svg aria-hidden="true" class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"
+                                <svg aria-hidden="true" class="w-5 h-5 text-yellow-400" fill="currentColor"
+                                     viewBox="0 0 20 20"
                                      xmlns="http://www.w3.org/2000/svg">
                                     <title>Second star</title>
                                     <path
                                             d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
                                     </path>
                                 </svg>
-                                <svg aria-hidden="true" class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"
+                                <svg aria-hidden="true" class="w-5 h-5 text-yellow-400" fill="currentColor"
+                                     viewBox="0 0 20 20"
                                      xmlns="http://www.w3.org/2000/svg">
                                     <title>Third star</title>
                                     <path
                                             d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
                                     </path>
                                 </svg>
-                                <svg aria-hidden="true" class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"
+                                <svg aria-hidden="true" class="w-5 h-5 text-yellow-400" fill="currentColor"
+                                     viewBox="0 0 20 20"
                                      xmlns="http://www.w3.org/2000/svg">
                                     <title>Fourth star</title>
                                     <path
                                             d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
                                     </path>
                                 </svg>
-                                <svg aria-hidden="true" class="w-5 h-5 text-gray-300 dark:text-gray-500" fill="currentColor"
+                                <svg aria-hidden="true" class="w-5 h-5 text-gray-300 dark:text-gray-500"
+                                     fill="currentColor"
                                      viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                     <title>Fifth star</title>
                                     <path
@@ -271,8 +277,10 @@
                                     <form class="" action="{{ url('/tour/book/' . $tour->serial) }}" method="POST">
                                         @csrf
                                         <button type="submit"
-                                                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Book
-                                            Now</button>
+                                                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                                            Book
+                                            Now
+                                        </button>
                                     </form>
                                 @endif
                             @endcan
@@ -306,35 +314,35 @@
             </section>
             {{-- /Detail --}}
 
-{{--            --}}{{-- Services --}}
-{{--            <div class="">--}}
+            {{--            --}}{{-- Services --}}
+            {{--            <div class="">--}}
 
-{{--                --}}{{-- Services Header --}}
-{{--                <h5 class="text-xl font-bold dark:text-white mb-3">Services</h5>--}}
-{{--                --}}{{-- /Services Header --}}
+            {{--                --}}{{-- Services Header --}}
+            {{--                <h5 class="text-xl font-bold dark:text-white mb-3">Services</h5>--}}
+            {{--                --}}{{-- /Services Header --}}
 
-{{--                --}}{{-- Services Body --}}
-{{--                <div class="bg-white rounded-md p-3 border">--}}
-{{--                    @foreach ($tour->services as $service)--}}
-{{--                        <div class="">--}}
-{{--                            <div class="">--}}
-{{--                                <span class="">{{ $service->service_name }}</span>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    @endforeach--}}
-{{--                </div>--}}
-{{--                --}}{{-- /Services Body --}}
+            {{--                --}}{{-- Services Body --}}
+            {{--                <div class="bg-white rounded-md p-3 border">--}}
+            {{--                    @foreach ($tour->services as $service)--}}
+            {{--                        <div class="">--}}
+            {{--                            <div class="">--}}
+            {{--                                <span class="">{{ $service->service_name }}</span>--}}
+            {{--                            </div>--}}
+            {{--                        </div>--}}
+            {{--                    @endforeach--}}
+            {{--                </div>--}}
+            {{--                --}}{{-- /Services Body --}}
 
-{{--            </div>--}}
-{{--            --}}{{-- /Services --}}
+            {{--            </div>--}}
+            {{--            --}}{{-- /Services --}}
 
-{{--            --}}{{-- Location --}}
-{{--            <section id="location">--}}
-{{--                <h5 class="text-xl font-bold dark:text-white mb-3">Location</h5>--}}
-{{--                <div class="bg-white rounded-md p-3 border">--}}
-{{--                </div>--}}
-{{--            </section>--}}
-{{--            --}}{{-- /Location --}}
+            {{--            --}}{{-- Location --}}
+            {{--            <section id="location">--}}
+            {{--                <h5 class="text-xl font-bold dark:text-white mb-3">Location</h5>--}}
+            {{--                <div class="bg-white rounded-md p-3 border">--}}
+            {{--                </div>--}}
+            {{--            </section>--}}
+            {{--            --}}{{-- /Location --}}
 
             {{-- Reviews --}}
             <section id="reviews">
@@ -353,7 +361,8 @@
                                         <span>{{ $comment->tourist->tourist->tourist_name }}</span>
                                         <span class="">{{ $comment->created_at }}</span>
                                     </div>
-                                </div>="">
+                                </div>
+                                ="">
                                 <span> {{ $comment->comment_content }}</span>
                             </div>
                         </div>
@@ -388,7 +397,8 @@
 
             @canany(['tourist'])
                 @if (isset($booking))
-                    <form method="POST" action="{{ url('tour/comment/' . $tour->serial) }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ url('tour/comment/' . $tour->serial) }}"
+                          enctype="multipart/form-data">
                         {{ csrf_field() }}
                         <div class="w-full mb-4 border border-gray-200 rounded bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
                             <div class="px-4 py-2 bg-white rounded-t-lg dark:bg-gray-800">
@@ -438,8 +448,10 @@
                         </div>
                     </form>
 
-                    <p class="ml-auto text-xs text-gray-500 dark:text-gray-400">Remember, contributions to this tour should follow
-                        our <a href="#" class="text-blue-600 dark:text-blue-500 hover:underline">Community Guidelines</a>.
+                    <p class="ml-auto text-xs text-gray-500 dark:text-gray-400">Remember, contributions to this tour
+                        should follow
+                        our <a href="#" class="text-blue-600 dark:text-blue-500 hover:underline">Community
+                            Guidelines</a>.
                     </p>
                 @endif
             @endcan
@@ -591,8 +603,45 @@
                             <p class="content-section-text">{{$tour->tour_detail}}
 
                         </div>
-                        @if(isset($tour->comments)&& count($tour->comments))
-                            <div id="reviews" class="content-section mt-5">
+                        @if(isset($booking))
+                            <form class="form-horizontal" method="POST"
+                                  action="{{ url('tour/comment/'.$tour->serial) }}"
+                                  enctype="multipart/form-data">
+                                {{ csrf_field() }}
+                                <div class="row mt-5">
+                                    <div class="col-md-2">
+                                        <div class="reviews-body">
+                                            <i class="fa-solid fa-user-tie user-icon"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <h2 class="reviews-rating">
+                                            Rating:
+                                            <input class="star star-5" value="5" id="star-5" type="radio" name="rating"/>
+                                            <label class="star star-5" for="star-5"></label>
+                                            <input class="star star-4" value="4" id="star-4" type="radio" name="rating"/>
+                                            <label class="star star-4" for="star-4"></label>
+                                            <input class="star star-3" value="3" id="star-3" type="radio" name="rating"/>
+                                            <label class="star star-3" for="star-3"></label>
+                                            <input class="star star-2" value="2" id="star-2" type="radio" name="rating"/>
+                                            <label class="star star-2" for="star-2"></label>
+                                            <input class="star star-1" value="1" id="star-1" type="radio" name="rating"/>
+                                            <label class="star star-1" for="star-1"></label>
+                                        </h2>
+                                        <textarea id="comment"
+                                                  class=" reviews-cmt col-form-label font-weight-normal align-middle "
+                                                  name="comment" placeholder="Comment..."></textarea>
+                                    </div>
+                                    <div class="col d-flex justify-content-end mt-2">
+                                        <button type="submit" class="btn btn-dark align-right">Leave Comment
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        @endif
+
+                    @if(isset($tour->comments)&& count($tour->comments))
+                            <div id="reviews" class="content-section my-5">
                                 <h1 class="content-section-heading">
                                     Reviews
                                 </h1>
@@ -627,37 +676,6 @@
 
                                     {{--                            </div>--}}
                                 </div>
-                                @if(isset($booking))
-                                    <form class="form-horizontal" method="POST"
-                                          action="{{ url('tour/comment/'.$tour->serial) }}"
-                                          enctype="multipart/form-data">
-                                        {{ csrf_field() }}
-                                        <div class="row mt-5">
-                                            <div class="col-md-2">
-                                                <div class="reviews-body">
-                                                    <i class="fa-solid fa-user-tie user-icon"></i>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-10">
-                                                <h2 class="reviews-rating">
-                                                    Rating:
-                                                    <i class="fa-regular fa-star reviews-rating-btn"></i>
-                                                    <i class="fa-regular fa-star reviews-rating-btn"></i>
-                                                    <i class="fa-regular fa-star reviews-rating-btn"></i>
-                                                    <i class="fa-regular fa-star reviews-rating-btn"></i>
-                                                    <i class="fa-regular fa-star reviews-rating-btn"></i>
-                                                </h2>
-                                                <textarea id="comment"
-                                                          class=" reviews-cmt col-form-label font-weight-normal align-middle "
-                                                          name="comment" placeholder="Comment..."></textarea>
-                                            </div>
-                                            <div class="col d-flex justify-content-end mt-2">
-                                                <button type="submit" class="btn btn-dark align-right">Leave Comment
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                @endif
 
                                 @foreach($tour->comments as $comment)
                                     <div class="row mt-5">

@@ -1,18 +1,39 @@
 <?php
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Module;
 
+/*
+  phpInsight is a Naive Bayes classifier to calculate sentiment. The program
+  uses a database of words categorised as positive, negative or neutral
 
-class CommentController {
+  Copyright (C) 2012  James Hennessey
+  Class modifications and improvements by Ismayil Khayredinov (ismayil.khayredinov@gmail.com)
+
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see <http://www.gnu.org/licenses/>
+
+ */
+
+class Sentiment {
 
 	/**
 	 * Location of the dictionary files
-	 * @var str
+	 * @var str 
 	 */
 	private $dataFolder = '';
 
 	/**
 	 * List of tokens to ignore
-	 * @var array
+	 * @var array 
 	 */
 	private $ignoreList = array();
 
@@ -24,7 +45,7 @@ class CommentController {
 
 	/**
 	 * Storage of cached dictionaries
-	 * @var array
+	 * @var array 
 	 */
 	private $dictionary = array();
 
@@ -48,7 +69,7 @@ class CommentController {
 
 	/**
 	 * Token score per class
-	 * @var array
+	 * @var array 
 	 */
 	private $classTokCounts = array(
 		'pos' => 0,
@@ -68,7 +89,7 @@ class CommentController {
 
 	/**
 	 * Number of tokens in a text
-	 * @var int
+	 * @var int 
 	 */
 	private $tokCount = 0;
 
@@ -144,6 +165,7 @@ class CommentController {
 					if (isset($this->dictionary[$token][$class])) {
 						//Set count equal to it
 						$count = $this->dictionary[$token][$class];
+						dd(1);
 					} else {
 						$count = 0;
 					}
@@ -174,7 +196,7 @@ class CommentController {
 
 	/**
 	 * Get the class of the text based on it's score
-	 *
+	 * 
 	 * @param str $sentence
 	 * @return str pos|neu|neg
 	 */
@@ -344,25 +366,25 @@ class CommentController {
 
 	/**
 	 * Function to clean a string so all characters with accents are turned into ASCII characters. EG: ‡ = a
-	 *
+	 * 
 	 * @param str $string
 	 * @return str
 	 */
 	private function _cleanString($string) {
 
 		$diac =
-			/* A */ chr(192) . chr(193) . chr(194) . chr(195) . chr(196) . chr(197) .
-			        /* a */ chr(224) . chr(225) . chr(226) . chr(227) . chr(228) . chr(229) .
-			        /* O */ chr(210) . chr(211) . chr(212) . chr(213) . chr(214) . chr(216) .
-			        /* o */ chr(242) . chr(243) . chr(244) . chr(245) . chr(246) . chr(248) .
-			        /* E */ chr(200) . chr(201) . chr(202) . chr(203) .
-			        /* e */ chr(232) . chr(233) . chr(234) . chr(235) .
-			        /* Cc */ chr(199) . chr(231) .
-			        /* I */ chr(204) . chr(205) . chr(206) . chr(207) .
-			        /* i */ chr(236) . chr(237) . chr(238) . chr(239) .
-			        /* U */ chr(217) . chr(218) . chr(219) . chr(220) .
-			        /* u */ chr(249) . chr(250) . chr(251) . chr(252) .
-			        /* yNn */ chr(255) . chr(209) . chr(241);
+				/* A */ chr(192) . chr(193) . chr(194) . chr(195) . chr(196) . chr(197) .
+				/* a */ chr(224) . chr(225) . chr(226) . chr(227) . chr(228) . chr(229) .
+				/* O */ chr(210) . chr(211) . chr(212) . chr(213) . chr(214) . chr(216) .
+				/* o */ chr(242) . chr(243) . chr(244) . chr(245) . chr(246) . chr(248) .
+				/* E */ chr(200) . chr(201) . chr(202) . chr(203) .
+				/* e */ chr(232) . chr(233) . chr(234) . chr(235) .
+				/* Cc */ chr(199) . chr(231) .
+				/* I */ chr(204) . chr(205) . chr(206) . chr(207) .
+				/* i */ chr(236) . chr(237) . chr(238) . chr(239) .
+				/* U */ chr(217) . chr(218) . chr(219) . chr(220) .
+				/* u */ chr(249) . chr(250) . chr(251) . chr(252) .
+				/* yNn */ chr(255) . chr(209) . chr(241);
 
 		return strtolower(strtr($string, $diac, 'AAAAAAaaaaaaOOOOOOooooooEEEEeeeeCcIIIIiiiiUUUUuuuuyNn'));
 	}
@@ -377,7 +399,7 @@ class CommentController {
 			$fn = "{$this->dataFolder}data.{$class}.php";
 			if (file_exists($fn)) {
 				unlink($fn);
-			}
+			} 
 		}
 
 		$dictionaries = __DIR__ . '/dictionaries/';
@@ -393,7 +415,7 @@ class CommentController {
 			file_put_contents($fn, serialize($$data));
 		}
 
-
+		
 
 	}
 
