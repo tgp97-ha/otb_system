@@ -63,7 +63,7 @@
                         class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
                         data-carousel-prev>
                 <span
-                        class="inline-flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                    class="inline-flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
                     <svg aria-hidden="true" class="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-gray-800" fill="none"
                          stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -278,8 +278,7 @@
                                         @csrf
                                         <button type="submit"
                                                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
-                                            Book
-                                            Now
+                                            Book Now
                                         </button>
                                     </form>
                                 @endif
@@ -361,8 +360,7 @@
                                         <span>{{ $comment->tourist->tourist->tourist_name }}</span>
                                         <span class="">{{ $comment->created_at }}</span>
                                     </div>
-                                </div>
-                                ="">
+                                </div>="">
                                 <span> {{ $comment->comment_content }}</span>
                             </div>
                         </div>
@@ -397,8 +395,7 @@
 
             @canany(['tourist'])
                 @if (isset($booking))
-                    <form method="POST" action="{{ url('tour/comment/' . $tour->serial) }}"
-                          enctype="multipart/form-data">
+                    <form method="POST" action="{{ url('tour/comment/' . $tour->serial) }}" enctype="multipart/form-data">
                         {{ csrf_field() }}
                         <div class="w-full mb-4 border border-gray-200 rounded bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
                             <div class="px-4 py-2 bg-white rounded-t-lg dark:bg-gray-800">
