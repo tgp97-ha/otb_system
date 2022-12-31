@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Module\Sentiment;
 use App\Models\Booking;
 use App\Models\Comment;
 use App\Models\Place;
@@ -350,15 +351,31 @@ class TourController extends Controller{
 	}
 
 	public function comment( $id, Request $request ) {
+		//$sentiment = new Sentiment();
+		//$scores = $sentiment->score($request->comment);
+		//dd($scores);
 		$tour = Tour::find( $id );
 		$user = auth()->user();
 
 		$comment                  = new Comment();
 		$comment->comment_content = $request->input( 'comment' );
 		$comment->tour_serial     = $id;
+		$comment->comment_rating = $request->input('rating');
 		$comment->user_id         = $user->id;
 
 		$comment->save();
+
+		$comments = Comment::where('tour_serial','=',$id)->whereNotNull('comment_rating')->get();
+
+		if(count($comments)){
+			$rating = 0;
+			foreach($comments as $comment_value){
+				$rating += (float)$comment_value->comment_rating;
+			}
+			$tour->tour_rating = $rating/count($comments);
+			$tour->save();
+		}
+
 
 		return redirect( '/tour/detail/' . $id );
 	}

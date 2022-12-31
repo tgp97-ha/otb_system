@@ -434,7 +434,7 @@
                 <div class="row">
                     @foreach($tours as $tour)
                         <div class="col-md-4 pt-4">
-                            <div class="card mb-5" style="height: 500px">
+                            <div class="card mb-5" style="height: 550px">
                                 @if(count($tour->images))
                                     <img src="{{ asset('storage/tour/'.$tour->images[0]->file_path) }}" alt="" style="height: 280px"
                                          class="image-detail"
@@ -451,13 +451,13 @@
                                     <i class="fa-solid fa-calendar card-time-btn mt-3">
                                         <span class="card-time">{{$tour->tour_start_date}}</span>
                                     </i>
-                                    {{--                            <div class="rating">--}}
-                                    {{--                                <i class="fa-solid fa-star rating-btn"></i>--}}
-                                    {{--                                <i class="fa-solid fa-star rating-btn"></i>--}}
-                                    {{--                                <i class="fa-solid fa-star rating-btn"></i>--}}
-                                    {{--                                <i class="fa-solid fa-star rating-btn"></i>--}}
-                                    {{--                                <i class="fa-solid fa-star rating-btn"></i> (2 reviewer)--}}
-                                    {{--                            </div>--}}
+                                    <div class="rating">
+                                        <i class="fa-solid fa-star rating-btn"></i><span class="font-weight-bold">
+                                            {{(html_entity_decode("&nbsp;&nbsp;&nbsp;")).((float)$tour->tour_rating?(number_format($tour->tour_rating,2,'.','').' / 5.0'):'')}}
+                                        </span>
+                                        ({{count($tour->comments)}}
+                                        reviewer)
+                                    </div>
                                     <div class="row">
                                         <div class="col">
                                             <i class="fa-solid fa-info-circle mt-3">
@@ -472,7 +472,9 @@
                             </div>
                         </div>
                     @endforeach
-                    {{$tours->links()}}
+                    <div>
+                        {{$tours->links()}}
+                    </div>
                 </div>
             </div>
         </div>
