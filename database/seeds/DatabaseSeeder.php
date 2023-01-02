@@ -1,6 +1,6 @@
 <?php
 
-use Database\Seeders\PlaceSeeder;
+//use Database\Seeders\PlaceSeeder;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -12,10 +12,11 @@ class DatabaseSeeder extends Seeder
 	 */
 	public function run()
 	{
-		//$this->call(RolesSeeder::class);
-		//$this->call(UserSeeder::class);
-		//$this->call(PlacesSeeder::class);
-		//$this->call(ServiceSeeder::class);
+		$this->call(RolesSeeder::class);
+		$this->call(UserSeeder::class);
+		$this->call(PlacesSeeder::class);
+        $this->call(ServiceSeeder::class);
+        $this->call(TourSeeder::class);
 		$this->call(PlaceSeeder::class);
 	}
 }

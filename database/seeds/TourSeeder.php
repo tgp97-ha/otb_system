@@ -21,6 +21,7 @@ class TourSeeder extends Seeder
                 'tour_tour_operator_serial' => $faker->numberBetween(12, 21),
                 'tour_name' => $faker->sentence(15, true),
                 'tour_title' => $faker->sentence(15, true),
+                'tour_starting_place' => $faker->numberBetween(1, 7),
                 'tour_destination' => $faker->city(),
                 'tour_detail' => $faker->paragraph(10, true),
                 'tour_description' => $faker->paragraph(1, true),
