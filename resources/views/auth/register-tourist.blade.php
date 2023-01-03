@@ -1,77 +1,83 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-	<div class="row justify-content-center">
-		<div class="col-md-8">
-			<div class="card">
-				<div class="card-header">{{ __('Register') }}</div>
+    <form method="POST" action="{{ route('register.tourist') }}">
+        @csrf
 
-				<div class="card-body">
-					<form method="POST" action="{{ route('register.tourist') }}">
-						@csrf
+        <div class="grid grid-cols-1 gap-6 p-6 bg-white rounded-lg shadow-lg">
+            {{-- Divider --}}
+            <div
+                class="flex items-center my-4 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5">
+                <p class="text-center font-semibold mx-4">{{ __('Register') }}</p>
+            </div>
+            {{-- /Divider --}}
 
-						<div class="form-group row">
-							<label for="username" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+            {{-- Username Input --}}
+            <div class="">
+                <label for="username" class="block mb-2 text-sm font-medium text-gray-900">Username</label>
 
-							<div class="col-md-6">
-								<input id="username" type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="name" autofocus>
+                <input id="username" type="username"
+                    class="{{ $errors->has('username') ? 'border border-red-500 focus:ring-red-500 focus:border-red-500' : 'border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500' }} bg-gray-50 border  text-sm rounded-lg  block w-full p-2.5"
+                    name="username" value="{{ old('username') }}" required autocomplete="name" autofocus>
 
-								@error('username')
-								<span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-								@enderror
-							</div>
-						</div>
+                @error('username')
+                    <p class="text-red-600">
+                        <strong>{{ $message }}</strong>
+                    </p>
+                @enderror
+            </div>
+            {{-- /Username Input --}}
 
-						<div class="form-group row">
-							<label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+            {{-- Email Input --}}
+            <div class="">
+                <label for="email"
+                    class="block mb-2 text-sm font-medium text-gray-900">{{ __('E-Mail Address') }}</label>
 
-							<div class="col-md-6">
-								<input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+                <input id="email" type="email"
+                    class="{{ $errors->has('email') ? 'border border-red-500 focus:ring-red-500 focus:border-red-500' : 'border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500' }} bg-gray-50 border  text-sm rounded-lg  block w-full p-2.5"
+                    name="email" value="{{ old('email') }}" required autocomplete="email">
 
-								@error('email')
-								<span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-								@enderror
-							</div>
-						</div>
+                @error('email')
+                    <p class="text-red-600">
+                        <strong>{{ $message }}</strong>
+                    </p>
+                @enderror
+            </div>
+            {{-- /Email Input --}}
 
-						<div class="form-group row">
-							<label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+            {{-- Password Input --}}
+            <div class="">
+                <label for="password" class="block mb-2 text-sm font-medium text-gray-900">{{ __('Password') }}</label>
 
-							<div class="col-md-6">
-								<input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                <input id="password" type="password"
+                    class="{{ $errors->has('password') ? 'border border-red-500 focus:ring-red-500 focus:border-red-500' : 'border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500' }} bg-gray-50 border  text-sm rounded-lg  block w-full p-2.5"
+                    name="password" required autocomplete="new-password">
 
-								@error('password')
-								<span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-								@enderror
-							</div>
-						</div>
+                @error('password')
+                    <p class="text-red-600" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </p>
+                @enderror
+            </div>
+            {{-- /Password Input --}}
 
-						<div class="form-group row">
-							<label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+            {{-- Password Confirm Input --}}
+            <div class="">
+                <label for="password-confirm"
+                    class="block mb-2 text-sm font-medium text-gray-900">{{ __('Confirm Password') }}</label>
 
-							<div class="col-md-6">
-								<input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-							</div>
-						</div>
+                <input id="password-confirm" type="password"
+                    class="{{ $errors->has('password-confirm') ? 'border border-red-500 focus:ring-red-500 focus:border-red-500' : 'border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500' }} bg-gray-50 border  text-sm rounded-lg  block w-full p-2.5"
+                    name="password_confirmation" required autocomplete="new-password">
+            </div>
+            {{-- /Password Confirm Input --}}
 
-						<div class="form-group row mb-0">
-							<div class="col-md-6 offset-md-4">
-								<button type="submit" class="btn btn-primary">
-									{{ __('Register') }}
-								</button>
-							</div>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
+            <div class="flex items-center justify-center mt-6">
+                <button type="submit"
+                    class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5">
+                    {{ __('Register') }}
+                </button>
+            </div>
+        </div>
+    </form>
 @endsection

@@ -455,9 +455,9 @@
                                 </div>
                                 {{-- /People --}}
 
-                                <div class="col-span-4 flex items-center justify-center">
+                                <div class="col-span-4 flex items-center justify-end">
                                     <button type="submit"
-                                        class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mt-2">SEARCH
+                                        class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mt-2">SEARCH
                                         TOUR</button>
                                 </div>
                             </div>
@@ -478,7 +478,7 @@
                 <div class="grid grid-cols-3 gap-6">
                     @foreach ($tours as $tour)
                         {{-- Grid Item --}}
-                        <div class="hover:scale-105 transition duration-300 pb-3 border-2 rounded-md shadow-md border-yellow-500">
+                        <div class="hover:scale-105 transition duration-300 pb-3 rounded-md shadow-md">
 
                             {{-- Tour Image --}}
                             @if (count($tour->images))
@@ -556,7 +556,7 @@
                                 {{-- Link --}}
                                 <div class="flex items-center justify-end">
                                     <a href="{{ url('/tour/detail/' . $tour->serial) }}"
-                                        class="font-medium text-blue-600 dark:text-blue-500 hover:underline">See
+                                        class="px-5 py-2.5 bg-blue-700 text-sm font-medium text-white rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300">See
                                         more</a>
                                 </div>
                                 {{-- /Link --}}

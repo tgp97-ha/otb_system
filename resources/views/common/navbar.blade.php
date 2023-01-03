@@ -1,7 +1,7 @@
 @section('nav')
     <nav id="navbar"
         class="flex items-center transition-all ease-in-out duration-300 fixed h-16 top-0 left-0 w-full z-50 bg-white border border-gray-200 px-2 rounded-b-md shadow-lg dark:bg-gray-900">
-        <div class="container flex flex-wrap items-center justify-between mx-auto">
+        <div class="w-full flex flex-wrap items-center justify-between mx-auto">
             <div class="flex items-center">
                 <a href="/" class="flex items-center mr-6">
                     <img src="{{ asset('images/logo1.jpg') }}" alt="" class="w-16">
@@ -128,10 +128,10 @@
                 @else
                     <div>
                         <a href="{{ url('/register/tourist/') }}"
-                            class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">Register
+                            class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-semibold rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">Register
                             as Tourist</a>
                         <a href="{{ url('/register/tour-operator') }}"
-                            class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">Register
+                            class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-semibold rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">Register
                             as Tour Operator</a>
                     </div>
                 @endif
