@@ -344,7 +344,7 @@
             </div>
         </div>
     @else
-        <div class="p-6 bg-white">
+        <div class="p-6 bg-gray-100 border rounded-lg shadow-md">
             {{--  --}}
             <div class="mb-6">
 
@@ -477,48 +477,95 @@
                 {{-- Grid Container --}}
                 <div class="grid grid-cols-3 gap-6">
                     @foreach ($tours as $tour)
-                    
                         {{-- Grid Item --}}
-                        <div class="border-2 border-red-500">
-                            <div class="" style="height: 550px">
-                                @if (count($tour->images))
-                                    <img src="{{ asset('storage/tour/' . $tour->images[0]->file_path) }}" alt=""
-                                        style="height: 280px" class="" title="" />
-                                @else
-                                    <img src="https://livedemo00.template-help.com/wt_51676/images/landing-private-airlines-01-570x370.jpg"
-                                        class="" alt="">
-                                @endif
-                                <div class="">
-                                    <div class="">
-                                        <h2 class="">{{ $tour->place ? $tour->place->place_name : '' }}</h2>
-                                        <h2 class="">{{ $tour->tour_prices . 'VND' }}</h2>
-                                    </div>
-                                    <i class="fa-solid fa-calendar card-time-btn mt-3">
-                                        <span class="">{{ $tour->tour_start_date }}</span>
-                                    </i>
-                                    <div class="">
-                                        <i class="fa-solid fa-star rating-btn"></i><span class="font-weight-bold">
-                                            {{ html_entity_decode('&nbsp;&nbsp;&nbsp;') . ((float) $tour->tour_rating ? number_format($tour->tour_rating, 2, '.', '') . ' / 5.0' : '') }}
-                                        </span>
-                                        ({{ count($tour->comments) }}
-                                        reviewer)
-                                    </div>
-                                    <div class="">
-                                        <div class="">
-                                            <i class="fa-solid fa-info-circle mt-3">
-                                            </i>
-                                            <span>{{ substr($tour->tour_detail, 0, 100) . '...' }}</span>
-                                        </div>
-                                    </div>
-                                    <div class="">
-                                        <a href="{{ url('/tour/detail/' . $tour->serial) }}">See more</a>
-                                    </div>
+                        <div class="pb-3 border rounded-md shadow-md">
+
+                            {{-- Tour Image --}}
+                            @if (count($tour->images))
+                                <img src="{{ asset('storage/tour/' . $tour->images[0]->file_path) }}" alt=""
+                                    style="height: 280px" class="" title="" />
+                            @else
+                                <img src="https://livedemo00.template-help.com/wt_51676/images/landing-private-airlines-01-570x370.jpg"
+                                    class="" alt="">
+                            @endif
+                            {{-- /Tour Image --}}
+
+                            {{-- Tour Info --}}
+                            <div class="grid grid-cols-1 gap-6 px-3 py-6">
+
+                                {{-- Tour Destination & Prices --}}
+                                <div class="flex items-center justify-between">
+                                    <span
+                                        class="text-xl font-bold">{{ $tour->place ? $tour->place->place_name : '' }}</span>
+                                    <span class="block text-right text-2xl font-bold text-orange-500">
+                                        {{ substr($tour->tour_prices, 0, strlen($tour->tour_prices) - 6) . '.' . substr($tour->tour_prices, 1, 3) . '.' . substr($tour->tour_prices, -3, 3) . ' VND' }}
+                                    </span>
                                 </div>
+                                {{-- /Tour Destination & Prices --}}
+
+                                {{-- Flex Container --}}
+                                <div class="flex items-center justify-between">
+
+                                    {{-- Tour Start Date --}}
+                                    <div class="flex items-center">
+                                        <svg class="block w-5 h-5 mr-1" fill="currentColor" viewBox="0 0 20 20"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd"
+                                                d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                                                clip-rule="evenodd"></path>
+                                        </svg>
+                                        <span class="block text-base font-medium">{{ $tour->tour_start_date }}</span>
+                                    </div>
+                                    {{-- /Tour Start Date --}}
+
+                                    {{-- Rates & Comments --}}
+                                    <div class="flex items-center">
+                                        <svg aria-hidden="true" class="w-5 h-5 text-yellow-400" fill="currentColor"
+                                            viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                            <title>Rating star</title>
+                                            <path
+                                                d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                                            </path>
+                                        </svg>
+                                        <p class="ml-2 text-sm font-bold text-gray-900 dark:text-white">
+                                            {{ html_entity_decode('&nbsp;&nbsp;&nbsp;') . ((float) $tour->tour_rating ? number_format($tour->tour_rating, 2, '.', '') . ' / 5.0' : '') }}
+                                        </p>
+                                        <span class="w-1 h-1 mx-1.5 bg-gray-500 rounded-full dark:bg-gray-400"></span>
+                                        <a href="#"
+                                            class="text-sm font-medium text-gray-900 underline hover:no-underline dark:text-white">({{ count($tour->comments) }}
+                                            reviews)</a>
+                                    </div>
+                                    {{-- /Rates & Comments --}}
+
+                                </div>
+                                {{-- /Flex Container --}}
+
+                                {{-- Description --}}
+                                <div class="">
+                                    <svg class="inline-block w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd"
+                                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                                            clip-rule="evenodd"></path>
+                                    </svg>
+                                    <span
+                                        class="text-base font-medium">{{ substr($tour->tour_detail, 0, 100) . '...' }}</span>
+                                </div>
+                                {{-- /Description --}}
+
+                                {{-- Link --}}
+                                <div class="flex items-center justify-end">
+                                    <a href="{{ url('/tour/detail/' . $tour->serial) }}"
+                                        class="font-medium text-blue-600 dark:text-blue-500 hover:underline">See more</a>
+                                </div>
+                                {{-- /Link --}}
+
                             </div>
+                            {{-- Tour Info --}}
                         </div>
                         {{-- /Grid Item --}}
                     @endforeach
-                    <div>
+                    <div class="col-span-3">
                         {{ $tours->links() }}
                     </div>
                 </div>

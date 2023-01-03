@@ -26,7 +26,7 @@ class TourSeeder extends Seeder
                 'tour_detail' => $faker->paragraph(10, true),
                 'tour_description' => $faker->paragraph(1, true),
                 'tour_day_length' => $faker->numberBetween(1, 99),
-                'tour_start_date' => $faker->date('Y/m/d'),
+                'tour_start_date' => $faker->date('d/m/Y'),
                 'tour_night_length' => $faker->numberBetween(1, 99),
                 'tour_slots' => $faker->numberBetween(1, 99),
                 'tour_slots_left' => $faker->numberBetween(1, 99),

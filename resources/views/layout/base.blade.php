@@ -23,7 +23,7 @@
 
     @include('common.sidebar')
 
-    <div id="content" class="w-[66%] mx-auto pt-20 pb-6 border-2 border-red-500 min-h-screen">
+    <div id="content" class="w-[66%] mx-auto pt-20 pb-6 min-h-screen">
         @yield('content')
     </div>
 
