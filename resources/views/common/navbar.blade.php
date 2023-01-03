@@ -1,9 +1,9 @@
 @section('nav')
     <nav id="navbar"
-        class="transition-all ease-in-out duration-300 fixed top-0 left-0 w-full z-50 bg-white border border-gray-200 px-2 sm:px-4 py-2.5 rounded-md shadow-md dark:bg-gray-900">
+        class="transition-all ease-in-out duration-300 fixed top-0 left-0 w-full z-50 bg-white border border-gray-200 px-2 py-2 rounded-md shadow-md dark:bg-gray-900">
         <div class="container flex flex-wrap items-center justify-between mx-auto">
             <a class="flex items-center" href="/">
-
+                <img src="{{ asset('images/logo1.jpg') }}" alt="" class="w-16">
                 <h3 class="text-3xl font-bold dark:text-white">
                     OTB System
                 </h3>
@@ -115,7 +115,7 @@
                 @if (Route::currentRouteName() == null)
                     <a class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
                         href="{{ url('/login') }}">
-                        Login
+                        Sign In
                     </a>
                     <form id="logout-form" action="{{ url('/login') }}" method="POST" style="display: none;">
                         {{ csrf_field() }}

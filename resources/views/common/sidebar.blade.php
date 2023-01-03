@@ -1,6 +1,6 @@
 @if (!Auth::guest())
-    <aside id="sidebar" class="fixed h-screen z-10 w-64 border showdow-md overflow-y-auto">
-        <div class="h-full pt-16 overflow-y-auto py-4 px-3 bg-white rounded dark:bg-gray-800">
+    <aside id="sidebar" class="fixed h-screen z-10 w-64 pt-16 border showdow-md overflow-y-auto">
+        <div class="h-full overflow-y-auto py-4 px-3 bg-white rounded dark:bg-gray-800">
             <ul class="space-y-2">
                 @can('tourist')
                     <li>

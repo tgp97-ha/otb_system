@@ -10,34 +10,32 @@
     <title>{{ config('app.name', 'OTB System') }}</title>
     <link rel="stylesheet" href="{{ asset('css/tailwind.css') }}">
     <link rel="stylesheet" href="{{ asset('css/flowbite.css') }}">
-    <link rel="stylesheet" type="text/css" href="/css/app.css">
+    {{-- <link rel="stylesheet" type="text/css" href="/css/app.css">
     <link rel="stylesheet" type="text/css" href="/css/print.css">
     <link href="{{asset('lib/datepicker/css/bootstrap-datepicker3.css') }}" rel="stylesheet">
     <script type="text/javascript" src="{{asset('lib/datepicker/js/bootstrap-datepicker.js') }}"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    @livewireStyles
-    @include('layout.css')
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> --}}
 </head>
-@if(Auth::user() &&( Auth::user()->can( 'tour-operator' ) || Auth::user()->can('admin')))
 
     <body class="bg-gray-100">
     @include('common.navbar')
 
     @include('common.sidebar')
 
-    <div id="content" class="w-[60%] mx-auto pt-20 pb-6">
+    <div id="content" class="w-[66%] mx-auto pt-20 pb-6 border-2 border-red-500 min-h-screen">
         @yield('content')
     </div>
+
+    @include('common.footer')
 
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/flowbite.js') }}"></script>
     <script src="{{ asset('js/datepicker.js') }}"></script>
-    {{-- @yield('javascript') --}}
     </body>
-@else
-    <body>
-    {{--@include('common.sidebar.sidebar')--}}
+
+
+    {{-- <body>
     @include('share.header')
     <div class="wrapper pb-5">
         @yield('content')
@@ -48,8 +46,8 @@
     @endif
     @yield('javascript')
     @livewireStyles
-    </body>
-@endif
+    </body> --}}
+
 <link rel="stylesheet" type="text/css"
       href="https://cdn.jsdelivr.net/npm/botman-web-widget@0/build/assets/css/chat.min.css">
 <script>
