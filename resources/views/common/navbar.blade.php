@@ -1,48 +1,53 @@
 @section('nav')
     <nav id="navbar"
-        class="transition-all ease-in-out duration-300 fixed top-0 left-0 w-full z-50 bg-white border border-gray-200 px-2 sm:px-4 py-2.5 rounded-md shadow-md dark:bg-gray-900">
-        <div class="container flex flex-wrap items-center justify-between mx-auto">
-            <a class="flex items-center" href="/">
+        class="flex items-center transition-all ease-in-out duration-300 fixed h-16 top-0 left-0 w-full z-50 bg-white border border-gray-200 px-2 rounded-b-md shadow-lg dark:bg-gray-900">
+        <div class="w-full flex flex-wrap items-center justify-between mx-auto">
+            <div class="flex items-center">
+                <a href="/" class="flex items-center mr-6">
+                    <img src="{{ asset('images/logo1.jpg') }}" alt="" class="w-16">
+                    <h3 class="text-3xl font-bold dark:text-white">
+                        OTB System
+                    </h3>
+                </a>
+                
+                @if (Auth::user() && Auth::user()->can('tourist'))
+                    <div class="inline-flex h-full">
+                        <a href="{{ url('tourist/my-tours') }}"
+                            class="px-5 py-5 text-base font-semibold text-blue-700 bg-white hover:border-gray-100 hover:bg-gray-100 hover:text-blue-600 focus:z-10 focus:ring-blue-700 focus:text-blue-700">My
+                            Tours</a>
+                    </div>
+                @endif
+            </div>
 
-                <h3 class="text-3xl font-bold dark:text-white">
-                    OTB System
-                </h3>
-            </a>
-            @if (Route::current()->uri == 'tour/detail/{id}')
+            {{-- @if (Route::current()->uri == 'tour/detail/{id}')
                 <ul
                     class="flex flex-col border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
                     <li>
                         <a href="#"
-                            class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white">
+                            class="block py-2 pl-3 pr-4 text-base font-medium text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white">
                             Home
                         </a>
                     </li>
                     <li>
                         <a href="#overview"
-                            class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white">
+                            class="block py-2 pl-3 pr-4 text-base font-medium text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white">
                             Overview
                         </a>
                     </li>
                     <li>
                         <a href="#itinerary"
-                            class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white">
+                            class="block py-2 pl-3 pr-4 text-base font-medium text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white">
                             Itinerary
                         </a>
                     </li>
                     <li>
-                        <a href="#location"
-                            class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white">
-                            Location
-                        </a>
-                    </li>
-                    <li>
                         <a href="#reviews"
-                            class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white">
+                            class="block py-2 pl-3 pr-4 text-base font-medium text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white">
                             Reviews
                         </a>
                     </li>
                 </ul>
-            @endif
+            @endif --}}
 
             @if (!Auth::guest())
                 <div class="flex items-center">
@@ -115,7 +120,7 @@
                 @if (Route::currentRouteName() == null)
                     <a class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
                         href="{{ url('/login') }}">
-                        Login
+                        Sign In
                     </a>
                     <form id="logout-form" action="{{ url('/login') }}" method="POST" style="display: none;">
                         {{ csrf_field() }}
@@ -123,10 +128,10 @@
                 @else
                     <div>
                         <a href="{{ url('/register/tourist/') }}"
-                            class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">Register
+                            class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-semibold rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">Register
                             as Tourist</a>
                         <a href="{{ url('/register/tour-operator') }}"
-                            class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">Register
+                            class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-semibold rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">Register
                             as Tour Operator</a>
                     </div>
                 @endif
