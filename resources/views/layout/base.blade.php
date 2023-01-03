@@ -2,7 +2,7 @@
 <html lang="{{ app()->getLocale() }}" class="scroll-smooth">
 
 <head>
-    <link rel="icon" href="{{URL::asset('/css/images/logo1.jpg')}}">
+    <link rel="icon" href="{{ URL::asset('/css/images/logo1.jpg') }}">
     <meta charset="utf-8">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,30 +18,37 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> --}}
 </head>
 
-    <body class="bg-gray-100">
+<body class="bg-gray-100">
     @include('common.navbar')
 
-    @include('common.sidebar')
 
-    <div id="content" class="w-[66%] mx-auto pt-20 pb-6 min-h-screen">
-        @yield('content')
-    </div>
+    @if (Auth::user() && (Auth::user()->can('tour-operator') || Auth::user()->can('admin')))
+        @include('common.sidebar')
+        <div id="content" class="w-[66%] mx-auto pt-20 pb-6">
+            @yield('content')
+        </div>
+    @else
+        <div id="content" class="w-[80%] mx-auto pt-20 pb-6">
+            @yield('content')
+        </div>
+    @endif
+
 
     @include('common.footer')
 
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/flowbite.js') }}"></script>
     <script src="{{ asset('js/datepicker.js') }}"></script>
-    </body>
+</body>
 
 
-    {{-- <body>
+{{-- <body>
     @include('share.header')
     <div class="wrapper pb-5">
         @yield('content')
     </div>
     <script type="text/javascript" src="./public/js/app.js"></script>
-    @if(Route::currentRouteName()!=='login' && !str_contains(Route::currentRouteName() ,'register'))
+    @if (Route::currentRouteName() !== 'login' && !str_contains(Route::currentRouteName(), 'register'))
         @include('share.footer')
     @endif
     @yield('javascript')
@@ -49,10 +56,10 @@
     </body> --}}
 
 <link rel="stylesheet" type="text/css"
-      href="https://cdn.jsdelivr.net/npm/botman-web-widget@0/build/assets/css/chat.min.css">
+    href="https://cdn.jsdelivr.net/npm/botman-web-widget@0/build/assets/css/chat.min.css">
 <script>
     var ChatBot = {
-        aboutText   : 'ssdsd',
+        aboutText: 'ssdsd',
         introMessage: "✋ Hi! I'm form ItSolutionStuff.com"
     };
 </script>

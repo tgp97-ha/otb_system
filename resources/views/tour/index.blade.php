@@ -478,7 +478,7 @@
                 <div class="grid grid-cols-3 gap-6">
                     @foreach ($tours as $tour)
                         {{-- Grid Item --}}
-                        <div class="pb-3 border rounded-md shadow-md">
+                        <div class="hover:scale-105 transition duration-300 pb-3 border-2 rounded-md shadow-md border-yellow-500">
 
                             {{-- Tour Image --}}
                             @if (count($tour->images))
@@ -556,7 +556,8 @@
                                 {{-- Link --}}
                                 <div class="flex items-center justify-end">
                                     <a href="{{ url('/tour/detail/' . $tour->serial) }}"
-                                        class="font-medium text-blue-600 dark:text-blue-500 hover:underline">See more</a>
+                                        class="font-medium text-blue-600 dark:text-blue-500 hover:underline">See
+                                        more</a>
                                 </div>
                                 {{-- /Link --}}
 
