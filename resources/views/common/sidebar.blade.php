@@ -1,8 +1,8 @@
 @if (!Auth::guest())
-    <aside id="sidebar" class="fixed h-screen z-10 w-64 border showdow-md overflow-y-auto">
-        <div class="h-full pt-16 overflow-y-auto py-4 px-3 bg-white rounded dark:bg-gray-800">
+    <aside id="sidebar" class="fixed h-screen z-10 w-64 pt-16 border showdow-md overflow-y-auto">
+        <div class="h-full overflow-y-auto py-4 px-3 bg-white rounded dark:bg-gray-800">
             <ul class="space-y-2">
-                @can('tourist')
+                {{-- @can('tourist')
                     <li>
                         <a href="{{ url('/tour/') }}"
                             class="group flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:scale-105 hover:bg-gray-100 dark:hover:bg-gray-700">
@@ -27,7 +27,7 @@
                             <span class="ml-3">My Tours</span>
                         </a>
                     </li>
-                @endcan
+                @endcan --}}
                 @can('tour-operator')
                     <li>
                         <a href="#"

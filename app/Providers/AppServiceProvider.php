@@ -18,7 +18,6 @@ class AppServiceProvider extends ServiceProvider
     {
         setlocale(LC_TIME, app()->getLocale());
         Carbon::setLocale(app()->getLocale());
-	    Paginator::useBootstrap();
     }
 
     /**
