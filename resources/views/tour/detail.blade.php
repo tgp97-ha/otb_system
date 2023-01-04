@@ -185,7 +185,6 @@
             </div>
             {{-- /Itinerary --}}
 
-
             {{-- Reviews --}}
             @if (isset($tour->comments) && count($tour->comments))
                 <div id="reviews" class="p-4 border rounded-lg shadow-lg bg-white">
@@ -374,9 +373,10 @@
             {{-- Rate & Comment --}}
             @if (isset($booking))
                 <div class="p-4 border rounded-lg shadow-lg bg-white">
-                    <form method="POST" action="{{ url('tour/comment/' . $tour->serial) }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ url('tour/comment/' . $tour->serial) }}"
+                        enctype="multipart/form-data">
                         {{ csrf_field() }}
-    
+
                         {{-- Rate --}}
                         <div class="flex items-center mb-2">
                             <h4 class="mr-2 text-xl font-semibold text-gray-900">
@@ -446,9 +446,10 @@
                             </div>
                         </div>
                         {{-- /Rate --}}
-    
+
                         {{-- Comment --}}
-                        <div class="w-full border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
+                        <div
+                            class="w-full border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
                             <div class="px-4 py-2 bg-white rounded-t-lg dark:bg-gray-800">
                                 <label for="comment" class="sr-only">Your comment</label>
                                 <textarea id="comment" rows="4" name="comment"
@@ -505,69 +506,71 @@
 
         {{-- Booking --}}
         @if (!isset($booking))
-            <div>
-                @if (\Illuminate\Support\Facades\Auth::user() || !\Illuminate\Support\Facades\Auth::user())
-                    <form action="{{ url('/tour/book/' . $tour->serial) }}" method="POST">
-                        <div class="grid grid-cols-1 gap-6 p-6 bg-gray-100 border rounded-lg">
-                            <div>
-                                <h1 class="text-lg font-semibold mb-2 text-red-700">BOOK THIS TOUR</h1>
-                                <div class="relative">
-                                    <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointers-events-none">
-                                        <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400"
-                                            fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                            <path fill-rule="evenodd"
-                                                d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-                                                clip-rule="evenodd"></path>
-                                        </svg>
+            @can('tourist')
+                <div>
+                    @if (\Illuminate\Support\Facades\Auth::user() || !\Illuminate\Support\Facades\Auth::user())
+                        <form action="{{ url('/tour/book/' . $tour->serial) }}" method="POST">
+                            <div class="grid grid-cols-1 gap-6 p-6 bg-gray-100 border rounded-lg">
+                                <div>
+                                    <h1 class="text-lg font-semibold mb-2 text-red-700">BOOK THIS TOUR</h1>
+                                    <div class="relative">
+                                        <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointers-events-none">
+                                            <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400"
+                                                fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd"
+                                                    d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                                                    clip-rule="evenodd"></path>
+                                            </svg>
+                                        </div>
+                                        <input datepicker datepicker-autohide datepicker-format="dd/mm/yyyy" type="text"
+                                            class="block w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm font-medium rounded-lg hover:border-blue-500 focus:ring-blue-500 focus:border-blue-500 pl-10 p-2.5"
+                                            name="tour_date" placeholder="dd/mm/yyyy">
                                     </div>
-                                    <input datepicker datepicker-autohide datepicker-format="dd/mm/yyyy" type="text"
-                                        class="block w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm font-medium rounded-lg hover:border-blue-500 focus:ring-blue-500 focus:border-blue-500 pl-10 p-2.5"
-                                        name="tour_date" placeholder="dd/mm/yyyy">
                                 </div>
+                                <div class="">
+                                    <div class="">Choose the number of people</div>
+                                    <input type="number" min="0" max="200" value="0" name="people_number"
+                                        class="block w-full p-2.5 text-sm font-medium text-gray-900 bg-gray-50 border border-gray-300 rounded-lg hover:border-blue-500 focus:ring-blue-500 focus:border-blue-500">
+                                </div>
+                                <div class="flex justify-end items-center">
+                                    <button
+                                        class="block px-5 py-2.5 rounded-lg text-sm font-medium text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300"
+                                        type="submit">BOOK NOW</button>
+                                </div>
+                                @csrf
                             </div>
-                            <div class="">
-                                <div class="">Choose the number of people</div>
-                                <input type="number" min="0" max="200" value="0" name="people_number"
-                                    class="block w-full p-2.5 text-sm font-medium text-gray-900 bg-gray-50 border border-gray-300 rounded-lg hover:border-blue-500 focus:ring-blue-500 focus:border-blue-500">
+                        </form>
+                    @else
+                        <div class="col-md-4 pr-0">
+                            <div class="book-tour">
+                                <h1 class="book-tour-heading">BOOK THIS TOUR</h1>
+                                <div class="book-tour-body">
+                                    <i class="fa-regular fa-calendar-days calendar-btn"></i>
+                                    <input class="book-tour-tickets-adults" placeholder="dd/mm/yyyy">
+                                    <i class="fa-solid fa-caret-down book-tour-down-btn"></i>
+                                </div>
+                                <div class="book-tour-tickets">
+                                    <h1 class="book-tour-tickets-heading">Number of People</h1>
+                                    <div class="book-tour-tickets-body">
+                                        <div class="book-tour-tickets-title">Adult (18+ years)
+                                        </div>
+                                        <input type="number" min="0" max="200" value="0"
+                                            class="book-tour-tickets-adults">
+                                    </div>
+                                </div>
+                                @csrf
+                                <button class="book-now-btn">BOOK NOW</button>
                             </div>
-                            <div class="flex justify-end items-center">
-                                <button
-                                    class="block px-5 py-2.5 rounded-lg text-sm font-medium text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300"
-                                    type="submit">BOOK NOW</button>
-                            </div>
-                            @csrf
                         </div>
-                    </form>
-                @else
-                    <div class="col-md-4 pr-0">
-                        <div class="book-tour">
-                            <h1 class="book-tour-heading">BOOK THIS TOUR</h1>
-                            <div class="book-tour-body">
-                                <i class="fa-regular fa-calendar-days calendar-btn"></i>
-                                <input class="book-tour-tickets-adults" placeholder="dd/mm/yyyy">
-                                <i class="fa-solid fa-caret-down book-tour-down-btn"></i>
-                            </div>
-                            <div class="book-tour-tickets">
-                                <h1 class="book-tour-tickets-heading">Number of People</h1>
-                                <div class="book-tour-tickets-body">
-                                    <div class="book-tour-tickets-title">Adult (18+ years)
-                                    </div>
-                                    <input type="number" min="0" max="200" value="0"
-                                        class="book-tour-tickets-adults">
-                                </div>
-                            </div>
-                            @csrf
+                        <a href="{{ url('/login') }}">
                             <button class="book-now-btn">BOOK NOW</button>
-                        </div>
-                    </div>
-                    <a href="{{ url('/login') }}">
-                        <button class="book-now-btn">BOOK NOW</button>
-                    </a>
-            </div>
+                        </a>
+                </div>
+            @endcan
         @endif
         {{-- /Booking --}}
 
-        
+
     </div>
     @endif
 @endsection

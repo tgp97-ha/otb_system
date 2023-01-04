@@ -42,22 +42,6 @@
     <script src="{{ asset('js/star-rating.js') }}"></script>
 </body>
 
-
-{{-- <body>
-    @include('share.header')
-    <div class="wrapper pb-5">
-        @yield('content')
-    </div>
-    <script type="text/javascript" src="./public/js/app.js"></script>
-    @if (Route::currentRouteName() !== 'login' && !str_contains(Route::currentRouteName(), 'register'))
-        @include('share.footer')
-    @endif
-    @yield('javascript')
-    @livewireStyles
-    </body> --}}
-
-{{-- <link rel="stylesheet" type="text/css"
-    href="https://cdn.jsdelivr.net/npm/botman-web-widget@0/build/assets/css/chat.min.css"> --}}
 <script>
     var ChatBot = {
         aboutText: 'ssdsd',
