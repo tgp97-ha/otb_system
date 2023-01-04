@@ -212,14 +212,44 @@ class TourController extends Controller{
 			'images',
 			'tourDetails'
 		] )->find( $id );
-
+		$comments = Comment::where( 'tour_serial', '=', $id )->whereNotNull( 'comment_rating' )->get();
+		$ratingArray = [];
+		$oneStars = 0;
+		$twoStars = 0;
+		$threeStars = 0;
+		$fourStars = 0;
+		$fiveStars = 0;
+		foreach ($comments as $comment){
+			switch ($comment->comment_rating){
+				case '1':
+					$oneStars+=1;
+					break;
+				case '2':
+					$twoStars+=1;
+					break;
+				case '3':
+					$threeStars+=1;
+					break;
+				case '4':
+					$fourStars+=1;
+					break;
+				case '5':
+					$fiveStars+=1;
+					break;
+			}
+		}
+		$ratingArray[] = (int)($oneStars/count($comments)*100);
+		$ratingArray[] = (int)($twoStars/count($comments)*100);
+		$ratingArray[] = (int)($threeStars/count($comments)*100);
+		$ratingArray[] = (int)($fourStars/count($comments)*100);
+		$ratingArray[] = (int)($fiveStars/count($comments)*100);
 		if ( Auth::user() ) {
 			$booking = Booking::where( 'tour_serial', $item->serial )->where( 'user_id', auth()->user()->id )->first();
 			if ( $booking ) {
-				return view( 'tour.detail', [ 'tour' => $item, 'booking' => $booking ] );
+				return view( 'tour.detail', [ 'tour' => $item, 'booking' => $booking, 'ratingArray'=> $ratingArray ] );
 			} else {
 				// dd($item);
-				return view( 'tour.detail', [ 'tour' => $item ] );
+				return view( 'tour.detail', [ 'tour' => $item, 'ratingArray'=> $ratingArray] );
 			}
 		}
 
@@ -364,9 +394,7 @@ class TourController extends Controller{
 	}
 
 	public function comment( $id, Request $request ) {
-		//$sentiment = new Sentiment();
-		//$scores = $sentiment->score($request->comment);
-		//dd($scores);
+
 		$tour = Tour::find( $id );
 		$user = auth()->user();
 
@@ -375,22 +403,25 @@ class TourController extends Controller{
 		$comment->tour_serial     = $id;
 		$comment->comment_rating  = $request->input( 'rating' );
 		$comment->user_id         = $user->id;
-
+		$sentiment = new Sentiment();
+		$scores    = $sentiment->score( $request->comment );
+		$comment_rating = 100*((float)$scores['pos'] - (float)$scores['neu']);
+		$comment->comment_analysis_rating = $comment_rating;
 		$comment->save();
 
 		$comments = Comment::where( 'tour_serial', '=', $id )->whereNotNull( 'comment_rating' )->get();
 
 		if ( count( $comments ) ) {
 			$rating = 0;
+			$comment_rating = 0;
 			foreach ( $comments as $comment_value ) {
 				$rating += (float) $comment_value->comment_rating;
+				$comment_rating += (float) $comment_value->comment_analysis_rating;
 			}
 			$tour->tour_rating = $rating / count( $comments );
+			$tour->tour_comment_rating = $comment_rating / count( $comments );
 			$tour->save();
 		}
-
-		$sentiment = new Sentiment();
-		$scores    = $sentiment->score( $request->comment );
 
 		return redirect( '/tour/detail/' . $id );
 	}

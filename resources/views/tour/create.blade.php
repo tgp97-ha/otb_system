@@ -215,19 +215,19 @@
                         <div>
                             <textarea id="tour_detail"
                                 class="{{ $errors->has('tour_detail') ? ' border-red-600 focus:ring-red-600 focus:border-red-600 dark:focus:ring-red-500 dark:focus:border-red-500' : '' }} mb-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                name="tour_detail[]" rows="2" required placeholder="Tour Detail 1"></textarea>
+                                name="tour_detail[]" rows="2" placeholder="Tour Detail 1"></textarea>
                             <textarea id="tour_detail"
                                       class="{{ $errors->has('tour_detail') ? '  border-red-600 focus:ring-red-600 focus:border-red-600 dark:focus:ring-red-500 dark:focus:border-red-500' : '' }} mb-2  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                      name="tour_detail[]" rows="2" required placeholder="Tour Detail 2"></textarea>
+                                      name="tour_detail[]" rows="2" placeholder="Tour Detail 2"></textarea>
                             <textarea id="tour_detail"
                                       class="{{ $errors->has('tour_detail') ? ' border-red-600 focus:ring-red-600 focus:border-red-600 dark:focus:ring-red-500 dark:focus:border-red-500' : '' }} mb-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                      name="tour_detail[]" rows="2" required placeholder="Tour Detail 3"></textarea>
+                                      name="tour_detail[]" rows="2" placeholder="Tour Detail 3"></textarea>
                             <textarea id="tour_detail"
                                       class="{{ $errors->has('tour_detail') ? 'border-red-600 focus:ring-red-600 focus:border-red-600 dark:focus:ring-red-500 dark:focus:border-red-500' : '' }} mb-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                      name="tour_detail[]" rows="2" required placeholder="Tour Detail 4"></textarea>
+                                      name="tour_detail[]" rows="2" placeholder="Tour Detail 4"></textarea>
                             <textarea id="tour_detail"
                                       class="{{ $errors->has('tour_detail') ? ' border-red-600 focus:ring-red-600 focus:border-red-600 dark:focus:ring-red-500 dark:focus:border-red-500' : '' }} mb-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                      name="tour_detail[]" rows="2" required placeholder="Tour Detail 5"></textarea>
+                                      name="tour_detail[]" rows="2" placeholder="Tour Detail 5"></textarea>
 
                             @if ($errors->has('tour_detail'))
                                 <p class="mt-2 text-sm text-red-600 dark:text-red-500">
