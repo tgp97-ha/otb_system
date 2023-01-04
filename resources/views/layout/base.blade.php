@@ -12,14 +12,13 @@
     <link rel="stylesheet" href="{{ asset('css/flowbite.css') }}">
     {{-- <link rel="stylesheet" type="text/css" href="/css/app.css"> --}}
     {{-- <link rel="stylesheet" type="text/css" href="/css/print.css"> --}}
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    {{-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script> --}}
     {{-- <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> --}}
 
 </head>
 
-<body class="bg-gray-100">
+<body>
     @include('common.navbar')
-
 
     @if (Auth::user() && (Auth::user()->can('tour-operator') || Auth::user()->can('admin')))
         @include('common.sidebar')
@@ -40,6 +39,7 @@
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/flowbite.js') }}"></script>
     <script src="{{ asset('js/datepicker.js') }}"></script>
+    <script src="{{ asset('js/star-rating.js') }}"></script>
 </body>
 
 
@@ -56,8 +56,8 @@
     @livewireStyles
     </body> --}}
 
-<link rel="stylesheet" type="text/css"
-    href="https://cdn.jsdelivr.net/npm/botman-web-widget@0/build/assets/css/chat.min.css">
+{{-- <link rel="stylesheet" type="text/css"
+    href="https://cdn.jsdelivr.net/npm/botman-web-widget@0/build/assets/css/chat.min.css"> --}}
 <script>
     var ChatBot = {
         aboutText: 'ssdsd',
