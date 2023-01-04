@@ -5,49 +5,24 @@
             <div class="flex items-center">
                 <a href="/" class="flex items-center mr-6">
                     <img src="{{ asset('images/logo1.jpg') }}" alt="" class="w-16">
-                    <h3 class="text-3xl font-bold dark:text-white">
+                    <h3 class="text-3xl font-extrabold text-yellow-400">
                         OTB System
                     </h3>
                 </a>
-                
+
                 @if (Auth::user() && Auth::user()->can('tourist'))
-                    <div class="inline-flex h-full">
+                    <div class="inline-flex items-center h-16">
+                        <a href="/"
+                            class="h-full flex items-center px-5 text-2xl font-semibold text-blue-700 bg-white hover:border-gray-100 hover:bg-gray-100 hover:text-blue-600 focus:z-10 focus:ring-blue-700 focus:text-blue-700">
+                            Tours
+                        </a>
                         <a href="{{ url('tourist/my-tours') }}"
-                            class="px-5 py-5 text-base font-semibold text-blue-700 bg-white hover:border-gray-100 hover:bg-gray-100 hover:text-blue-600 focus:z-10 focus:ring-blue-700 focus:text-blue-700">My
-                            Tours</a>
+                            class="h-full flex items-center px-5 text-2xl font-semibold text-blue-700 bg-white hover:border-gray-100 hover:bg-gray-100 hover:text-blue-600 focus:z-10 focus:ring-blue-700 focus:text-blue-700">
+                            My Tours
+                        </a>
                     </div>
                 @endif
             </div>
-
-            {{-- @if (Route::current()->uri == 'tour/detail/{id}')
-                <ul
-                    class="flex flex-col border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-                    <li>
-                        <a href="#"
-                            class="block py-2 pl-3 pr-4 text-base font-medium text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white">
-                            Home
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#overview"
-                            class="block py-2 pl-3 pr-4 text-base font-medium text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white">
-                            Overview
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#itinerary"
-                            class="block py-2 pl-3 pr-4 text-base font-medium text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white">
-                            Itinerary
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#reviews"
-                            class="block py-2 pl-3 pr-4 text-base font-medium text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white">
-                            Reviews
-                        </a>
-                    </li>
-                </ul>
-            @endif --}}
 
             @if (!Auth::guest())
                 <div class="flex items-center">

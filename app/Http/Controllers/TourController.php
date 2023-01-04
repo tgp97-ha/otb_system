@@ -340,8 +340,8 @@ class TourController extends Controller{
 
 		$booking->user_id          = $user->id;
 		$booking->tour_serial      = $tour->serial;
-		$booking->date             = $request->input('tour_date');
-		$booking->number_of_people = $request->input('people_number');
+		$booking->date             = $request->tour_date;
+		$booking->number_of_people = $request->people_number;
 		$booking->isPaid           = 0;
 
 		$booking->save();
