@@ -504,26 +504,7 @@
                             </div>
                             @csrf
                         </div>
-                    </form>
-                @else
-                    <div class="col-md-4 pr-0">
-                        <div class="book-tour">
-                            <h1 class="book-tour-heading">BOOK THIS TOUR</h1>
-                            <div class="book-tour-body">
-                                <i class="fa-regular fa-calendar-days calendar-btn"></i>
-                                <input class="book-tour-tickets-adults" placeholder="dd/mm/yyyy">
-                                <i class="fa-solid fa-caret-down book-tour-down-btn"></i>
-                            </div>
-                            <div class="book-tour-tickets">
-                                <h1 class="book-tour-tickets-heading">Number of People</h1>
-                                <div class="book-tour-tickets-body">
-                                    <div class="book-tour-tickets-title">Adult (18+ years)
-                                    </div>
-                                    <input type="number" min="0" max="200" value="0"
-                                        class="book-tour-tickets-adults">
-                                </div>
-                            </div>
-                            @csrf
+                        <a href="{{ url('/login') }}">
                             <button class="book-now-btn">BOOK NOW</button>
                         </div>
                     </div>

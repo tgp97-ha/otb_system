@@ -277,7 +277,7 @@
                                 </span>
                             </div>
 
-                            @canany(['tourist'])
+                            @can('tourist')
                                 @if (!isset($booking))
                                     <form class="w-[70%]" action="{{ url('/tour/book/' . $tour->serial) }}" method="POST">
                                         @csrf
@@ -288,6 +288,7 @@
                                     </form>
                                 @endif
                             @endcan
+
                             {{-- Move to right flex box --}}
                             @canany(['admin', 'tour-operator'])
                                 <form class="w-[70%]" action="{{ url('/tour/delete/' . $tour->serial) }}" method="POST">

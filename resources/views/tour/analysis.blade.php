@@ -1,66 +1,31 @@
 @extends('layout.table')
 
 @section('content')
-    {{-- Search Operator --}}
-    {{-- <div class="card">
-        <div class="card-header">Search Tour Operator</div>
-        <div class="card-body">
-            <form method="POST" action="{{ url('/tourist/list/') }}">
-                @csrf
-                <div class="row form-group offset-md-1">
-                    <div class="col-3">Name</div>
-                    <div class="col-9">
-                        <input id="name" type="text" class="form-control" name="name">
-                    </div>
-                </div>
-                <div class="row form-group offset-md-1">
-                    <div class="col-3">Personal ID</div>
-                    <div class="col-9">
-                        <input id="personal_id" type="number" class="form-control" name="personal_id">
-                    </div>
-                </div>
-                <div class="row form-group offset-md-1">
-                    <div class="col-3">Address</div>
-                    <div class="col-9">
-                        <input id="address" type="number" class="form-control" name="address">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-10 offset-md-1">
-                        <button type="submit" class="btn btn-primary float-right">
-                            Search Tourist
-                        </button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div> --}}
-    {{-- /Search Operator --}}
-
-    {{-- Operator List --}}
+    {{-- Tour List --}}
     <div class="">
-        <h5 class="text-xl font-bold mb-4">Tourist List</h5>
+        <h5 class="text-xl font-bold mb-4">Tour List</h5>
         <div class="flex items-center justify-between pb-4 bg-white">
             <table class="w-full text-sm text-left text-gray-500 rounded-lg shadow-md">
                 <thead class="bg-gray-100">
                     <tr>
-                        <th class="px-6 py-3">Name</th>
-                        <th class="px-6 py-3">Address</th>
-                        <th class="px-6 py-3">Date of Birth</th>
-                        <th class="px-6 py-3">Personal ID </th>
-                        <th class="px-6 py-3">Phone Number </th>
-                        <th class="px-6 py-3">Functions</th>
+                        <th class="px-6 py-3">Title</th>
+                        <th class="px-6 py-3">Place</th>
+                        <th class="px-6 py-3">Duration</th>
+                        <th class="px-6 py-3">Start Date</th>
+                        <th class="px-6 py-3">Tour Rating</th>
+                        <th class="px-6 py-3">Comment Rating</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($tourists as $tourist)
+                    @foreach ($tours as $tour)
                         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50">
-                            <td class="px-6 py-4">{{ $tourist->tourist_name }}</td>
-                            <td class="px-6 py-4">{{ $tourist->address }}</td>
-                            <td class="px-6 py-4">{{ $tourist->date_of_birth }}</td>
-                            <td class="px-6 py-4">{{ $tourist->tourist_phone_number }}</td>
-                            <td class="px-6 py-4">{{ $tourist->tourist_personal_id }}</td>
-                            <td class="px-6 py-4">
+                            <td class="px-6 py-4">{{ $tour->tour_title }}</td>
+                            <td class="px-6 py-4">{{ $tour->place ? $tour->place->place_name : '' }}</td>
+                            <td class="px-6 py-4">{{ $tour->tour_day_length . ' days ' . $tour->tour_night_length . ' nights' }}</td>
+                            <td class="px-6 py-4">{{ $tour->tour_start_date }}</td>
+                            <td class="px-6 py-4">{{ $tour->tour_rating }}</td>
+                            <td class="px-6 py-4">{{ $tour->tour_comment_rating }}</td>
+                            {{-- <td class="px-6 py-4">
                                 <div class="flex items-center">
                                     <a class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2"
                                         href="{{ url('/tourist/detail/' . $tourist->serial) }}">
@@ -88,7 +53,8 @@
                                         </button>
                                     </form>
                                 </div>
-                            </td>
+                            </td> --}}
+
                         </tr>
                     @endforeach
                 </tbody>
@@ -96,5 +62,5 @@
 
         </div>
     </div>
-    {{-- /Operator List --}}
+    {{-- /Tour List --}}
 @endsection
