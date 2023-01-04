@@ -398,7 +398,7 @@
                             class="w-full mb-4 border border-gray-200 rounded bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
                             <div class="px-4 py-2 bg-white rounded-t-lg dark:bg-gray-800">
                                 <label for="comment" class="sr-only">Your comment</label>
-                                <textarea id="comment" name="comment" rows="4"
+                                <textarea id="comment" name="comment" rows="4" style="width:100%"
                                     class="w-full px-0 text-sm text-gray-900 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400"
                                     placeholder="Leave a comment..." required></textarea>
                             </div>
@@ -669,10 +669,10 @@
                                         name="rating" />
                                     <label class="star star-1" for="star-1"></label>
                                 </h2>
-                                <textarea id="comment" class=" reviews-cmt col-form-label font-weight-normal align-middle " name="comment"
+                                <textarea id="comment" class=" reviews-cmt col-form-label font-weight-normal align-middle " name="comment" style="width: 100%"
                                     placeholder="Comment..."></textarea>
                             </div>
-                            <div class="col d-flex justify-content-end mt-2">
+                            <div class="col mt-2" style="width: 100%; display: flex; justify-content: end">
                                 <button type="submit" class="btn btn-dark align-right">Leave Comment
                                 </button>
                             </div>
@@ -732,13 +732,6 @@
                                             {{ $comment->tourist->tourist->tourist_name }}</div>
                                         <div class="reviews-feedback-time">{{ $comment->created_at }}</div>
                                     </div>
-                                    {{--                                <div class="rate"> --}}
-                                    {{--                                    <i class="fa-solid fa-star reviews-rating-btn"></i> --}}
-                                    {{--                                    <i class="fa-solid fa-star reviews-rating-btn"></i> --}}
-                                    {{--                                    <i class="fa-solid fa-star reviews-rating-btn"></i> --}}
-                                    {{--                                    <i class="fa-solid fa-star reviews-rating-btn"></i> --}}
-                                    {{--                                    <i class="fa-solid fa-star reviews-rating-btn"></i> --}}
-                                    {{--                                </div> --}}
                                     <div class="h3">{{ $comment->comment_content }}</div>
                                 </div>
                             </div>

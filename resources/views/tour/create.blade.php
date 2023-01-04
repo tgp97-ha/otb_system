@@ -54,12 +54,36 @@
                     {{-- Place --}}
                     <div>
                         <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            Departure
+                        </label>
+                        <div class="">
+                            <select type="text"
+                                class="{{ $errors->has('departure') ? 'border-red-600 focus:ring-red-600 focus:border-red-600 dark:focus:ring-red-500 dark:focus:border-red-500' : '' }} bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                name="departure" required autocomplete="off">
+                                <option value="" disabled selected>Choose place</option>
+                                @foreach ($places as $place)
+                                    {{-- @if ($tour->place === $place->serial)
+                                        <option selected value="{{ $place->serial }}">
+                                            {{ $place->place_name }}
+                                        </option>
+                                    @else --}}
+                                    <option value="{{ $place->serial }}">
+                                        {{ $place->place_name }}
+                                    </option>
+                                    {{-- @endif --}}
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                             Destination
                         </label>
                         <div class="">
                             <select type="text"
-                                class="{{ $errors->has('destination') ? 'border-red-600 focus:ring-red-600 focus:border-red-600 dark:focus:ring-red-500 dark:focus:border-red-500' : '' }} bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                name="destination" required autocomplete="off">
+                                    class="{{ $errors->has('destination') ? 'border-red-600 focus:ring-red-600 focus:border-red-600 dark:focus:ring-red-500 dark:focus:border-red-500' : '' }} bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    name="destination" required autocomplete="off">
+                                <option value="" disabled selected>Choose place</option>
                                 @foreach ($places as $place)
                                     {{-- @if ($tour->place === $place->serial)
                                         <option selected value="{{ $place->serial }}">
@@ -97,125 +121,75 @@
                     </div>
                     {{-- /Start Date --}}
 
-                    {{-- Services --}}
-                    <div>
-                        <label for="services[]"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Services</label>
-                        <div class="grid grid-cols-3 gap-6">
-                            @foreach ($services as $service)
-                                <div
-                                    class="flex items-center {{ $errors->has('services') ? 'border border-red-600' : '' }}">
-                                    {{-- @if (in_array($service->id, $tour->services->toArray()))
-                                        <input id="{{ 'service' . $service->id }}" type="checkbox" name="services[]"
-                                            checked
-                                            class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                                            value="{{ $service->id }}">
-                                    @else --}}
-                                    <input id="{{ 'service' . $service->id }}" type="checkbox" name="services[]"
-                                        class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                                        value="{{ $service->id }}">
-                                    {{-- @endif --}}
-
-                                    <label for="{{ 'service' . $service->id }}"
-                                        class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{ $service->service_name }}</label>
-                                </div>
-                            @endforeach
-                        </div>
-                    </div>
-                    {{-- /Services --}}
-
-                    {{-- Days --}}
-                    <div class="">
-                        <label for="day_length" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Day
-                            length</label>
+                    <div class="grid grid-cols-2 gap-6">
                         <div>
-                            <input id="day_length" type="number"
-                                class=" {{ $errors->has('day_length') ? 'border-red-600 focus:ring-red-600 focus:border-red-600 dark:focus:ring-red-500 dark:focus:border-red-500' : '' }} bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                name="day_length" required" min="0">
+                            <label for="day_length" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Day
+                                length</label>
+                            <div>
+                                <input id="day_length" type="number"
+                                       class=" {{ $errors->has('day_length') ? 'border-red-600 focus:ring-red-600 focus:border-red-600 dark:focus:ring-red-500 dark:focus:border-red-500' : '' }} bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                       name="day_length" required min="0">
 
-                            @if ($errors->has('day_length'))
-                                <p class="mt-2 text-sm text-red-600 dark:text-red-500">
-                                    <strong>{{ $errors->first('day_length') }}</strong>
-                                </p>
-                            @endif
+                                @if ($errors->has('day_length'))
+                                    <p class="mt-2 text-sm text-red-600 dark:text-red-500">
+                                        <strong>{{ $errors->first('day_length') }}</strong>
+                                    </p>
+                                @endif
+                            </div>
                         </div>
-                    </div>
-                    {{-- /Days --}}
 
-                    {{-- Nights --}}
-                    <div>
-                        <label for="night_length" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Night
-                            length</label>
                         <div>
-                            <input id="night_length" type="number"
-                                class="{{ $errors->has('night_length') ? 'border-red-600 focus:ring-red-600 focus:border-red-600 dark:focus:ring-red-500 dark:focus:border-red-500' : '' }} bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                name="night_length" required min="0">
+                            <label for="night_length" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Night
+                                length</label>
+                            <div>
+                                <input id="night_length" type="number"
+                                       class="{{ $errors->has('night_length') ? 'border-red-600 focus:ring-red-600 focus:border-red-600 dark:focus:ring-red-500 dark:focus:border-red-500' : '' }} bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                       name="night_length" required min="0">
 
-                            @if ($errors->has('night_length'))
-                                <p class="mt-2 text-sm text-red-600 dark:text-red-500">
-                                    <strong>{{ $errors->first('night_length') }}</strong>
-                                </p>
-                            @endif
+                                @if ($errors->has('night_length'))
+                                    <p class="mt-2 text-sm text-red-600 dark:text-red-500">
+                                        <strong>{{ $errors->first('night_length') }}</strong>
+                                    </p>
+                                @endif
+                            </div>
                         </div>
                     </div>
-                    {{-- /Nights --}}
+
 
                     {{-- Slots --}}
-                    <div>
-                        <label for="tour_slot" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                            Slot
-                        </label>
+                    <div class="grid grid-cols-2 gap-6">
                         <div>
-                            <input id="tour_slot" type="number"
-                                class="{{ $errors->has('tour_slot') ? 'border-red-600 focus:ring-red-600 focus:border-red-600 dark:focus:ring-red-500 dark:focus:border-red-500' : '' }} bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                name="tour_slot" required min="0">
+                            <label for="tour_slot" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                Slot
+                            </label>
+                            <div>
+                                <input id="tour_slot" type="number"
+                                       class="{{ $errors->has('tour_slot') ? 'border-red-600 focus:ring-red-600 focus:border-red-600 dark:focus:ring-red-500 dark:focus:border-red-500' : '' }} bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                       name="tour_slot" required min="0">
 
-                            @if ($errors->has('tour_slot'))
-                                <p class="mt-2 text-sm text-red-600 dark:text-red-500">
-                                    <strong>{{ $errors->first('tour_slot') }}</strong>
-                                </p>
-                            @endif
+                                @if ($errors->has('tour_slot'))
+                                    <p class="mt-2 text-sm text-red-600 dark:text-red-500">
+                                        <strong>{{ $errors->first('tour_slot') }}</strong>
+                                    </p>
+                                @endif
+                            </div>
+                        </div>
+                        <div>
+                            <label for="tour_price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tour
+                                Price</label>
+                            <div>
+                                <input id="tour_price" type="number" style="width: 80%; display: inline"
+                                       class="{{ $errors->has('tour_price') ? 'border-red-600 focus:ring-red-600 focus:border-red-600 dark:focus:ring-red-500 dark:focus:border-red-500' : '' }} bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                       name="tour_price" required min="0">
+                                <span class="text-right" style="padding-left: 60px;">VND</span>
+                                @if ($errors->has('tour_price'))
+                                    <p class="mt-2 text-sm text-red-600 dark:text-red-500">
+                                        <strong>{{ $errors->first('tour_price') }}</strong>
+                                    </p>
+                                @endif
+                            </div>
                         </div>
                     </div>
-                    {{-- /Slots --}}
-
-                    {{-- Slots Left --}}
-                    <div>
-                        <label for="tour_slot_left" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                            Slot left
-                        </label>
-                        <div>
-                            <input id="tour_slot_left" type="number"
-                                class="{{ $errors->has('tour_slot_left') ? 'border-red-600 focus:ring-red-600 focus:border-red-600 dark:focus:ring-red-500 dark:focus:border-red-500' : '' }} bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                name="tour_slot_left" required min="0">
-
-                            @if ($errors->has('tour_slot_left'))
-                                <p class="mt-2 text-sm text-red-600 dark:text-red-500">
-                                    <strong>{{ $errors->first('tour_slot_left') }}</strong>
-                                </p>
-                            @endif
-                        </div>
-                    </div>
-                    {{-- /Slots Left --}}
-
-                    {{-- Prices --}}
-                    <div>
-                        <label for="tour_price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tour
-                            Price</label>
-                        <div>
-                            <input id="tour_price" type="number"
-                                class="{{ $errors->has('tour_price') ? 'border-red-600 focus:ring-red-600 focus:border-red-600 dark:focus:ring-red-500 dark:focus:border-red-500' : '' }} bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                name="tour_price" required min="0">
-
-                            @if ($errors->has('tour_price'))
-                                <p class="mt-2 text-sm text-red-600 dark:text-red-500">
-                                    <strong>{{ $errors->first('tour_price') }}</strong>
-                                </p>
-                            @endif
-                        </div>
-                    </div>
-                    {{-- /Prices --}}
-
                     {{-- Description --}}
                     <div>
                         <label for="tour_description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
