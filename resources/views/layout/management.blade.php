@@ -18,7 +18,7 @@
 
     @include('common.sidebar')
 
-    <div id="content" class="ml-64  pt-16">
+    <div id="content" class="ml-64  pt-20">
         @yield('content')
     </div>
 

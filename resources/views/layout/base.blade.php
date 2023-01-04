@@ -38,6 +38,6 @@
     <script src="{{ asset('js/star-rating.js') }}"></script>
 </body>
 
-<script src='https://cdn.jsdelivr.net/npm/botman-web-widget@0/build/js/widget.js'></script>
+{{-- <script src='https://cdn.jsdelivr.net/npm/botman-web-widget@0/build/js/widget.js'></script> --}}
 
 </html>

@@ -71,6 +71,5 @@ Route::middleware(['auth'])->group(function () {
 	Route::resource('tour-operator', 'TourOperatorController');
 	Route::resource('tourist', 'TouristController');
 	Route::resource('tour', 'TourController');
-	Route::match(['get', 'post'], '/botman', 'BotManController@handle');
 });
 
