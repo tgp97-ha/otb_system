@@ -1740,6 +1740,9 @@ input:checked + .toggle-bg {
 .pl-10 {
   padding-left: 2.5rem;
 }
+.pb-4 {
+  padding-bottom: 1rem;
+}
 .pl-0 {
   padding-left: 0px;
 }
@@ -2281,6 +2284,10 @@ input:checked + .toggle-bg {
 .dark .dark\:border-red-600 {
   --tw-border-opacity: 1;
   border-color: rgb(224 36 36 / var(--tw-border-opacity));
+}
+.dark .dark\:border-gray-700 {
+  --tw-border-opacity: 1;
+  border-color: rgb(55 65 81 / var(--tw-border-opacity));
 }
 .dark .dark\:border-blue-500 {
   --tw-border-opacity: 1;
