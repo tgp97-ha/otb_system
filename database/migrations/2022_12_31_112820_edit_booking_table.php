@@ -14,7 +14,6 @@ class EditBookingTable extends Migration
     public function up()
     {
 	    Schema::table('booking', function (Blueprint $table) {
-		    $table->string('date');
 		    $table->string('number_of_people');
 	    });
     }
@@ -27,7 +26,6 @@ class EditBookingTable extends Migration
     public function down()
     {
 	    Schema::table('booking', function (Blueprint $table) {
-		    $table->dropColumn('date');
 		    $table->dropColumn('number_of_people');
 	    });
     }
