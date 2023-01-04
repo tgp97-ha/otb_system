@@ -47,7 +47,7 @@
                             </div>
                             {{-- /Price Range --}}
 
-                            <div class="grid grid-rows-2 gap-y-3">
+                            <div class="grid grid-rows-1 gap-y-3">
 
                                 {{-- Start Date --}}
                                 <div class="">
@@ -120,29 +120,6 @@
                                 {{-- /Tour Verify --}}
 
                             </div>
-
-                            {{-- Services --}}
-                            <div class="">
-                                <label for="services"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Services
-                                </label>
-                                <div class="grid grid-cols-3 gap-3">
-                                    @foreach ($services as $service)
-                                        <div class="col-span-1">
-                                            <div class="">
-                                                <div class="flex items-center">
-                                                    <input id="{{ 'service' . $service->id }}" type="checkbox"
-                                                        name="services[]" value="{{ $service->id }}"
-                                                        class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                                    <label for="{{ 'service' . $service->id }}"
-                                                        class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{ $service->service_name }}</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                </div>
-                            </div>
-                            {{-- /Services --}}
 
                             {{-- Submit Button --}}
                             <div class="col-span-2 flex justify-end items-center">
@@ -293,7 +270,7 @@
 
                             <div class="mb-3">
                                 <span class="block text-right text-2xl font-bold text-orange-500">
-                                    {{ substr($tour->tour_prices, 0, strlen($tour->tour_prices) - 6) . ',' . substr($tour->tour_prices, 1, 3) . '.' . substr($tour->tour_prices, -3, 3) . ' VND' }}
+                                    {{ number_format($tour->tour_prices). ' VND' }}
                                 </span>
                                 <span class="block text-right text-base font-bold text-gray-500">
                                     /person
@@ -498,7 +475,7 @@
                                     <span
                                         class="text-xl font-bold">{{ $tour->place ? $tour->place->place_name : '' }}</span>
                                     <span class="block text-right text-2xl font-bold text-orange-500">
-                                        {{ substr($tour->tour_prices, 0, strlen($tour->tour_prices) - 6) . '.' . substr($tour->tour_prices, 1, 3) . '.' . substr($tour->tour_prices, -3, 3) . ' VND' }}
+                                        {{ number_format($tour->tour_prices). ' VND' }}
                                     </span>
                                 </div>
                                 {{-- /Tour Destination & Prices --}}
@@ -549,7 +526,7 @@
                                             clip-rule="evenodd"></path>
                                     </svg>
                                     <span
-                                        class="text-sm">{{ substr($tour->tour_detail, 0, 100) . '...' }}</span>
+                                        class="text-sm">{{ substr($tour->tour_description, 0, 50) . '...' }}</span>
                                 </div>
                                 {{-- /Description --}}
 

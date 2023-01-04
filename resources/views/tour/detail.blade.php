@@ -23,7 +23,7 @@
             {{-- Overview --}}
             <div id="overview" class="-mt-6 p-6">
                 <h1 class="text-xl font-bold text-gray-900 mb-3">
-                    HÀ NỘI - ĐÀ NẴNG - PHỐ CỔ HỘI AN - BÀ NÀ HILL
+                    {{$tour->tour_title}}
                 </h1>
                 <div class="photos">
                     @if (count($tour->images))
@@ -47,7 +47,7 @@
                             <span class="mr-1 text-base font-medium text-gray-600">
                                 Departure:
                             </span>
-                            <span class="text-base font-semibold">{{ $tour->place->place_name }}</span>
+                            <span class="text-base font-semibold">{{ $tour->startingPlace->place_name }}</span>
                         </div>
                         <div class="flex items-center">
                             <svg class="w-5 h-5 mr-1" fill="currentColor" viewBox="0 0 20 20"
@@ -170,16 +170,15 @@
 
                     <div>
                         <h4 class="font-semibold text-[#FF6F61] mb-1">
-                            NGÀY 01: NỘI BÀI - ĐÀ NẴNG
+                            {{$tour->tour_description}}
                         </h4>
-                        <p class="text-justify tracking-wide text-gray-800">{{ $tour->tour_detail }}
-                    </div>
-
-                    <div>
-                        <h4 class="font-semibold text-[#FF6F61] mb-1">
-                            NGÀY 02: ĐÀ NẴNG - HỘI AN
-                        </h4>
-                        <p class="text-justify tracking-wide text-gray-800">{{ $tour->tour_detail }}
+                        @if(isset($tour->tourDetails) && count($tour->tourDetails))
+                        <ul class="pl-3" style="list-style-type: circle">
+                            @foreach($tour->tourDetails as $detail)
+                            <li class="text-justify tracking-wide text-gray-800 mt-2">{{ $detail->tour_detail_content }}
+                            @endforeach
+                        </ul>
+                        @endif
                     </div>
                 </div>
             </div>

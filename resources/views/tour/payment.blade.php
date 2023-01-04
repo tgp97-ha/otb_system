@@ -7,7 +7,7 @@
         {{-- Tour Info --}}
         <div class="flex flex-col p-4 border rounded-lg shadow-lg bg-white">
 
-            <h5 class="text-xl font-bold mb-4">HÀ NỘI - ĐÀ NẴNG - BÀ NÀ HILL - PHỐ CỔ HỘI AN</h5>
+            <h5 class="text-xl font-bol d mb-4">{{$tour->tour_title}}</h5>
 
             <div class="grid grid-cols-12 gap-4">
                 <div class="col-span-8 flex items-center">
@@ -35,7 +35,7 @@
                                         clip-rule="evenodd"></path>
                                 </svg>
                                 <span class="mr-1 text-sm font-normal text-gray-600">Điểm khởi hành:</span>
-                                <span class="text-sm font-medium text-gray-900">{{ $tour->place->place_name }}</span>
+                                <span class="text-sm font-medium text-gray-900">{{ $tour->startingPlace->place_name }}</span>
                             </div>
                             <div class="flex items-center">
                                 <svg class="w-5 h-5 mr-1" fill="currentColor" viewBox="0 0 20 20"
@@ -62,7 +62,7 @@
                                     Ngày khởi hành:
                                 </span>
                                 <span class="text-sm font-medium text-gray-900">
-                                    2022
+                                    {{$tour->tour_start_date}}
                                 </span>
                             </div>
                             <div class="flex items-center">
@@ -101,7 +101,7 @@
                 <div class="col-span-4 flex items-center justify-end">
                     <h1 class="text-xl font-medium mr-2">Thành tiền:</h1>
                     <span class="block text-right text-2xl font-bold text-orange-500">
-                        {{ substr($tour->tour_prices, 0, strlen($tour->tour_prices) - 6) . ',' . substr($tour->tour_prices, 1, 3) . '.' . substr($tour->tour_prices, -3, 3) . ' VND' }}
+                        {{ number_format((float)$tour->tour_prices * (float) $booking->number_of_people).'VND'}}
                     </span>
                 </div>
                 {{-- /Total --}}
@@ -117,7 +117,7 @@
                 {{-- Payment Type --}}
                 <div class="">
                     <h3 class="mb-4 text-xl font-semibold text-gray-900">LOẠI HÌNH THANH TOÁN</h3>
-                    <ul class="w-48 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg">
+                    <ul class="w-100 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg">
                         <li class="w-full border-b border-gray-200 rounded-t-lg">
                             <div class="flex items-center pl-3">
                                 <input class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500"
@@ -208,7 +208,7 @@
                 </div>
                 {{-- /Payment Method --}}
 
-                <form class="pl-3" action="{{ url('/tour/payment/' . $booking->serial) }}" method="POST">
+                <form class="pl-3" action="{{ url('/tour/payment/' . $booking->serial) }}" method="GET">
                     @csrf
                     <div class="flex items-center justify-end">
                         <button type="submit"
