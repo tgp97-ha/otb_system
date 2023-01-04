@@ -13,14 +13,17 @@ use App\Models\TourOperator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use function Symfony\Component\String\s;
 
-class TourController extends Controller{
+class TourController extends Controller
+{
 	/**
 	 * Create a new controller instance.
 	 *
 	 * @return void
 	 */
-	public function __construct() {
+	public function __construct()
+	{
 	}
 
 	/**
@@ -28,30 +31,58 @@ class TourController extends Controller{
 	 *
 	 * @return Response
 	 */
-	public function index() {
+	public function index()
+	{
 		//search
-		$tours     = Tour::with( 'place', 'services', 'images' );
+		$tours     = Tour::with('place', 'services', 'images');
 		$places    = Place::all();
 		$services  = Service::all();
-		$operators = TourOperator::all();
-;		if ( ! Auth::user() || Auth::user()->can( 'tourist' ) ) {
-			$tours->where( 'tour_is_verify', 1 );
+		$operators = TourOperator::all();;
+		if (!Auth::user() || Auth::user()->can('tourist')) {
+			$tours->where('tour_is_verify', 1);
 		}
-		if ( Auth::user() ) {
-			if ( Auth::user()->can( 'tour-operator' ) ) {
-				$tours->with( 'userTourist' )->whereHas( 'userTourist', function ( $user ) {
-					$user->where( 'id', auth()->user()->id );
-				} );
+		if (Auth::user()) {
+			if (Auth::user()->can('tour-operator')) {
+				$tours->with('userTourist')->whereHas('userTourist', function ($user) {
+					$user->where('id', auth()->user()->id);
+				});
 			}
 		}
-		$tours = $tours->paginate( 10, [ '*' ] );
+		$tours = $tours->paginate(10, ['*']);
 
-		return view( 'tour.index', [
+		return view('tour.index', [
 			'tours'     => $tours,
 			'places'    => $places,
 			'services'  => $services,
 			'operators' => $operators,
-		] );
+		]);
+	}
+
+	public function analysis()
+	{
+		//search
+		$tours     = Tour::with('place', 'services', 'images');
+		$places    = Place::all();
+		$services  = Service::all();
+		$operators = TourOperator::all();;
+		if (!Auth::user() || Auth::user()->can('tourist')) {
+			$tours->where('tour_is_verify', 1);
+		}
+		if (Auth::user()) {
+			if (Auth::user()->can('tour-operator')) {
+				$tours->with('userTourist')->whereHas('userTourist', function ($user) {
+					$user->where('id', auth()->user()->id);
+				});
+			}
+		}
+		$tours = $tours->paginate(10, ['*']);
+
+		return view('tour.analysis', [
+			'tours'     => $tours,
+			'places'    => $places,
+			'services'  => $services,
+			'operators' => $operators,
+		]);
 	}
 
 	public function list( Request $request ) {
@@ -67,14 +98,14 @@ class TourController extends Controller{
 			if ( $request->input( 'start_date_range_begin' ) !== null ) {
 				$tours->whereDate( 'tour_start_date', '>=', $request->input( 'start_date_range_begin' ) );
 			}
-			if ( $request->input( 'start_date_range_end' ) !== null ) {
-				$tours->whereDate( 'tour_start_date', '<=', $request->input( 'start_date_range_begin' ) );
+			if ($request->input('start_date_range_end') !== null) {
+				$tours->whereDate('tour_start_date', '<=', $request->input('start_date_range_begin'));
 			}
-			if ( $request->input( 'price_range_begin' ) !== null ) {
-				$tours->where( 'tour_prices', '>=', $request->input( 'price_range_begin' ) );
+			if ($request->input('price_range_begin') !== null) {
+				$tours->where('tour_prices', '>=', $request->input('price_range_begin'));
 			}
-			if ( $request->input( 'price_range_end' ) !== null ) {
-				$tours->where( 'tour_prices', '>=', $request->input( 'price_range_end' ) );
+			if ($request->input('price_range_end') !== null) {
+				$tours->where('tour_prices', '>=', $request->input('price_range_end'));
 			}
 		}
 		if ( ! Auth::user() || Auth::user()->can( 'tourist' ) ) {
@@ -82,28 +113,28 @@ class TourController extends Controller{
 				//->whereDate( 'tour_start_date', '>=', Carbon::today() )
 				->where( 'tour_is_verify', '=', 1 );
 		}
-		if ( Auth::user() ) {
-			if ( Auth::user()->can( 'tour-operator' ) ) {
-				$tours->with( 'userTourist' )->whereHas( 'userTourist', function ( $user ) {
-					$user->where( 'id', auth()->user()->id );
-				} );
+		if (Auth::user()) {
+			if (Auth::user()->can('tour-operator')) {
+				$tours->with('userTourist')->whereHas('userTourist', function ($user) {
+					$user->where('id', auth()->user()->id);
+				});
 			}
-			if ( Auth::user()->can( 'admin' ) ) {
-				if ( $request->input( 'is_verify' ) !== null && count( $request->input( 'is_verify' ) ) ) {
-					$tours->whereIn( 'tour_is_verify', $request->input( 'is_verify' ) );
+			if (Auth::user()->can('admin')) {
+				if ($request->input('is_verify') !== null && count($request->input('is_verify'))) {
+					$tours->whereIn('tour_is_verify', $request->input('is_verify'));
 				}
 			}
 		}
-		$tours    = $tours->paginate( 10 );
+		$tours    = $tours->paginate(10);
 		$places   = Place::all();
 		$services = Service::all();
 
-		return view( 'tour.index', [
+		return view('tour.index', [
 			'tours'          => $tours,
 			'search_details' => $request,
 			'places'         => $places,
 			'services'       => $services,
-		] );
+		]);
 	}
 
 	/**
@@ -111,12 +142,13 @@ class TourController extends Controller{
 	 *
 	 * @return Response
 	 */
-	public function create() {
+	public function create()
+	{
 		$services = Service::all();
 		$places   = Place::all();
-		$item     = TourOperator::where( 'tour_operator_user_serial', auth()->user()->id );
+		$item     = TourOperator::where('tour_operator_user_serial', auth()->user()->id);
 
-		return view( 'tour.create', [ 'tourOperator' => $item, 'services' => $services, 'places' => $places ] );
+		return view('tour.create', ['tourOperator' => $item, 'services' => $services, 'places' => $places]);
 	}
 
 	/**
@@ -126,8 +158,9 @@ class TourController extends Controller{
 	 *
 	 * @return Response
 	 */
-	public function store( Request $request ) {
-		$request->validate( [
+	public function store(Request $request)
+	{
+		$request->validate([
 			'tour_name'        => 'required|min:2|max:64',
 			'title'            => 'required|string',
 			'departure'        => 'required',
@@ -142,13 +175,13 @@ class TourController extends Controller{
 			//'tour_slot_left'   => 'required',
 			'tour_price'       => 'required',
 			'tour_image.*'     => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
-		] );
+		]);
 		$imageData = [];
-		foreach ( $request->file( 'tour_image' ) as $image ) {
-			$image->store( 'tour', 'public' );
+		foreach ($request->file('tour_image') as $image) {
+			$image->store('tour', 'public');
 
 			$imageData[] = [
-				"description" => $request->input( 'tour_name' ) . count( $imageData ),
+				"description" => $request->input('tour_name') . count($imageData),
 				"file_path"   => $image->hashName(),
 			];
 		}
@@ -179,20 +212,20 @@ class TourController extends Controller{
 				}
 			}
 		}
-		$item->images()->createMany( $imageData );
+		$item->images()->createMany($imageData);
 
 		$serial = $item->serial;
-		$item->services()->sync( $request->input( 'services' ) );
-		for ( $i = 1; $i <= 5; $i ++ ) {
-			if ( $request->input( 'tour_image_' . $i ) !== null ) {
+		$item->services()->sync($request->input('services'));
+		for ($i = 1; $i <= 5; $i++) {
+			if ($request->input('tour_image_' . $i) !== null) {
 				$imageName = $serial . '.' . $i . $request->image->extension();
-				$request->input( 'tour_image_' . $i )->move( public_path( 'images/' . $serial . '/' ), $imageName );
+				$request->input('tour_image_' . $i)->move(public_path('images/' . $serial . '/'), $imageName);
 			}
 		}
 
-		$request->session()->flash( 'message', 'Successfully created' );
+		$request->session()->flash('message', 'Successfully created');
 
-		return redirect( '/tour/detail/' . $item->serial );
+		return redirect('/tour/detail/' . $item->serial);
 	}
 
 	/**
@@ -202,8 +235,9 @@ class TourController extends Controller{
 	 *
 	 * @return Response
 	 */
-	public function show( $id ) {
-		$item = Tour::with( [
+	public function show($id)
+	{
+		$item = Tour::with([
 			'userTourist.tourOperator',
 			'services',
 			'place',
@@ -213,7 +247,7 @@ class TourController extends Controller{
 			'tourDetails'
 		] )->find( $id );
 		$comments = Comment::where( 'tour_serial', '=', $id )->whereNotNull( 'comment_rating' )->get();
-		$ratingArray = [];
+		$ratingArray = [0,0,0,0,0];
 		if(count($comments))
 		{
 			$oneStars   = 0;
@@ -240,11 +274,11 @@ class TourController extends Controller{
 						break;
 				}
 			}
-			$ratingArray[] = (int) ( $oneStars / count( $comments ) * 100 );
-			$ratingArray[] = (int) ( $twoStars / count( $comments ) * 100 );
-			$ratingArray[] = (int) ( $threeStars / count( $comments ) * 100 );
-			$ratingArray[] = (int) ( $fourStars / count( $comments ) * 100 );
-			$ratingArray[] = (int) ( $fiveStars / count( $comments ) * 100 );
+			$ratingArray[0] = (int) ( $oneStars / count( $comments ) * 100 );
+			$ratingArray[1] = (int) ( $twoStars / count( $comments ) * 100 );
+			$ratingArray[2] = (int) ( $threeStars / count( $comments ) * 100 );
+			$ratingArray[3] = (int) ( $fourStars / count( $comments ) * 100 );
+			$ratingArray[4] = (int) ( $fiveStars / count( $comments ) * 100 );
 		}
 		if ( Auth::user() ) {
 			$booking = Booking::where( 'tour_serial', $item->serial )->where( 'user_id', auth()->user()->id )->first();
@@ -256,7 +290,7 @@ class TourController extends Controller{
 			}
 		}
 
-		return view( 'tour.detail', [ 'tour' => $item ] );
+		return view( 'tour.detail', [ 'tour' => $item, 'ratingArray'=> $ratingArray  ] );
 	}
 
 	/**
@@ -266,19 +300,19 @@ class TourController extends Controller{
 	 *
 	 * @return Response
 	 */
-	public function edit( $id ) {
-		if ( ! Auth::user()->can( 'admin' ) && ! Auth::user()->can( 'tour-operator' ) ) {
-			return view( 'welcome' );
+	public function edit($id)
+	{
+		if (!Auth::user()->can('admin') && !Auth::user()->can('tour-operator')) {
+			return view('welcome');
 		}
 		try {
-			$item     = Tour::with( [ 'startingPlace', 'place', 'services' ] )->findOrFail( $id );
+			$item     = Tour::with(['startingPlace', 'place', 'services', 'tourDetails'])->findOrFail($id);
 			$place    = Place::all();
-			$services = Service::all();
-		} catch ( \Exception $exception ) {
-			return back()->withError( $exception->getMessage() )->withInput();
+		} catch (\Exception $exception) {
+			return back()->withError($exception->getMessage())->withInput();
 		}
 
-		return view( 'tour.edit', [ 'tour' => $item, 'places' => $place, 'services' => $services ] );
+		return view('tour.edit', ['tour' => $item, 'places' => $place]);
 	}
 
 	/**
@@ -289,66 +323,62 @@ class TourController extends Controller{
 	 *
 	 * @return Response
 	 */
-	public function update( Request $request, $id ) {
+	public function update(Request $request, $id)
+	{
 		//if ( ! Auth::user()->can( 'admin' ) && ! Auth::user()->can( 'tour-operator' ) ) {
 		//	return route( '/' );
 		//}
-		$request->validate( [
+		$request->validate([
 			'tour_name'        => 'required|min:2|max:64',
 			'title'            => 'required|string',
 			'destination'      => 'required',
 			'start_date'       => 'required',
 			'tour_description' => 'required',
-			'tour_detail'      => 'required',
 			'departure'        => 'required',
-			'phone_number'     => 'nullable|regex:/^([0-9\s\-\+\(\)]*)$/|min:9|max:15',
 			'night_length'     => 'required',
 			'day_length'       => 'required',
 			'tour_slot'        => 'required',
 			//'tour_slot_left'   => 'required',
-			'services'         => 'array|min:1',
 			'tour_image.*'     => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
-		] );
-		$imageData = [];
-		foreach ( $request->file( 'tour_image' ) as $image ) {
-			$image->store( 'tour', 'public' );
+		]);
 
+		$imageData = [];
+		foreach ($request->file('tour_image') as $image) {
+			$image->store('tour', 'public');
 			$imageData[] = [
-				"description" => $request->input( 'tour_name' ) . count( $imageData ),
+				"description" => $request->input('tour_name') . count($imageData),
 				"file_path"   => $image->hashName(),
 			];
 		}
-		$item                      = Tour::with( 'services' )->find( $id );
-		$item->tour_name           = $request->input( 'tour_name' );
-		$item->tour_title          = $request->input( 'title' );
-		$item->tour_destination    = $request->input( 'destination' );
-		$item->tour_starting_place = $request->input( 'departure' );
-		$item->tour_detail         = $request->input( 'tour_detail' );
-		$item->tour_description    = $request->input( 'tour_description' );
-		$item->tour_start_date     = $request->input( 'start_date' );
-		$item->tour_night_length   = $request->input( 'night_length' );
-		$item->tour_day_length     = $request->input( 'day_length' );
-		$item->tour_slots          = $request->input( 'tour_slot' );
-		$item->tour_slots_left     = $request->input( 'tour_slot_left' );
-		$item->tour_prices         = $request->input( 'tour_price' );
+
+		$item                      = Tour::with('services')->find($id);
+		$item->tour_name           = $request->input('tour_name');
+		$item->tour_title          = $request->input('title');
+		$item->tour_destination    = $request->input('destination');
+		$item->tour_starting_place = $request->input('departure');
+		$item->tour_description    = $request->input('tour_description');
+		$item->tour_start_date     = $request->input('start_date');
+		$item->tour_night_length   = $request->input('night_length');
+		$item->tour_day_length     = $request->input('day_length');
+		$item->tour_slots          = $request->input('tour_slot');
+		$item->tour_prices         = $request->input('tour_price');
 		$item->save();
 		$serial         = $item->serial;
-		$services       = $item->services;
-		$serviceRequest = $request->input( 'services' );
-		foreach ( $services as $service ) {
-			if ( ! in_array( $service->serial, $serviceRequest ) ) {
-				$item->services()->detach( $service->serial );
-				array_filter( $serviceRequest, function ( $serviceItem ) use ( $service ) {
-					return $serviceItem !== $service->serial;
-				} );
+		$item->images()->createMany($imageData);
+		$item->tourDetails()->delete();
+		if ( count( $request->tour_detail ) ) {
+			foreach ( $request->tour_detail as $detail ) {
+				if($detail) {
+					$tourDetail                      = new TourDetail();
+					$tourDetail->tour_serial         = $item->serial;
+					$tourDetail->tour_detail_content = $detail;
+					$tourDetail->save();
+				}
 			}
 		}
-		$item->services()->sync( $request->input( 'services' ) );
-		$item->images()->createMany( $imageData );
+		$request->session()->flash('message', 'Successfully created');
 
-		$request->session()->flash( 'message', 'Successfully created' );
-
-		return redirect( '/tour/detail/' . $item->serial );
+		return redirect('/tour/detail/' . $item->serial);
 	}
 
 	/**
@@ -358,28 +388,31 @@ class TourController extends Controller{
 	 *
 	 * @return Response
 	 */
-	public function destroy( $id ) {
-		$item = Tour::find( $id );
-		if ( $item ) {
+	public function destroy($id)
+	{
+		$item = Tour::find($id);
+		if ($item) {
 			$item->delete();
 		}
 
-		return redirect()->route( 'tour.index' );
+		return redirect()->route('tour.index');
 	}
 
-	public function verify( $id ) {
-		$item                 = Tour::find( $id );
+	public function verify($id)
+	{
+		$item                 = Tour::find($id);
 		$item->tour_is_verify = 1;
 		$item->save();
 
-		return redirect()->route( 'tour.index' );
+		return redirect()->route('tour.index');
 	}
 
-	public function book( $id, Request $request ) {
-		if ( ! Auth::user() ) {
-			return redirect( route( 'login' ) );
+	public function book($id, Request $request)
+	{
+		if (!Auth::user()) {
+			return redirect(route('login'));
 		}
-		$tour    = Tour::with( [ 'startingPlace', 'place', 'services' ] )->find( $id );
+		$tour    = Tour::with(['startingPlace', 'place', 'services'])->find($id);
 		$user    = auth()->user();
 		$booking = new Booking();
 
@@ -393,7 +426,7 @@ class TourController extends Controller{
 		$tour->tour_slots_left = (int) $tour->tour_slots_left - 1;
 		$tour->save();
 
-		return view( 'tour.payment', [ 'tour' => $tour, 'booking' => $booking ] );
+		return view('tour.payment', ['tour' => $tour, 'booking' => $booking]);
 	}
 
 	public function comment( $id, Request $request ) {
@@ -402,9 +435,9 @@ class TourController extends Controller{
 		$user = auth()->user();
 
 		$comment                  = new Comment();
-		$comment->comment_content = $request->input( 'comment' );
+		$comment->comment_content = $request->input('comment');
 		$comment->tour_serial     = $id;
-		$comment->comment_rating  = $request->input( 'rating' );
+		$comment->comment_rating  = $request->input('rating');
 		$comment->user_id         = $user->id;
 		$sentiment = new Sentiment();
 		$scores    = $sentiment->score( $request->comment );
@@ -412,9 +445,9 @@ class TourController extends Controller{
 		$comment->comment_analysis_rating = $comment_rating;
 		$comment->save();
 
-		$comments = Comment::where( 'tour_serial', '=', $id )->whereNotNull( 'comment_rating' )->get();
+		$comments = Comment::where('tour_serial', '=', $id)->whereNotNull('comment_rating')->get();
 
-		if ( count( $comments ) ) {
+		if (count($comments)) {
 			$rating = 0;
 			$comment_rating = 0;
 			foreach ( $comments as $comment_value ) {
@@ -429,15 +462,18 @@ class TourController extends Controller{
 		return redirect( '/tour/detail/' . $id );
 	}
 
-	public function listVerify() {
-
+	public function listVerify()
+	{
 	}
 
-	public function payment( $id ) {
-		$booking = Booking::find( $id );
+	public function payment($id)
+	{
+		dd(1);
+		$booking = Booking::find($id);
 
 		$booking->isPaid = true;
 		$booking->save();
-		return redirect( '/tourist//my-tours/' . $id );
+
+		return redirect('/tourist/my-tours/');
 	}
 }

@@ -16,28 +16,18 @@
 <body>
     @include('common.navbar')
 
-    @if (Auth::user() && (Auth::user()->can('tour-operator') || Auth::user()->can('admin')))
-        @include('common.sidebar')
-        <div id="content" class="w-[66%] mx-auto pt-20 pb-6">
-            @yield('content')
-        </div>
-    @else
-        <div id="content" class="w-[80%] mx-auto pt-20 pb-6">
-            @yield('content')
-        </div>
-    @endif
+    @include('common.sidebar')
 
+    <div id="content" class="ml-64  pt-20">
+        @yield('content')
+    </div>
 
-    @if (Route::currentRouteName() !== 'login' && !str_contains(Route::currentRouteName(), 'register'))
-        @include('common.footer')
-    @endif
+    @include('common.footer')
 
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/flowbite.js') }}"></script>
     <script src="{{ asset('js/datepicker.js') }}"></script>
     <script src="{{ asset('js/star-rating.js') }}"></script>
 </body>
-
-{{-- <script src='https://cdn.jsdelivr.net/npm/botman-web-widget@0/build/js/widget.js'></script> --}}
 
 </html>

@@ -3,7 +3,8 @@
 @section('content')
     <div class="flex items-star mb-12">
         {{-- Detail --}}
-        <div class="w-[75%] grid grid-cols-1 gap-12 mr-12">
+
+        <div class="{{ Auth::guest() || Auth::user()->can('tourist') ? 'w-[75%]' : '' }} grid grid-cols-1 gap-12 mr-12">
 
             {{-- Links --}}
             <div class="w-full flex items-center justify-start border-b">
@@ -23,7 +24,7 @@
             {{-- Overview --}}
             <div id="overview" class="-mt-6 p-6">
                 <h1 class="text-xl font-bold text-gray-900 mb-3">
-                    {{$tour->tour_title}}
+                    {{ $tour->tour_title }}
                 </h1>
                 <div class="photos">
                     @if (count($tour->images))
@@ -104,7 +105,7 @@
                                 Tour Operator:
                             </span>
                             <a class="font-semibold text-blue-600 hover:underline"
-                                href="{{ url('/tour-operator/detail/' . $tour->userTourist->tourOperator->serial) }}">{{ $tour->userTourist->tourOperator->tour_operator_name }}</a>
+                                href="{{ url('/tour-operator/detail/' . $tour->userTourist->id) }}">{{ $tour->userTourist->username }}</a>
                         </div>
                         {{-- /Operator --}}
 
@@ -129,7 +130,7 @@
                             <div class="row mt-4 d-flex justify-content-end">
                                 <div class="col-3">
                                     <div class="form-group col-md-10 offset-md-1">
-                                        <a class="btn btn-primary card-btn"
+                                        <a class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
                                             href="{{ url('/tour/' . $tour->serial . '/edit') }}">Edit
                                             Tours</a>
                                     </div>
@@ -170,14 +171,15 @@
 
                     <div>
                         <h4 class="font-semibold text-[#FF6F61] mb-1">
-                            {{$tour->tour_description}}
+                            {{ $tour->tour_description }}
                         </h4>
-                        @if(isset($tour->tourDetails) && count($tour->tourDetails))
-                        <ul class="pl-3" style="list-style-type: circle">
-                            @foreach($tour->tourDetails as $detail)
-                            <li class="text-justify tracking-wide text-gray-800 mt-2">{{ $detail->tour_detail_content }}
-                            @endforeach
-                        </ul>
+                        @if (isset($tour->tourDetails) && count($tour->tourDetails))
+                            <ul class="pl-3" style="list-style-type: circle">
+                                @foreach ($tour->tourDetails as $detail)
+                                    <li class="text-justify tracking-wide text-gray-800 mt-2">
+                                        {{ $detail->tour_detail_content }}
+                                @endforeach
+                            </ul>
                         @endif
                     </div>
                 </div>
@@ -199,14 +201,15 @@
 
                             {{-- Total Rating --}}
                             <div class="flex flex-col items-center jusity-center px-[10%]">
-                                <h3 class="mb-2 text-xl font-semibold text-gray-900">{{$tour->tour_rating}} / 5
-                                    <svg aria-hidden="true" style="display: inline" class="w-5 h-5 text-yellow-400" fill="currentColor"
-                                         viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <h3 class="mb-2 text-xl font-semibold text-gray-900">{{ $tour->tour_rating }} / 5
+                                    <svg aria-hidden="true" style="display: inline" class="w-5 h-5 text-yellow-400"
+                                        fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                         <title>First star</title>
                                         <path
                                                 d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
                                         </path>
-                                    </svg></h3>
+                                    </svg>
+                                </h3>
                                 <p class="text-sm font-medium text-gray-500 dark:text-gray-400">
                                     {{ count($tour->comments) }} ratings & feedbacks</p>
                             </div>
@@ -217,37 +220,47 @@
                                 <div class="flex items-center mt-4">
                                     <span class="text-sm font-medium text-blue-600 dark:text-blue-500">5 star</span>
                                     <div class="w-[80%] h-5 mx-4 bg-gray-200 rounded dark:bg-gray-700">
-                                        <div class="h-5 bg-yellow-400 rounded" style="width: {{$ratingArray[4]}}%"></div>
+                                        <div class="h-5 bg-yellow-400 rounded" style="width: {{ $ratingArray[4] }}%">
+                                        </div>
                                     </div>
-                                    <span class="text-sm font-medium text-blue-600 dark:text-blue-500">{{$ratingArray[4]}}%</span>
+                                    <span
+                                        class="text-sm font-medium text-blue-600 dark:text-blue-500">{{ $ratingArray[4] }}%</span>
                                 </div>
                                 <div class="flex items-center mt-4">
                                     <span class="text-sm font-medium text-blue-600 dark:text-blue-500">4 star</span>
                                     <div class="w-[80%] h-5 mx-4 bg-gray-200 rounded dark:bg-gray-700">
-                                        <div class="h-5 bg-yellow-400 rounded" style="width: {{$ratingArray[3]}}%"></div>
+                                        <div class="h-5 bg-yellow-400 rounded" style="width: {{ $ratingArray[3] }}%">
+                                        </div>
                                     </div>
-                                    <span class="text-sm font-medium text-blue-600 dark:text-blue-500">{{$ratingArray[3]}}%</span>
+                                    <span
+                                        class="text-sm font-medium text-blue-600 dark:text-blue-500">{{ $ratingArray[3] }}%</span>
                                 </div>
                                 <div class="flex items-center mt-4">
                                     <span class="text-sm font-medium text-blue-600 dark:text-blue-500">3 star</span>
                                     <div class="w-[80%] h-5 mx-4 bg-gray-200 rounded dark:bg-gray-700">
-                                        <div class="h-5 bg-yellow-400 rounded" style="width: {{$ratingArray[2]}}%"></div>
+                                        <div class="h-5 bg-yellow-400 rounded" style="width: {{ $ratingArray[2] }}%">
+                                        </div>
                                     </div>
-                                    <span class="text-sm font-medium text-blue-600 dark:text-blue-500">{{$ratingArray[2]}}%</span>
+                                    <span
+                                        class="text-sm font-medium text-blue-600 dark:text-blue-500">{{ $ratingArray[2] }}%</span>
                                 </div>
                                 <div class="flex items-center mt-4">
                                     <span class="text-sm font-medium text-blue-600 dark:text-blue-500">2 star</span>
                                     <div class="w-[80%] h-5 mx-4 bg-gray-200 rounded dark:bg-gray-700">
-                                        <div class="h-5 bg-yellow-400 rounded" style="width: {{$ratingArray[1]}}%"></div>
+                                        <div class="h-5 bg-yellow-400 rounded" style="width: {{ $ratingArray[1] }}%">
+                                        </div>
                                     </div>
-                                    <span class="text-sm font-medium text-blue-600 dark:text-blue-500">{{$ratingArray[1]}}%</span>
+                                    <span
+                                        class="text-sm font-medium text-blue-600 dark:text-blue-500">{{ $ratingArray[1] }}%</span>
                                 </div>
                                 <div class="flex items-center mt-4">
                                     <span class="text-sm font-medium text-blue-600 dark:text-blue-500">1 star</span>
                                     <div class="w-[80%] h-5 mx-4 bg-gray-200 rounded dark:bg-gray-700">
-                                        <div class="h-5 bg-yellow-400 rounded" style="width: {{$ratingArray[0]}}%"></div>
+                                        <div class="h-5 bg-yellow-400 rounded" style="width: {{ $ratingArray[0] }}%">
+                                        </div>
                                     </div>
-                                    <span class="text-sm font-medium text-blue-600 dark:text-blue-500">{{$ratingArray[0]}}%</span>
+                                    <span
+                                        class="text-sm font-medium text-blue-600 dark:text-blue-500">{{ $ratingArray[0] }}%</span>
                                 </div>
                             </div>
                             {{-- /Rating Percent --}}
@@ -276,8 +289,11 @@
                     @foreach ($tour->comments as $comment)
                         <div class="mb-4">
                             <div class="flex items-center justify-between mb-2">
-                                <span
-                                    class="text-base font-medium text-gray-900">{{ $comment->tourist->tourist->tourist_name }}</span>
+                                @if ($comment->tourist)
+                                    <span class="text-base font-medium text-gray-900">{{ $comment->tourist->username }}</span>
+                                @else
+                                    <span class="text-base font-medium text-gray-900">Deleted user</span>
+                                @endif
                                 <span class="text-sm font-semibold text-gray-900">{{ $comment->created_at }}</span>
                             </div>
 
@@ -341,9 +357,10 @@
             {{-- Rate & Comment --}}
             @if (isset($booking))
                 <div class="p-4 border rounded-lg shadow-lg bg-white">
-                    <form method="POST" action="{{ url('tour/comment/' . $tour->serial) }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ url('tour/comment/' . $tour->serial) }}"
+                        enctype="multipart/form-data">
                         {{ csrf_field() }}
-    
+
                         {{-- Rate --}}
                         <div class="flex items-center mb-2">
                             <h4 class="mr-2 text-xl font-semibold text-gray-900">
@@ -413,9 +430,10 @@
                             </div>
                         </div>
                         {{-- /Rate --}}
-    
+
                         {{-- Comment --}}
-                        <div class="w-full border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
+                        <div
+                            class="w-full border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
                             <div class="px-4 py-2 bg-white rounded-t-lg dark:bg-gray-800">
                                 <label for="comment" class="sr-only">Your comment</label>
                                 <textarea id="comment" rows="4" name="comment"
@@ -474,67 +492,45 @@
         @if (!isset($booking))
             <div>
                 @if (\Illuminate\Support\Facades\Auth::user() || !\Illuminate\Support\Facades\Auth::user())
-                    <form action="{{ url('/tour/book/' . $tour->serial) }}" method="POST">
-                        <div class="grid grid-cols-1 gap-6 p-6 bg-gray-100 border rounded-lg">
-                            <div>
-                                <h1 class="text-lg font-semibold mb-2 text-red-700">BOOK THIS TOUR</h1>
-                                <div class="relative">
-                                    <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointers-events-none">
-                                        <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400"
-                                            fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                            <path fill-rule="evenodd"
-                                                d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-                                                clip-rule="evenodd"></path>
-                                        </svg>
+                    @can('tourist')
+                        <form action="{{ url('/tour/book/' . $tour->serial) }}" method="POST">
+                            <div class="grid grid-cols-1 gap-6 p-6 bg-gray-100 border rounded-lg">
+                                <div>
+                                    <h1 class="text-lg font-semibold mb-2 text-red-700">BOOK THIS TOUR</h1>
+                                    <div class="relative">
+                                        <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointers-events-none">
+                                            <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400"
+                                                fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd"
+                                                    d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                                                    clip-rule="evenodd"></path>
+                                            </svg>
+                                        </div>
+                                        <input datepicker datepicker-autohide datepicker-format="dd/mm/yyyy" type="text"
+                                            class="block w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm font-medium rounded-lg hover:border-blue-500 focus:ring-blue-500 focus:border-blue-500 pl-10 p-2.5"
+                                            name="tour_date" placeholder="dd/mm/yyyy">
                                     </div>
-                                    <input datepicker datepicker-autohide datepicker-format="dd/mm/yyyy" type="text"
-                                        class="block w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm font-medium rounded-lg hover:border-blue-500 focus:ring-blue-500 focus:border-blue-500 pl-10 p-2.5"
-                                        name="tour_date" placeholder="dd/mm/yyyy">
                                 </div>
-                            </div>
-                            <div class="">
-                                <div class="">Choose the number of people</div>
-                                <input type="number" min="0" max="200" value="0" name="people_number"
-                                    class="block w-full p-2.5 text-sm font-medium text-gray-900 bg-gray-50 border border-gray-300 rounded-lg hover:border-blue-500 focus:ring-blue-500 focus:border-blue-500">
-                            </div>
-                            <div class="flex justify-end items-center">
-                                <button
-                                    class="block px-5 py-2.5 rounded-lg text-sm font-medium text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300"
-                                    type="submit">BOOK NOW</button>
-                            </div>
-                            @csrf
-                        </div>
-                    </form>
-                @else
-                    <div class="col-md-4 pr-0">
-                        <div class="book-tour">
-                            <h1 class="book-tour-heading">BOOK THIS TOUR</h1>
-                            <div class="book-tour-body">
-                                <i class="fa-regular fa-calendar-days calendar-btn"></i>
-                                <input class="book-tour-tickets-adults" placeholder="dd/mm/yyyy">
-                                <i class="fa-solid fa-caret-down book-tour-down-btn"></i>
-                            </div>
-                            <div class="book-tour-tickets">
-                                <h1 class="book-tour-tickets-heading">Number of People</h1>
-                                <div class="book-tour-tickets-body">
-                                    <div class="book-tour-tickets-title">Adult (18+ years)
-                                    </div>
-                                    <input type="number" min="0" max="200" value="0"
-                                        class="book-tour-tickets-adults">
+                                <div class="">
+                                    <div class="">Choose the number of people</div>
+                                    <input type="number" min="0" max="200" value="0" name="people_number"
+                                        class="block w-full p-2.5 text-sm font-medium text-gray-900 bg-gray-50 border border-gray-300 rounded-lg hover:border-blue-500 focus:ring-blue-500 focus:border-blue-500">
                                 </div>
+                                <div class="flex justify-end items-center">
+                                    <button
+                                        class="block px-5 py-2.5 rounded-lg text-sm font-medium text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300"
+                                        type="submit">BOOK NOW</button>
+                                </div>
+                                @csrf
                             </div>
-                            @csrf
-                            <button class="book-now-btn">BOOK NOW</button>
-                        </div>
-                    </div>
-                    <a href="{{ url('/login') }}">
-                        <button class="book-now-btn">BOOK NOW</button>
-                    </a>
+                        @endcan
+                        {{-- <a href="{{ url('/login') }}">
+                            <button class="book-now-btn">BOOK NOW</button> --}}
             </div>
         @endif
         {{-- /Booking --}}
 
-        
+
     </div>
     @endif
 @endsection
