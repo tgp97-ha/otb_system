@@ -14,7 +14,7 @@ class AddTourDetailTable extends Migration
 	public function up() {
 		Schema::create( 'tour_detail', function ( Blueprint $table ) {
 			$table->primaryColumn();
-			$table->string( 'tour_detail_title' );
+			$table->string( 'tour_detail_title' )->nullable();
 			$table->string( 'tour_detail_content' );
 			$table->bigInteger( 'tour_serial' );
 			$table->defaultFields();

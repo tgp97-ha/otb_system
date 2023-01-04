@@ -23,6 +23,7 @@ class Tour extends Model{
 		'tour_place',
 		'tour_prices',
 		'tour_is_verify',
+		'tour_starting_place',
 	];
 
 	public function userTourist(): BelongsTo {
@@ -35,6 +36,9 @@ class Tour extends Model{
 
 	public function place(): BelongsTo {
 		return $this->belongsTo( Place::class, 'tour_place', 'serial' );
+	}
+	public function startingPlace(): BelongsTo {
+		return $this->belongsTo( Place::class, 'tour_starting_place', 'serial' );
 	}
 
 	public function bookings(): HasMany {

@@ -47,72 +47,79 @@
                             </div>
                             {{-- /Price Range --}}
 
+                            <div class="grid grid-rows-1 gap-y-3">
 
-                            {{-- Start Date --}}
-                            <div class="">
-                                <label for="start-date"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Start
-                                    Date Range
-                                </label>
-                                <div id="start-date" date-rangepicker datepicker-buttons datepicker-format="yyyy/mm/dd"
-                                    class="flex items-center">
-                                    <div class="relative">
-                                        <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
-                                            <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400"
-                                                fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                                <path fill-rule="evenodd"
-                                                    d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-                                                    clip-rule="evenodd"></path>
-                                            </svg>
-                                        </div>
-                                        <input name="start_date_range_begin" type="text"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                            placeholder="Select date start">
-                                    </div>
-                                    <span class="mx-4 text-gray-500">to</span>
-                                    <div class="relative">
-                                        <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
-                                            <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400"
-                                                fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                                <path fill-rule="evenodd"
-                                                    d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-                                                    clip-rule="evenodd"></path>
-                                            </svg>
-                                        </div>
-                                        <input name="start_date_range_end" type="text"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                            placeholder="Select date end">
-                                    </div>
-                                </div>
-                            </div>
-                            {{-- /Start Date --}}
-
-                            {{-- Tour Verify --}}
-                            @can('admin')
+                                {{-- Start Date --}}
                                 <div class="">
-                                    <label for="verify"
-                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tour
-                                        Verify
+                                    <label for="start-date"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Start
+                                        Date Range
                                     </label>
-
-                                    <div class="grid grid-cols-2">
-                                        <div class="flex items-center">
-                                            <input id="verify_yes" type="checkbox" name="is_verify[]" value="1"
-                                                class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                            <label for="verify_yes"
-                                                class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Verified</label>
+                                    <div id="start-date" date-rangepicker datepicker-buttons datepicker-format="yyyy/mm/dd"
+                                        class="flex items-center">
+                                        <div class="relative">
+                                            <div
+                                                class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+                                                <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400"
+                                                    fill="currentColor" viewBox="0 0 20 20"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path fill-rule="evenodd"
+                                                        d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                                                        clip-rule="evenodd"></path>
+                                                </svg>
+                                            </div>
+                                            <input name="start_date_range_begin" type="text"
+                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                placeholder="Select date start">
                                         </div>
-                                        <div class="flex items-center">
-                                            <input id="verify_no" type="checkbox" name="is_verify[]"
-                                                class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                            <label for="verify_no"
-                                                class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Not
-                                                verified</label>
+                                        <span class="mx-4 text-gray-500">to</span>
+                                        <div class="relative">
+                                            <div
+                                                class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+                                                <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400"
+                                                    fill="currentColor" viewBox="0 0 20 20"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path fill-rule="evenodd"
+                                                        d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                                                        clip-rule="evenodd"></path>
+                                                </svg>
+                                            </div>
+                                            <input name="start_date_range_end" type="text"
+                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                placeholder="Select date end">
                                         </div>
                                     </div>
                                 </div>
-                            @endcan
-                            {{-- /Tour Verify --}}
+                                {{-- /Start Date --}}
+
+                                {{-- Tour Verify --}}
+                                @can('admin')
+                                    <div class="">
+                                        <label for="verify"
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tour
+                                            Verify
+                                        </label>
+
+                                        <div class="grid grid-cols-2">
+                                            <div class="flex items-center">
+                                                <input id="verify_yes" type="checkbox" name="is_verify[]" value="1"
+                                                    class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                                <label for="verify_yes"
+                                                    class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Verified</label>
+                                            </div>
+                                            <div class="flex items-center">
+                                                <input id="verify_no" type="checkbox" name="is_verify[]"
+                                                    class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                                <label for="verify_no"
+                                                    class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Not
+                                                    verified</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endcan
+                                {{-- /Tour Verify --}}
+
+                            </div>
 
                             {{-- Submit Button --}}
                             <div class="col-span-2 flex justify-end items-center">
@@ -263,7 +270,7 @@
 
                             <div class="mb-3">
                                 <span class="block text-right text-2xl font-bold text-orange-500">
-                                    {{ substr($tour->tour_prices, 0, strlen($tour->tour_prices) - 6) . ',' . substr($tour->tour_prices, 1, 3) . '.' . substr($tour->tour_prices, -3, 3) . ' VND' }}
+                                    {{ number_format($tour->tour_prices). ' VND' }}
                                 </span>
                                 <span class="block text-right text-base font-bold text-gray-500">
                                     /person
@@ -323,7 +330,7 @@
                 <div
                     class="grid grid-cols-12 gap-6 p-6 bg-gray-100 border-gray-50 rounded-lg shadow-md bg-[url('/images/slide1.jpg')] bg-center">
 
-                    <div class="col-span-7 px-16 pt-6 text-white">
+                    <div class="col-span-8 px-16 pt-6 text-white">
                         <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none">
                             WELCOME TO OTB SYSTEM
                         </h1>
@@ -333,7 +340,7 @@
                     </div>
 
                     {{-- Find Tour --}}
-                    <div class="col-span-5 p-6 bg-gray-100 border-gray-50 rounded-lg shadow-md">
+                    <div class="col-span-4 p-6 bg-gray-100 border-gray-50 rounded-lg shadow-md">
                         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Find Tour</h5>
                         <form method="POST" action="{{ url('/tour/list/') }}">
                             @csrf
@@ -449,8 +456,7 @@
                 <div class="grid grid-cols-3 gap-6">
                     @foreach ($tours as $tour)
                         {{-- Grid Item --}}
-                        <div
-                            class="hover:scale-105 transition duration-300 pb-3 rounded-md shadow-md bg-white hover:border-blue-500 hover:shadow-2xl">
+                        <div class="hover:scale-105 transition duration-300 pb-3 rounded-md shadow-md bg-white hover:border-blue-500 hover:shadow-2xl">
 
                             {{-- Tour Image --}}
                             @if (count($tour->images))
@@ -470,7 +476,7 @@
                                     <span
                                         class="text-xl font-bold">{{ $tour->place ? $tour->place->place_name : '' }}</span>
                                     <span class="block text-right text-2xl font-bold text-orange-500">
-                                        {{ substr($tour->tour_prices, 0, strlen($tour->tour_prices) - 6) . '.' . substr($tour->tour_prices, 1, 3) . '.' . substr($tour->tour_prices, -3, 3) . ' VND' }}
+                                        {{ number_format($tour->tour_prices). ' VND' }}
                                     </span>
                                 </div>
                                 {{-- /Tour Destination & Prices --}}
@@ -520,7 +526,8 @@
                                             d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
                                             clip-rule="evenodd"></path>
                                     </svg>
-                                    <span class="text-sm">{{ substr($tour->tour_detail, 0, 100) . '...' }}</span>
+                                    <span
+                                        class="text-sm">{{ substr($tour->tour_description, 0, 50) . '...' }}</span>
                                 </div>
                                 {{-- /Description --}}
 
