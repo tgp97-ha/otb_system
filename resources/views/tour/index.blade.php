@@ -346,13 +346,13 @@
     @else
         <div class="p-6 bg-gray-100 border rounded-lg shadow-md">
             {{--  --}}
-            <div class="mb-6">
+            <div class="mb-12">
 
                 {{-- Welcome Section --}}
                 <div
                     class="grid grid-cols-12 gap-6 p-6 bg-gray-100 border-gray-50 rounded-lg shadow-md bg-[url('/images/slide1.jpg')] bg-center">
 
-                    <div class="col-span-7 px-16 pt-6 text-white">
+                    <div class="col-span-8 px-16 pt-6 text-white">
                         <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none">
                             WELCOME TO OTB SYSTEM
                         </h1>
@@ -362,7 +362,7 @@
                     </div>
 
                     {{-- Find Tour --}}
-                    <div class="col-span-5 p-6 bg-gray-100 border-gray-50 rounded-lg shadow-md opacity-90">
+                    <div class="col-span-4 p-6 bg-gray-100 border-gray-50 rounded-lg shadow-md">
                         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Find Tour</h5>
                         <form method="POST" action="{{ url('/tour/list/') }}">
                             @csrf
@@ -478,7 +478,7 @@
                 <div class="grid grid-cols-3 gap-6">
                     @foreach ($tours as $tour)
                         {{-- Grid Item --}}
-                        <div class="hover:scale-105 transition duration-300 pb-3 rounded-md shadow-md">
+                        <div class="hover:scale-105 transition duration-300 pb-3 rounded-md shadow-md bg-white hover:border-blue-500 hover:shadow-2xl">
 
                             {{-- Tour Image --}}
                             @if (count($tour->images))
@@ -549,17 +549,17 @@
                                             clip-rule="evenodd"></path>
                                     </svg>
                                     <span
-                                        class="text-base font-medium">{{ substr($tour->tour_detail, 0, 100) . '...' }}</span>
+                                        class="text-sm">{{ substr($tour->tour_detail, 0, 100) . '...' }}</span>
                                 </div>
                                 {{-- /Description --}}
 
-                                {{-- Link --}}
+                                {{-- See more --}}
                                 <div class="flex items-center justify-end">
                                     <a href="{{ url('/tour/detail/' . $tour->serial) }}"
                                         class="px-5 py-2.5 bg-blue-700 text-sm font-medium text-white rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300">See
                                         more</a>
                                 </div>
-                                {{-- /Link --}}
+                                {{-- /See more --}}
 
                             </div>
                             {{-- Tour Info --}}
