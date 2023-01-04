@@ -1,4 +1,4 @@
-@extends('layout.management')
+@extends('layout.table')
 
 @section('content')
     {{-- Search Operator --}}
@@ -39,7 +39,7 @@
 
     {{-- Operator List --}}
     <div class="">
-        <h5 class="text-xl font-bold mb-4 ml-4">Tourist List</h5>
+        <h5 class="text-xl font-bold mb-4">Tourist List</h5>
         <div class="flex items-center justify-between pb-4 bg-white">
             <table class="w-full text-sm text-left text-gray-500 rounded-lg shadow-md">
                 <thead class="bg-gray-100">

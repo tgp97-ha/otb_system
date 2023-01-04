@@ -1260,9 +1260,6 @@ input:checked + .toggle-bg {
 .w-\[40\%\] {
   width: 40%;
 }
-.w-\[200px\] {
-  width: 200px;
-}
 .w-5 {
   width: 1.25rem;
 }
@@ -1289,18 +1286,6 @@ input:checked + .toggle-bg {
 }
 .w-\[150px\] {
   width: 150px;
-}
-.w-\[\] {
-  width: ;
-}
-.w-\[5\] {
-  width: 5;
-}
-.w-\[50\%\] {
-  width: 50%;
-}
-.w-\[0\%\] {
-  width: 0%;
 }
 .min-w-\[224px\] {
   min-width: 224px;

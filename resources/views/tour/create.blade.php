@@ -18,12 +18,12 @@
                     {{-- Name --}}
                     <div>
                         <label for="tour_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                            Name
+                            Tour Code Name
                         </label>
                         <input id="tour_name" type="text"
                             class="{{ $errors->has('tour_name') ? 'border-red-600 focus:ring-red-600 focus:border-red-600 dark:focus:ring-red-500 dark:focus:border-red-500' : '' }} bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             name="tour_name" required autofocus>
-                            
+
                         @if ($errors->has('tour_name'))
                             <p class="mt-2 text-sm text-red-600 dark:text-red-500">
                                 <strong>{{ $errors->first('tour_name') }}</strong>
@@ -117,6 +117,11 @@
                             <input datepicker datepicker-autohide datepicker-format="dd/mm/yyyy" type="text"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 name="start_date"placeholder="dd/mm/yyyy">
+                            @if ($errors->has('start_date'))
+                                <p class="mt-2 text-sm text-red-600 dark:text-red-500">
+                                    <strong>{{ $errors->first('start_date') }}</strong>
+                                </p>
+                            @endif
                         </div>
                     </div>
                     {{-- /Start Date --}}

@@ -1,4 +1,4 @@
-@extends('layout.management')
+@extends('layout.table')
 
 @section('content')
     {{-- Tour List --}}

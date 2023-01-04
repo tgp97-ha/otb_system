@@ -208,7 +208,7 @@
                 </div>
                 {{-- /Payment Method --}}
 
-                <form class="pl-3" action="{{ url('/tour/payment/' . $booking->serial) }}" method="GET">
+                <form class="pl-3" action="{{ url('/tour/payment/' . $booking->serial) }}" method="POST">
                     @csrf
                     <div class="flex items-center justify-end">
                         <button type="submit"
