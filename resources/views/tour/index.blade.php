@@ -270,7 +270,7 @@
 
                             <div class="mb-3">
                                 <span class="block text-right text-2xl font-bold text-orange-500">
-                                    {{ number_format($tour->tour_prices). ' VND' }}
+                                    {{ number_format($tour->tour_prices) . ' VND' }}
                                 </span>
                                 <span class="block text-right text-base font-bold text-gray-500">
                                     /person
@@ -330,7 +330,7 @@
                 <div
                     class="grid grid-cols-12 gap-6 p-6 bg-gray-100 border-gray-50 rounded-lg shadow-md bg-[url('/images/slide1.jpg')] bg-center">
 
-                    <div class="col-span-8 px-16 pt-6 text-white">
+                    <div class="col-span-7 px-16 pt-6 text-white">
                         <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none">
                             WELCOME TO OTB SYSTEM
                         </h1>
@@ -340,7 +340,7 @@
                     </div>
 
                     {{-- Find Tour --}}
-                    <div class="col-span-4 p-6 bg-gray-100 border-gray-50 rounded-lg shadow-md">
+                    <div class="col-span-5 p-6 bg-gray-100 border-gray-50 rounded-lg shadow-md">
                         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Find Tour</h5>
                         <form method="POST" action="{{ url('/tour/list/') }}">
                             @csrf
@@ -456,7 +456,8 @@
                 <div class="grid grid-cols-3 gap-6">
                     @foreach ($tours as $tour)
                         {{-- Grid Item --}}
-                        <div class="hover:scale-105 transition duration-300 pb-3 rounded-md shadow-md bg-white hover:border-blue-500 hover:shadow-2xl">
+                        <div
+                            class="hover:scale-105 transition duration-300 pb-3 rounded-md shadow-md bg-white hover:border-blue-500 hover:shadow-2xl">
 
                             {{-- Tour Image --}}
                             @if (count($tour->images))
@@ -473,10 +474,22 @@
 
                                 {{-- Tour Destination & Prices --}}
                                 <div class="flex items-center justify-between">
-                                    <span
-                                        class="text-xl font-bold">{{ $tour->place ? $tour->place->place_name : '' }}</span>
+                                    <span class="text-xl font-bold">
+                                        {{ $tour->place ? $tour->place->place_name : '' }}</span>
+                                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd"
+                                            d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                                            clip-rule="evenodd"></path>
+                                    </svg>
+                                    <span class="text-xl font-bold">
+                                        {{ $tour->startingPlace->place_name ? $tour->startingPlace->place_name : '' }}</span>
+                                    </span>
+
+                                </div>
+                                <div>
                                     <span class="block text-right text-2xl font-bold text-orange-500">
-                                        {{ number_format($tour->tour_prices). ' VND' }}
+                                        {{ number_format($tour->tour_prices) . ' VND' }}
                                     </span>
                                 </div>
                                 {{-- /Tour Destination & Prices --}}
@@ -526,8 +539,7 @@
                                             d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
                                             clip-rule="evenodd"></path>
                                     </svg>
-                                    <span
-                                        class="text-sm">{{ substr($tour->tour_description, 0, 50) . '...' }}</span>
+                                    <span class="text-sm">{{ substr($tour->tour_description, 0, 50) . '...' }}</span>
                                 </div>
                                 {{-- /Description --}}
 
