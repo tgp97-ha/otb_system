@@ -1030,8 +1030,11 @@ input:checked + .toggle-bg {
 .col-span-3 {
   grid-column: span 3 / span 3;
 }
-.col-span-8 {
-  grid-column: span 8 / span 8;
+.col-span-7 {
+  grid-column: span 7 / span 7;
+}
+.col-span-5 {
+  grid-column: span 5 / span 5;
 }
 .col-span-4 {
   grid-column: span 4 / span 4;
@@ -1039,11 +1042,8 @@ input:checked + .toggle-bg {
 .col-span-1 {
   grid-column: span 1 / span 1;
 }
-.col-span-5 {
-  grid-column: span 5 / span 5;
-}
-.col-span-7 {
-  grid-column: span 7 / span 7;
+.col-span-8 {
+  grid-column: span 8 / span 8;
 }
 .float-right {
   float: right;
@@ -1101,8 +1101,8 @@ input:checked + .toggle-bg {
 .mb-4 {
   margin-bottom: 1rem;
 }
-.mb-6 {
-  margin-bottom: 1.5rem;
+.ml-4 {
+  margin-left: 1rem;
 }
 .mb-12 {
   margin-bottom: 3rem;
@@ -1128,8 +1128,8 @@ input:checked + .toggle-bg {
 .mb-1 {
   margin-bottom: 0.25rem;
 }
-.ml-4 {
-  margin-left: 1rem;
+.mb-6 {
+  margin-bottom: 1.5rem;
 }
 .-ml-1 {
   margin-left: -0.25rem;
@@ -1260,6 +1260,9 @@ input:checked + .toggle-bg {
 .w-\[40\%\] {
   width: 40%;
 }
+.w-\[200px\] {
+  width: 200px;
+}
 .w-5 {
   width: 1.25rem;
 }
@@ -1286,6 +1289,18 @@ input:checked + .toggle-bg {
 }
 .w-\[150px\] {
   width: 150px;
+}
+.w-\[\] {
+  width: ;
+}
+.w-\[5\] {
+  width: 5;
+}
+.w-\[50\%\] {
+  width: 50%;
+}
+.w-\[0\%\] {
+  width: 0%;
 }
 .min-w-\[224px\] {
   min-width: 224px;
@@ -1740,9 +1755,6 @@ input:checked + .toggle-bg {
 .pl-10 {
   padding-left: 2.5rem;
 }
-.pb-4 {
-  padding-bottom: 1rem;
-}
 .pl-0 {
   padding-left: 0px;
 }
@@ -1766,12 +1778,6 @@ input:checked + .toggle-bg {
 }
 .pt-3 {
   padding-top: 0.75rem;
-}
-.pl-5 {
-  padding-left: 1.25rem;
-}
-.pt-1 {
-  padding-top: 0.25rem;
 }
 .text-left {
   text-align: left;
@@ -2284,10 +2290,6 @@ input:checked + .toggle-bg {
 .dark .dark\:border-red-600 {
   --tw-border-opacity: 1;
   border-color: rgb(224 36 36 / var(--tw-border-opacity));
-}
-.dark .dark\:border-gray-700 {
-  --tw-border-opacity: 1;
-  border-color: rgb(55 65 81 / var(--tw-border-opacity));
 }
 .dark .dark\:border-blue-500 {
   --tw-border-opacity: 1;

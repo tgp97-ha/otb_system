@@ -246,8 +246,8 @@ class TourController extends Controller
 			'images',
 			'tourDetails'
 		])->find($id);
-		$comments = Comment::where('tour_serial', '=', $id)->whereNotNull('comment_rating')->get();
-		$ratingArray = [];
+		$comments = Comment::with('tourist')->has('tourist')->where('tour_serial', '=', $id)->whereNotNull('comment_rating')->get();
+		$ratingArray = [0, 0, 0, 0, 0];
 		$oneStars = 0;
 		$twoStars = 0;
 		$threeStars = 0;
@@ -272,22 +272,22 @@ class TourController extends Controller
 					break;
 			}
 		}
-		$ratingArray[] = (int)($oneStars / count($comments) * 100);
-		$ratingArray[] = (int)($twoStars / count($comments) * 100);
-		$ratingArray[] = (int)($threeStars / count($comments) * 100);
-		$ratingArray[] = (int)($fourStars / count($comments) * 100);
-		$ratingArray[] = (int)($fiveStars / count($comments) * 100);
+		if (count($comments)) {
+			$ratingArray[0] = (int)($oneStars / count($comments) * 100);
+			$ratingArray[1] = (int)($twoStars / count($comments) * 100);
+			$ratingArray[2] = (int)($threeStars / count($comments) * 100);
+			$ratingArray[3] = (int)($fourStars / count($comments) * 100);
+			$ratingArray[4] = (int)($fiveStars / count($comments) * 100);
+		}
 		if (Auth::user()) {
 			$booking = Booking::where('tour_serial', $item->serial)->where('user_id', auth()->user()->id)->first();
 			if ($booking) {
-				return view('tour.detail', ['tour' => $item, 'booking' => $booking, 'ratingArray' => $ratingArray]);
+				return view('tour.detail', ['tour' => $item, 'booking' => $booking, 'comments' => $comments, 'ratingArray' => $ratingArray]);
 			} else {
-				// dd($item);
-				return view('tour.detail', ['tour' => $item, 'ratingArray' => $ratingArray]);
+				return view('tour.detail', ['tour' => $item, 'comments' => $comments, 'ratingArray' => $ratingArray]);
 			}
 		}
-
-		return view('tour.detail', ['tour' => $item]);
+		return view('tour.detail', ['tour' => $item, 'comments' => $comments, 'ratingArray' => $ratingArray]);
 	}
 
 	/**
@@ -418,6 +418,8 @@ class TourController extends Controller
 		$tour    = Tour::with(['startingPlace', 'place', 'services'])->find($id);
 		$user    = auth()->user();
 		$booking = new Booking();
+
+		
 
 		$booking->user_id          = $user->id;
 		$booking->tour_serial      = $tour->serial;
