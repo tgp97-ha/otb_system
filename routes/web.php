@@ -66,6 +66,7 @@ Route::middleware(['auth'])->group(function () {
 		Route::post('/book/{id}', [TourController::class, 'book']);
 		Route::post('/comment/{id}', [TourController::class, 'comment']);
 		Route::post('/payment/{id}', [TourController::class, 'payment']);
+		Route::get('/analysis', [TourController::class, 'analysis']);
 	});
 	Route::resource('tour-operator', 'TourOperatorController');
 	Route::resource('tourist', 'TouristController');
