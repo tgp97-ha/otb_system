@@ -34,7 +34,7 @@
                                         d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
                                         clip-rule="evenodd"></path>
                                 </svg>
-                                <span class="mr-1 text-sm font-normal text-gray-600">Điểm khởi hành:</span>
+                                <span class="mr-1 text-sm font-normal text-gray-600">Departure:</span>
                                 <span class="text-sm font-medium text-gray-900">{{ $tour->startingPlace->place_name }}</span>
                             </div>
                             <div class="flex items-center">
@@ -45,7 +45,7 @@
                                         clip-rule="evenodd"></path>
                                 </svg>
                                 <span class="mr-1 text-sm font-normal text-gray-600">
-                                    Điểm đến:
+                                    Arrival:
                                 </span>
                                 <span class="text-sm font-medium text-gray-900">
                                     {{ $tour->place->place_name }}
@@ -59,7 +59,7 @@
                                         clip-rule="evenodd"></path>
                                 </svg>
                                 <span class="mr-1 text-sm font-normal text-gray-600">
-                                    Ngày khởi hành:
+                                    Starting Date:
                                 </span>
                                 <span class="text-sm font-medium text-gray-900">
                                     {{$tour->tour_start_date}}
@@ -73,7 +73,7 @@
                                         clip-rule="evenodd"></path>
                                 </svg>
                                 <span class="mr-1 text-sm font-normal text-gray-600">
-                                    Thời gian:
+                                    Length:
                                 </span>
                                 <span class="text-sm font-medium text-gray-900">
                                     {{ $tour->tour_day_length . ' days ' . ' / ' . $tour->tour_night_length . ' nights' }}
@@ -99,9 +99,9 @@
 
                 {{-- Total --}}
                 <div class="col-span-4 flex items-center justify-end">
-                    <h1 class="text-xl font-medium mr-2">Thành tiền:</h1>
+                    <h1 class="text-xl font-medium mr-2">Total:</h1>
                     <span class="block text-right text-2xl font-bold text-orange-500">
-                        {{ number_format($tour->tour_prices) . ' VND' }}
+                        {{ number_format((float)$tour->tour_prices) . ' VND' }}
                     </span>
                 </div>
                 {{-- /Total --}}
@@ -112,36 +112,10 @@
 
 
             <div class="p-4 border rounded-lg shadow-lg bg-white">
-                {{-- Payment Type --}}
-                <div class="">
-                    <h3 class="mb-4 text-xl font-semibold text-gray-900">LOẠI HÌNH THANH TOÁN</h3>
-                    <ul class="w-100 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg">
-                        <li class="w-full border-b border-gray-200 rounded-t-lg">
-                            <div class="flex items-center pl-3">
-                                <input class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500"
-                                    type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                                <label class="w-full py-3 ml-2 text-sm font-medium text-gray-900" for="flexRadioDefault1">
-                                    Thanh toán toàn bộ (100% giá trị tour)
-                                </label>
-                            </div>
-                        <li class="w-full border-b border-gray-200 rounded-t-lg">
-                            <div class="flex items-center pl-3">
-                                <input class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500"
-                                    type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-                                <label class="w-full py-3 ml-2 text-sm font-medium text-gray-900" for="flexRadioDefault2">
-                                    Đặt cọc trước (20% giá trị tour)
-                                </label>
-                            </div>
-                        <li>
-
-                        </li>
-                    </ul>
-                </div>
-                {{-- /Payment Type --}}
 
                 {{-- Payment Method --}}
                 <div class="mb-4">
-                    <h3 class="mb-4 text-xl font-semibold text-gray-900">PHƯƠNG THỨC THANH TOÁN</h3>
+                    <h3 class="mb-4 text-xl font-semibold text-gray-900">Payment Method</h3>
                     <ul class="text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg">
                         <li class="w-full border-b border-gray-200 rounded-t-lg">
                             <div class="flex items-center pl-3">
@@ -149,7 +123,7 @@
                                     type="radio" name="flexRadioDefaultMethodPayment" id="flexRadioDefaultMethodPayment1">
                                 <label class="w-full py-3 ml-2 text-sm font-medium text-gray-900"
                                     for="flexRadioDefaultMethodPayment1">
-                                    Thanh toán trực tuyến bằng thẻ ngân hàng
+                                    Banking Payment
                                 </label>
                             </div>
                         </li>
@@ -158,20 +132,19 @@
                         <div class="p-4">
                             {{-- Banking Info --}}
                             <div class="rounded-lg bg-gray-100">
-                                <h5 class="mb-4 text-xl font-semibold text-gray-900">Tài khoản ngân hàng của OBTS:</h5>
+                                <h5 class="mb-4 text-xl font-semibold text-gray-900">OBTS's Bank Account:</h5>
                                 <div class="flex items-center">
                                     <div class="">
                                         <img src="https://inkythuatso.com/uploads/images/2021/11/mb-bank-logo-inkythuatso-01-10-09-01-10.jpg"
                                             class="object-fill w-44" alt="">
                                     </div>
                                     <div class="flex flex-col justify-between p-4 leading-normal">
-                                        <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900">Ngân hàng TMCP Quân
-                                            Đội
-                                            - CN Đà
-                                            Nẵng
+                                        <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900">Military Commercial Joint Stock Bank
+                                            Team
+                                            - Da Nang branch
                                         </h5>
-                                        <h5 class="mb-3 font-medium text-gray-700">STK: 0123456789</h5>
-                                        <h5 class="mb-3 font-medium text-gray-700">CTK: OBTSystem</h5>
+                                        <h5 class="mb-3 font-medium text-gray-700">Account Number: 0123456789</h5>
+                                        <h5 class="mb-3 font-medium text-gray-700">Account Name: OBTSystem</h5>
                                     </div>
                                 </div>
                             </div>
@@ -181,11 +154,10 @@
 
                             {{-- Transfer Content --}}
                             <div class="rounded-lg bg-gray-100">
-                                <h5 class="mb-4 text-xl font-semibold text-gray-900">Nội dung chuyển khoản:</h5>
+                                <h5 class="mb-4 text-xl font-semibold text-gray-900">Transfer Content:</h5>
                                 <div class="flex flex-col items-start">
-                                    <h5 class="mb-3 font-medium text-gray-700">Họ và tên + tên tour</h5>
-                                    <h5 class="mb-3 font-medium text-gray-700">Ví dụ: Nguyen Van A, Ha Noi - Da Nang -
-                                        Hoi An</h5>
+                                    <h5 class="mb-3 font-medium text-gray-700">Name + Tour Name</h5>
+                                    <h5 class="mb-3 font-medium text-gray-700">Example: Nguyen Van A, Ha Noi - Da Nang - Hoi An</h5>
                                 </div>
                             </div>
                             {{-- /Transfer Content --}}
@@ -198,7 +170,7 @@
                                     id="flexRadioDefaultMethodPayment2" checked>
                                 <label class="w-full py-3 ml-2 text-sm font-medium text-gray-900"
                                     for="flexRadioDefaultMethodPayment2">
-                                    Thanh toán trực tiếp tại OBTS
+                                    Pay directly at OBTS
                                 </label>
                             </div>
                         </li>

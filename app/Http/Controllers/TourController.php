@@ -458,6 +458,7 @@ class TourController extends Controller
 		$comment->user_id         = $user->id;
 		$sentiment = new Sentiment();
 		$scores    = $sentiment->score( $request->comment );
+		dd($scores);
 		$comment_rating = 100*((float)$scores['pos'] - (float)$scores['neu']);
 		$comment->comment_analysis_rating = $comment_rating;
 		$comment->save();
