@@ -445,7 +445,7 @@
                                 {{-- Tour Destination & Prices --}}
                                 <div class="flex items-center justify-between">
                                     <span class="text-xl font-bold">
-                                        {{ $tour->place ? $tour->place->place_name : '' }}</span>
+                                        {{$tour->startingPlace->place_name ? $tour->startingPlace->place_name : ''}}</span>
                                     <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <path fill-rule="evenodd"
@@ -453,7 +453,7 @@
                                             clip-rule="evenodd"></path>
                                     </svg>
                                     <span class="text-xl font-bold">
-                                        {{ $tour->startingPlace->place_name ? $tour->startingPlace->place_name : '' }}</span>
+                                        {{  $tour->place ? $tour->place->place_name : ''  }}</span>
                                     </span>
 
                                 </div>
