@@ -240,46 +240,26 @@
                             <label for="tour_detail" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tour
                                 Image</label>
                             <div>
+                                @if ($errors->has('tour_image[]'))
+                                    <p class="mt-2 text-sm text-red-600 dark:text-red-500">
+                                        <strong>{{ $errors->first('tour_image[]') }}</strong>
+                                    </p>
+                                @endif
                                 <input id="tour_image_1" type="file"
                                        class="{{ $errors->has('tour_image_1') ? ' border-red-600d dark:border-red-600' : '' }} block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
                                        name="tour_image[]">
-                                @if ($errors->has('tour_image_1'))
-                                    <p class="mt-2 text-sm text-red-600 dark:text-red-500">
-                                        <strong>{{ $errors->first('tour_image_1') }}</strong>
-                                    </p>
-                                @endif
                                 <input id="tour_image_2" type="file"
                                        class="{{ $errors->has('tour_image_2') ? ' border-red-600d dark:border-red-600' : '' }} block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
                                        name="tour_image[]">
-                                @if ($errors->has('tour_image_2'))
-                                    <p class="mt-2 text-sm text-red-600 dark:text-red-500">
-                                        <strong>{{ $errors->first('tour_image_2') }}</strong>
-                                    </p>
-                                @endif
                                 <input id="tour_image_3" type="file"
                                        class="{{ $errors->has('tour_image_3') ? ' border-red-600d dark:border-red-600' : '' }} block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
                                        name="tour_image[]">
-                                @if ($errors->has('tour_image_3'))
-                                    <p class="mt-2 text-sm text-red-600 dark:text-red-500">
-                                        <strong>{{ $errors->first('tour_image_3') }}</strong>
-                                    </p>
-                                @endif
                                 <input id="tour_image_4" type="file"
                                        class="{{ $errors->has('tour_image_4') ? ' border-red-600d dark:border-red-600' : '' }} block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
                                        name="tour_image[]">
-                                @if ($errors->has('tour_image_4'))
-                                    <p class="mt-2 text-sm text-red-600 dark:text-red-500">
-                                        <strong>{{ $errors->first('tour_image_4') }}</strong>
-                                    </p>
-                                @endif
                                 <input id="tour_image_5" type="file"
                                        class="{{ $errors->has('tour_image_5') ? ' border-red-600d dark:border-red-600' : '' }} block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
                                        name="tour_image[]">
-                                @if ($errors->has('tour_image_5'))
-                                    <p class="mt-2 text-sm text-red-600 dark:text-red-500">
-                                        <strong>{{ $errors->first('tour_image_5') }}</strong>
-                                    </p>
-                                @endif
                             </div>
                         </div>
                         {{-- /Images --}}
