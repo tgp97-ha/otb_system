@@ -86,7 +86,6 @@ class TourController extends Controller
 	}
 
 	public function list( Request $request ) {
-
 		$tours = Tour::with( 'startingPlace','place', 'services' );
 		if ( $request ) {
 			if ( $request->input( 'destination' ) !== null && $request->input( 'destination' ) !== 'Choose destination'  ) {
@@ -96,10 +95,10 @@ class TourController extends Controller
 				$tours->where( 'tour_starting_place', '=', $request->input( 'departure' ) );
 			}
 			if ( $request->input( 'start_date_range_begin' ) !== null ) {
-				$tours->whereDate( 'tour_start_date', '>=', $request->input( 'start_date_range_begin' ) );
+				$tours->where( 'tour_start_date', '>=', $request->input( 'start_date_range_begin' ) );
 			}
 			if ($request->input('start_date_range_end') !== null) {
-				$tours->whereDate('tour_start_date', '<=', $request->input('start_date_range_begin'));
+				$tours->where('tour_start_date', '<=', $request->input('start_date_range_end'));
 			}
 			if ($request->input('price_range_begin') !== null) {
 				$tours->where('tour_prices', '>=', $request->input('price_range_begin'));
@@ -107,10 +106,20 @@ class TourController extends Controller
 			if ($request->input('price_range_end') !== null) {
 				$tours->where('tour_prices', '>=', $request->input('price_range_end'));
 			}
+			if ( $request->input( 'operator' ) !== null ) {
+				$tours->with( 'userTourist' )->whereHas( 'userTourist', function ( $user ) use ( $request ) {
+					$user->with( 'tourOperator' )->whereHas( 'tourOperator', function ( $operator ) use ( $request ) {
+						$operator->where( 'tour_operator_name', 'LIKE', '%' . $request->input( 'operator' ) . '%' );
+					} );
+				} );
+			}
+			if ( $request->input( 'peple_number' ) !== null ) {
+				$tours->where('tour_slots_left','>',$request->input( 'peple_number' ) );
+			}
 		}
 		if ( ! Auth::user() || Auth::user()->can( 'tourist' ) ) {
 			$tours
-				//->whereDate( 'tour_start_date', '>=', Carbon::today() )
+				->where( 'tour_start_date', '>=', Carbon::today() )
 				->where( 'tour_is_verify', '=', 1 );
 		}
 		if (Auth::user()) {
@@ -449,6 +458,7 @@ class TourController extends Controller
 		$comment->user_id         = $user->id;
 		$sentiment = new Sentiment();
 		$scores    = $sentiment->score( $request->comment );
+		dd($scores);
 		$comment_rating = 100*((float)$scores['pos'] - (float)$scores['neu']);
 		$comment->comment_analysis_rating = $comment_rating;
 		$comment->save();
