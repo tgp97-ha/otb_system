@@ -217,8 +217,12 @@ class TouristController extends Controller
 
 	public function myTours() {
 		$user  = auth()->user();
-		$tours = Tour::with( 'bookings' )->whereHas( 'bookings', function ( $bookings ) use ( $user ) {
-            $bookings->where( 'user_id', $user->id );
+		$tours = Tour::with( [
+			'bookings' => function ( $bookings ) use ( $user ) {
+				return $bookings->where( 'user_id', $user->id );
+			},
+		] )->whereHas( 'bookings', function ( $bookings ) use ( $user ) {
+			$bookings->where( 'user_id', $user->id );
 		} );
         $operators = TourOperator::all();
 

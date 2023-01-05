@@ -429,6 +429,12 @@ class TourController extends Controller
 		return view('tour.payment', ['tour' => $tour, 'booking' => $booking]);
 	}
 
+	public function handlePay($id){
+		$booking = Booking::find($id);
+		$tour = Tour::find($booking->tour_serial);
+		return view('tour.payment', ['tour' => $tour, 'booking' => $booking]);
+	}
+
 	public function comment( $id, Request $request ) {
 
 		$tour = Tour::find( $id );
@@ -468,7 +474,6 @@ class TourController extends Controller
 
 	public function payment($id)
 	{
-		dd(1);
 		$booking = Booking::find($id);
 
 		$booking->isPaid = true;
