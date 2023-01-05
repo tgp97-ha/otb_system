@@ -1,7 +1,7 @@
 @extends('layout.base')
 
 @section('content')
-    <div class="w-[40%] mx-auto bg-white p-6 rounded-lg">
+    <div class="w-[80%] mx-auto bg-white p-6 rounded-lg">
         <h1 class="text-2xl font-bold text-gray-900 mb-6">Register as tour operator</h1>
         <form class="" method="POST" action="{{ route('tour-operator.store') }}">
             {{ csrf_field() }}

@@ -34,15 +34,15 @@
 
                     {{-- Title --}}
                     <div>
-                        <label for="username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        <label for="title" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                             Title
                         </label>
                         <div>
-                            <input id="username" type="text"
+                            <input id="title" type="text"
                                 class="{{ $errors->has('title') ? 'border-red-600 focus:ring-red-600 focus:border-red-600 dark:focus:ring-red-500 dark:focus:border-red-500' : '' }} bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 name="title" required>
 
-                            @if ($errors->has('address'))
+                            @if ($errors->has('title'))
                                 <p class="mt-2 text-sm text-red-600 dark:text-red-500">
                                     <strong>{{ $errors->first('address') }}</strong>
                                 </p>
@@ -76,7 +76,7 @@
                         </div>
                     </div>
                     <div>
-                        <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        <label for="destination" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                             Destination
                         </label>
                         <div class="">
@@ -221,19 +221,19 @@
                             class="block mb-2 text-sm font-semibold text-gray-900 dark:text-white">TOUR
                             DETAIL</label>
                         <div>
-                            <textarea id="tour_detail"
+                            <textarea
                                 class="{{ $errors->has('tour_detail') ? ' border-red-600 focus:ring-red-600 focus:border-red-600 dark:focus:ring-red-500 dark:focus:border-red-500' : '' }} mb-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 name="tour_detail[]" rows="2" placeholder="Tour Detail 1"></textarea>
-                            <textarea id="tour_detail"
+                            <textarea
                                 class="{{ $errors->has('tour_detail') ? '  border-red-600 focus:ring-red-600 focus:border-red-600 dark:focus:ring-red-500 dark:focus:border-red-500' : '' }} mb-2  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 name="tour_detail[]" rows="2" placeholder="Tour Detail 2"></textarea>
-                            <textarea id="tour_detail"
+                            <textarea
                                 class="{{ $errors->has('tour_detail') ? ' border-red-600 focus:ring-red-600 focus:border-red-600 dark:focus:ring-red-500 dark:focus:border-red-500' : '' }} mb-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 name="tour_detail[]" rows="2" placeholder="Tour Detail 3"></textarea>
-                            <textarea id="tour_detail"
+                            <textarea
                                 class="{{ $errors->has('tour_detail') ? 'border-red-600 focus:ring-red-600 focus:border-red-600 dark:focus:ring-red-500 dark:focus:border-red-500' : '' }} mb-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 name="tour_detail[]" rows="2" placeholder="Tour Detail 4"></textarea>
-                            <textarea id="tour_detail"
+                            <textarea
                                 class="{{ $errors->has('tour_detail') ? ' border-red-600 focus:ring-red-600 focus:border-red-600 dark:focus:ring-red-500 dark:focus:border-red-500' : '' }} mb-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 name="tour_detail[]" rows="2" placeholder="Tour Detail 5"></textarea>
 
@@ -248,7 +248,7 @@
 
                     {{-- Images --}}
                     <div>
-                        <label for="tour_detail" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tour
+                        <label for="tour_image" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tour
                             Image</label>
                         <div>
                             <input id="tour_image_1" type="file"
