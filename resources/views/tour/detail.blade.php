@@ -486,7 +486,7 @@
             {{-- /Rate & Comment --}}
 
             {{-- Users List --}}
-            @if (Auth::user()->can('tour-operator') || Auth::user()->can('admin'))
+            @if (!Auth::guest() &&( Auth::user()->can('tour-operator') || Auth::user()->can('admin')))
                 <div class="mb-4 p-4">
                     <h5 class="text-xl font-bold mb-4">
                         Booked List
