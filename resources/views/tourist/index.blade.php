@@ -54,7 +54,7 @@
                 </thead>
                 <tbody>
                     @foreach ($tourists as $tourist)
-                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50">
+                        <tr class="bg-white border-b hover:bg-gray-50">
                             <td class="px-6 py-4">{{ $tourist->tourist_name }}</td>
                             <td class="px-6 py-4">{{ $tourist->address }}</td>
                             <td class="px-6 py-4">{{ $tourist->date_of_birth }}</td>
