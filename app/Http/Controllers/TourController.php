@@ -13,6 +13,7 @@ use App\Models\TourOperator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use function Symfony\Component\String\s;
 
 class TourController extends Controller
 {
