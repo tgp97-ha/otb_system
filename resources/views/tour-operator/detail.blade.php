@@ -2,10 +2,11 @@
 
 @section('content')
     @if(Auth::user() &&( Auth::user()->can( 'tour-operator' ) || Auth::user()->can('admin')))
-        <div>
-            <h4 class="mb-6 text-2xl font-bold dark:text-white">Profile</h4>
+        <div class="ml-32">
+            <h5 class="text-xl font-bold mb-4">Profile</h5>
 
-            <div class="bg-white p-6 rounded-md">
+            <div class="w-full bg-white p-6 rounded-lg shadow-lg">
+
                 <form method="POST" action="{{ url('tour-operator/edit-profile', [$tourOperator->serial]) }}">
                     {{ csrf_field() }}
 
