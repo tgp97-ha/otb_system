@@ -15,7 +15,7 @@
                     <div class="min-w-max">
                         @if (count($tour->images))
                             <img src="{{ asset('storage/tour/' . $tour->images[0]->file_path) }}" alt=""
-                                class="object-cover w-48 h-44 rounded-md" style="200px" title="" />
+                                class="object-cover w-48 h-44 rounded-md" title="" />
                         @else
                             <img src="https://livedemo00.template-help.com/wt_51676/images/landing-private-airlines-01-570x370.jpg"
                                 class="object-cover w-48 h-44 rounded-md" alt="">
@@ -110,8 +110,6 @@
         </div>
         {{-- /Tour Info --}}
 
-
-        <form action="">
 
             <div class="p-4 border rounded-lg shadow-lg bg-white">
                 {{-- Payment Type --}}
@@ -208,7 +206,7 @@
                 </div>
                 {{-- /Payment Method --}}
 
-                <form class="pl-3" action="{{ url('/tour/payment/' . $booking->serial) }}" method="POST">
+                <form class="pl-3" action="{{ url('tour/payment/' . $booking->id) }}" method="POST">
                     @csrf
                     <div class="flex items-center justify-end">
                         <button type="submit"
@@ -216,6 +214,5 @@
                     </div>
                 </form>
             </div>
-        </form>
     </div>
 @endsection

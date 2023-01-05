@@ -163,10 +163,15 @@
                             href="{{ url('/tour/detail/' . $tour->serial) }}">
                             Detail
                         </a>
-                        <a href=""
+{{--                        @php--}}
+{{--                        dd($tour->bookings[0]->id);--}}
+{{--                        @endphp--}}
+                        @if(!$tour->bookings[0]->isPaid)
+                        <a href="{{ url('/tour/pay-booking/' . $tour->bookings[0]->id) }}"
                             class="w-48 text-center text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-blue-300 font-semibold rounded-lg text-base px-5 py-2.5">
-                            Refund
+                            Pay
                         </a>
+                        @endif
                     </div>
                     {{-- /Actions --}}
 
