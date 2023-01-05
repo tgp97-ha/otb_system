@@ -1,9 +1,13 @@
-@extends('layout.base')
+@extends('layout.management')
 
 @section('content')
-    <div class="">
-        <div class="bg-white p-6 rounded-md">
-            <h4 class="mb-6 text-2xl font-bold dark:text-white">My Profile</h4>
+    <div class="w-[70%] mx-auto">
+        <h5 class="text-xl font-bold mb-4">
+            My Profile
+        </h5>
+        <div class="w-full bg-white p-4 rounded-lg shadow-lg">
+
+
             {{-- Grid Container --}}
             <div class="grid grid-cols-1 gap-6">
                 <div class="w-full flex items-center justify-center">
@@ -76,36 +80,53 @@
             </div>
             {{-- /Grid Container --}}
 
-            @can('admin')
-                <div class="card pt-2">
-                    <div class="card-header">Booked Tours</div>
-                    <div class="card-body">
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <td>Tour Name</td>
-                                    <td>Tour Destination</td>
-                                    <td>Tour Date</td>
-                                    <td>Booked At</td>
-                                    <td>Functions</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($tourist->userTourist->bookings as $booking)
-                                    <tr>
-                                        <td>{{ $booking->tours->tour_title }}</td>
-                                        <td>{{ $booking->tours->place->place_name }}</td>
-                                        <td>{{ $booking->tours->tour_start_date }}</td>
-                                        <td>{{ $booking->created_at }}</td>
-                                        <td> <a class="btn btn-primary"
-                                                href="{{ url('/tour/detail/' . $booking->tours->serial) }}">Detail</a></td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            @endcan
+
         </div>
+
     </div>
+    @can('admin')
+        <div class="mb-4">
+            <h5 class="text-xl font-bold mb-4">
+                Booked Tours
+            </h5>
+            <div class="relative overflow-x-auto">
+                <table class="w-full text-sm text-left text-gray-500">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+                        <tr>
+                            <th scope="col" class="px-6 py-3">Tour Name</td>
+                            <th scope="col" class="px-6 py-3">Tour Destination</td>
+                            <th scope="col" class="px-6 py-3">Tour Date</td>
+                            <th scope="col" class="px-6 py-3">Booked At</td>
+                            <th scope="col" class="px-6 py-3">Functions</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($tourist->userTourist->bookings as $booking)
+                            <tr class="bg-white border-b">
+                                <td class="px-6 py-4">{{ $booking->tours->tour_title }}</td>
+                                <td class="px-6 py-4">{{ $booking->tours->place->place_name }}</td>
+                                <td class="px-6 py-4">{{ $booking->tours->tour_start_date }}</td>
+                                <td class="px-6 py-4">{{ $booking->created_at }}</td>
+                                <td class="px-6 py-4">
+                                    <div class="flex items-center">
+                                        <a class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2"
+                                            href="{{ url('/tour/detail/' . $booking->tours->serial) }}">
+                                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z">
+                                                </path>
+                                            </svg>
+                                            Detail
+                                        </a>
+                                    </div>
+
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    @endcan
 @endsection

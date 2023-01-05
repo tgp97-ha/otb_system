@@ -1,12 +1,12 @@
 @extends('layout.base')
 
 @section('content')
-    <div class="">
+    <div class="ml-32">
 
-        <h5 class="text-xl font-bold mb-4 ml-4">Create Tour</h5>
+        <h5 class="text-xl font-bold mb-4">Create Tour</h5>
 
 
-        <div class="w-[80%] mx-auto bg-white p-6 rounded-lg shadow-lg">
+        <div class="w-full bg-white p-6 rounded-lg shadow-lg">
 
 
             <form class="" method="POST" action="{{ route('tour.store') }}" enctype="multipart/form-data">

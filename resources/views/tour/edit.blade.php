@@ -2,12 +2,11 @@
 
 @section('content')
     @if(Auth::user() &&( Auth::user()->can( 'tour-operator' ) || Auth::user()->can('admin')))
-        <div class="">
+        <div class="ml-32">
 
-            <h4 class="mb-6 text-2xl font-bold dark:text-white">Edit Tour</h4>
+            <h5 class="text-xl font-bold mb-4">Edit Tour</h5>
 
-
-            <div class="bg-white p-6 rounded-md">
+            <div class="bg-white p-4 rounded-md">
 
                 <form class="" method="POST" action="{{ url('tour/edit/' . $tour->serial) }}" enctype="multipart/form-data">
                     {{ csrf_field() }}
