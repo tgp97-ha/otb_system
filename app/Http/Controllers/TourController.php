@@ -172,7 +172,7 @@ class TourController extends Controller
 		$request->validate([
 			'tour_name'        => 'required|min:2|max:64',
 			'title'            => 'required|string',
-			'departure'        => 'required',
+			'departure'        => 'different:destination,required',
 			'destination'      => 'required',
 			'start_date'       => 'required',
 			'tour_description' => 'required',
@@ -256,8 +256,6 @@ class TourController extends Controller
 			'tourDetails'
 		] )->find( $id );
 
-		$bookingsList = Booking::with('tourist')->get();
-
 		$comments = Comment::where( 'tour_serial', '=', $id )->whereNotNull( 'comment_rating' )->get();
 		$ratingArray = [0,0,0,0,0];
 		if(count($comments))
@@ -293,12 +291,17 @@ class TourController extends Controller
 			$ratingArray[4] = (int) ( $fiveStars / count( $comments ) * 100 );
 		}
 		if ( Auth::user() ) {
-			$booking = Booking::where( 'tour_serial', $item->serial )->where( 'user_id', auth()->user()->id )->first();
+			if(Auth::user()->can('tourist')){
+				$booking = Booking::where( 'tour_serial', $item->serial )->where( 'user_id', auth()->user()->id )->first();
+			}
+			else{
+				$booking = Booking::with('tourist.tourist')->where( 'tour_serial', $item->serial )->get();
+			}
 			if ( $booking ) {
-				return view( 'tour.detail', [ 'tour' => $item, 'booking' => $booking, 'ratingArray'=> $ratingArray, 'bookingsList' => $bookingsList ] );
+				return view( 'tour.detail', [ 'tour' => $item, 'booking' => $booking, 'ratingArray'=> $ratingArray] );
 			} else {
 				// dd($item);
-				return view( 'tour.detail', [ 'tour' => $item, 'ratingArray'=> $ratingArray, 'bookingsList' => $bookingsList] );
+				return view( 'tour.detail', [ 'tour' => $item, 'ratingArray'=> $ratingArray] );
 			}
 		}
 
@@ -318,7 +321,7 @@ class TourController extends Controller
 			return view('welcome');
 		}
 		try {
-			$item     = Tour::with(['startingPlace', 'place', 'services', 'tourDetails'])->findOrFail($id);
+			$item     = Tour::with(['startingPlace', 'place', 'services', 'tourDetails','images'])->findOrFail($id);
 			$place    = Place::all();
 		} catch (\Exception $exception) {
 			return back()->withError($exception->getMessage())->withInput();
@@ -343,14 +346,13 @@ class TourController extends Controller
 		$request->validate([
 			'tour_name'        => 'required|min:2|max:64',
 			'title'            => 'required|string',
-			'destination'      => 'required',
+			'destination'      => 'different:departure,required',
 			'start_date'       => 'required',
 			'tour_description' => 'required',
 			'departure'        => 'required',
 			'night_length'     => 'required',
 			'day_length'       => 'required',
 			'tour_slot'        => 'required',
-			//'tour_slot_left'   => 'required',
 			'tour_image.*'     => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
 		]);
 
@@ -425,10 +427,11 @@ class TourController extends Controller
 			return redirect(route('login'));
 		}
 		$tour    = Tour::with(['startingPlace', 'place', 'services'])->find($id);
+		if( (int) $tour->tour_slots_left < (int)$request->people_number){
+			return redirect()->back()->withErrors(['msg' => 'No tour slot left']);
+		}
 		$user    = auth()->user();
 		$booking = new Booking();
-
-		
 
 		$booking->user_id          = $user->id;
 		$booking->tour_serial      = $tour->serial;
@@ -437,7 +440,7 @@ class TourController extends Controller
 
 		$booking->save();
 
-		$tour->tour_slots_left = (int) $tour->tour_slots_left - 1;
+		$tour->tour_slots_left = (int) $tour->tour_slots_left - (int)$request->people_number;
 		$tour->save();
 
 		return view('tour.payment', ['tour' => $tour, 'booking' => $booking]);
@@ -461,8 +464,7 @@ class TourController extends Controller
 		$comment->user_id         = $user->id;
 		$sentiment = new Sentiment();
 		$scores    = $sentiment->score( $request->comment );
-		dd($scores);
-		$comment_rating = 100*((float)$scores['pos'] - (float)$scores['neu']);
+		$comment_rating = 100*((float)$scores['pos'] - (float)$scores['neg']);
 		$comment->comment_analysis_rating = $comment_rating;
 		$comment->save();
 
