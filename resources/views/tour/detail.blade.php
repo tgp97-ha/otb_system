@@ -491,8 +491,6 @@
         {{-- Booking --}}
         @if (!isset($booking))
             <div>
-                @if (\Illuminate\Support\Facades\Auth::user() || !\Illuminate\Support\Facades\Auth::user())
-                    @can('tourist')
                         <form action="{{ url('/tour/book/' . $tour->serial) }}" method="POST">
                             <div class="grid grid-cols-1 gap-6 p-6 bg-gray-100 border rounded-lg">
                                 <div>
@@ -501,20 +499,18 @@
                                 <div class="">
                                     <div class="">Choose the number of people</div>
                                     <input type="number" min="0" max="200" value="0" name="people_number"
-                                        class="block w-full p-2.5 text-sm font-medium text-gray-900 bg-gray-50 border border-gray-300 rounded-lg hover:border-blue-500 focus:ring-blue-500 focus:border-blue-500">
+                                           class="block w-full p-2.5 text-sm font-medium text-gray-900 bg-gray-50 border border-gray-300 rounded-lg hover:border-blue-500 focus:ring-blue-500 focus:border-blue-500">
                                 </div>
                                 <div class="flex justify-end items-center">
                                     <button
-                                        class="block px-5 py-2.5 rounded-lg text-sm font-medium text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300"
-                                        type="submit">BOOK NOW</button>
+                                            class="block px-5 py-2.5 rounded-lg text-sm font-medium text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300"
+                                            type="submit">BOOK NOW
+                                    </button>
                                 </div>
                                 @csrf
                             </div>
-                        @endcan
-                        {{-- <a href="{{ url('/login') }}">
-                            <button class="book-now-btn">BOOK NOW</button> --}}
+                        </form>
             </div>
-        @endif
         {{-- /Booking --}}
 
 
