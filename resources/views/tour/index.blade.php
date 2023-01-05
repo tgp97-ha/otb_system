@@ -226,7 +226,7 @@
                                             d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                     </svg>
                                     <span class="text-sm text-gray-900">
-                                        {{ $tour->tour_description }}
+                                        {{ strlen($tour->tour_description)>400?substr($tour->tour_description,0,399).'...': $tour->tour_description}}
                                     </span>
                                 </div>
                                 {{-- /Description --}}

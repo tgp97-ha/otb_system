@@ -48,7 +48,7 @@ class TourController extends Controller
 				});
 			}
 		}
-		$tours = $tours->paginate(10, ['*']);
+		$tours = $tours->paginate(9, ['*']);
 
 		return view('tour.index', [
 			'tours'     => $tours,
@@ -75,7 +75,7 @@ class TourController extends Controller
 				});
 			}
 		}
-		$tours = $tours->paginate(10, ['*']);
+		$tours = $tours->paginate(9, ['*']);
 
 		return view('tour.analysis', [
 			'tours'     => $tours,
@@ -119,7 +119,6 @@ class TourController extends Controller
 		}
 		if ( ! Auth::user() || Auth::user()->can( 'tourist' ) ) {
 			$tours
-				->where( 'tour_start_date', '>=', Carbon::today() )
 				->where( 'tour_is_verify', '=', 1 );
 		}
 		if (Auth::user()) {
@@ -134,7 +133,7 @@ class TourController extends Controller
 				}
 			}
 		}
-		$tours    = $tours->paginate(10);
+		$tours    = $tours->paginate(9);
 		$places   = Place::all();
 		$services = Service::all();
 

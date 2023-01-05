@@ -138,12 +138,10 @@
                         PHOTOS
                     </h1>
                     @foreach ($tour->images as $key => $image)
-                        @if ($key !== 0)
                             <div class="w-[800px] h-[600px] mb-4">
                                 <img src="{{ asset('storage/tour/' . $image->file_path) }}" alt=""
                                     class="object-fill w-full h-full" title="" />
                             </div>
-                        @endif
                     @endforeach
                 </div>
             @endif
