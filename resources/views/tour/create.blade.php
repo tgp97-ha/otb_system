@@ -1,12 +1,12 @@
 @extends('layout.base')
 
 @section('content')
-    <div class="">
+    <div class="ml-32">
 
-        <h5 class="text-xl font-bold mb-4 ml-4">Create Tour</h5>
+        <h5 class="text-xl font-bold mb-4">Create Tour</h5>
 
 
-        <div class="w-[80%] mx-auto bg-white p-6 rounded-lg shadow-lg">
+        <div class="w-full bg-white p-6 rounded-lg shadow-lg">
 
 
             <form class="" method="POST" action="{{ route('tour.store') }}" enctype="multipart/form-data">
@@ -23,7 +23,7 @@
                         <input id="tour_name" type="text"
                             class="{{ $errors->has('tour_name') ? 'border-red-600 focus:ring-red-600 focus:border-red-600 dark:focus:ring-red-500 dark:focus:border-red-500' : '' }} bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             name="tour_name" required autofocus>
-
+                            
                         @if ($errors->has('tour_name'))
                             <p class="mt-2 text-sm text-red-600 dark:text-red-500">
                                 <strong>{{ $errors->first('tour_name') }}</strong>

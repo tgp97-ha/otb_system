@@ -425,6 +425,8 @@ class TourController extends Controller
 		$user    = auth()->user();
 		$booking = new Booking();
 
+		
+
 		$booking->user_id          = $user->id;
 		$booking->tour_serial      = $tour->serial;
 		$booking->number_of_people = $request->people_number;

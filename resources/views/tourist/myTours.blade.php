@@ -2,7 +2,7 @@
 
 @section('content')
     {{-- @if (Auth::user() && (Auth::user()->can('tour-operator') || Auth::user()->can('admin'))) --}}
-    <div class="w-full bg-gray-50 p-6 rounded-lg">
+    <div class="w-full bg-gray-50 rounded-lg">
 
         <h1 class="mb-6 text-3xl font-bold text-gray-900">My Tours</h1>
 
@@ -149,7 +149,7 @@
                     {{-- Prices --}}
                     <div class="">
                         <span class="block text-right text-2xl font-bold text-orange-500">
-                            {{ substr($tour->tour_prices, 0, strlen($tour->tour_prices) - 6) . ',' . substr($tour->tour_prices, 1, 3) . '.' . substr($tour->tour_prices, -3, 3) . ' VND' }}
+                            {{ number_format($tour->tour_prices) . ' VND' }}
                         </span>
                         <span class="block text-right text-base font-bold text-gray-500">
                             /person
@@ -163,14 +163,14 @@
                             href="{{ url('/tour/detail/' . $tour->serial) }}">
                             Detail
                         </a>
-{{--                        @php--}}
-{{--                        dd($tour->bookings[0]->id);--}}
-{{--                        @endphp--}}
-                        @if(!$tour->bookings[0]->isPaid)
-                        <a href="{{ url('/tour/pay-booking/' . $tour->bookings[0]->id) }}"
-                            class="w-48 text-center text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-blue-300 font-semibold rounded-lg text-base px-5 py-2.5">
-                            Pay
-                        </a>
+                        {{--                        @php --}}
+                        {{--                        dd($tour->bookings[0]->id); --}}
+                        {{--                        @endphp --}}
+                        @if (!$tour->bookings[0]->isPaid)
+                            <a href="{{ url('/tour/pay-booking/' . $tour->bookings[0]->id) }}"
+                                class="w-48 mb-3 px-5 py-2.5 text-base text-center text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-blue-300 font-semibold rounded-lg">
+                                Purchase
+                            </a>
                         @endif
                     </div>
                     {{-- /Actions --}}
