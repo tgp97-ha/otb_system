@@ -37,7 +37,7 @@ class TourController extends Controller
 		$tours     = Tour::with('place', 'services', 'images');
 		$places    = Place::all();
 		$services  = Service::all();
-		$operators = TourOperator::all();;
+		$operators = TourOperator::all();
 		if (!Auth::user() || Auth::user()->can('tourist')) {
 			$tours->where('tour_is_verify', 1);
 		}
@@ -246,6 +246,9 @@ class TourController extends Controller
 			'images',
 			'tourDetails'
 		] )->find( $id );
+
+		$bookingsList = Booking::with('tourist')->get();
+
 		$comments = Comment::where( 'tour_serial', '=', $id )->whereNotNull( 'comment_rating' )->get();
 		$ratingArray = [0,0,0,0,0];
 		if(count($comments))
@@ -283,10 +286,10 @@ class TourController extends Controller
 		if ( Auth::user() ) {
 			$booking = Booking::where( 'tour_serial', $item->serial )->where( 'user_id', auth()->user()->id )->first();
 			if ( $booking ) {
-				return view( 'tour.detail', [ 'tour' => $item, 'booking' => $booking, 'ratingArray'=> $ratingArray ] );
+				return view( 'tour.detail', [ 'tour' => $item, 'booking' => $booking, 'ratingArray'=> $ratingArray, 'bookingsList' => $bookingsList ] );
 			} else {
 				// dd($item);
-				return view( 'tour.detail', [ 'tour' => $item, 'ratingArray'=> $ratingArray] );
+				return view( 'tour.detail', [ 'tour' => $item, 'ratingArray'=> $ratingArray, 'bookingsList' => $bookingsList] );
 			}
 		}
 

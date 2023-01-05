@@ -47,7 +47,6 @@
                             </div>
                             {{-- /Price Range --}}
 
-                            <div class="grid grid-rows-1 gap-y-3">
 
                                 {{-- Start Date --}}
                                 <div class="">
@@ -119,7 +118,6 @@
                                 @endcan
                                 {{-- /Tour Verify --}}
 
-                            </div>
 
                             {{-- Submit Button --}}
                             <div class="col-span-2 flex justify-end items-center">
