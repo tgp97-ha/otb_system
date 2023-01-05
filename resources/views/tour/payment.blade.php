@@ -101,7 +101,7 @@
                 <div class="col-span-4 flex items-center justify-end">
                     <h1 class="text-xl font-medium mr-2">Total:</h1>
                     <span class="block text-right text-2xl font-bold text-orange-500">
-                        {{ number_format((float)$tour->tour_prices) . ' VND' }}
+                        {{ number_format((float)$tour->tour_prices * (float) $booking->number_of_people, 2).'VND'}}
                     </span>
                 </div>
                 {{-- /Total --}}
