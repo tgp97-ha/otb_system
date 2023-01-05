@@ -87,13 +87,13 @@
 
     </div>
     @can('admin')
-        <div class="mb-4">
+        <div class="mb-4 p-4">
             <h5 class="text-xl font-bold mb-4">
                 Booked Tours
             </h5>
             <div class="relative overflow-x-auto">
                 <table class="w-full text-sm text-left text-gray-500">
-                    <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-100">
                         <tr>
                             <th scope="col" class="px-6 py-3">Tour Name</td>
                             <th scope="col" class="px-6 py-3">Tour Destination</td>
@@ -104,7 +104,7 @@
                     </thead>
                     <tbody>
                         @foreach ($tourist->userTourist->bookings as $booking)
-                            <tr class="bg-white border-b">
+                            <tr class="bg-white border-b hover:bg-gray-50">
                                 <td class="px-6 py-4">{{ $booking->tours->tour_title }}</td>
                                 <td class="px-6 py-4">{{ $booking->tours->place->place_name }}</td>
                                 <td class="px-6 py-4">{{ $booking->tours->tour_start_date }}</td>

@@ -256,6 +256,8 @@ class TourController extends Controller
 			'tourDetails'
 		] )->find( $id );
 
+		$bookingsList = Booking::with('tourist')->get();
+
 		$comments = Comment::where( 'tour_serial', '=', $id )->whereNotNull( 'comment_rating' )->get();
 		$ratingArray = [0,0,0,0,0];
 		if(count($comments))
@@ -298,10 +300,10 @@ class TourController extends Controller
 				$booking = Booking::with('tourist.tourist')->where( 'tour_serial', $item->serial )->get();
 			}
 			if ( $booking ) {
-				return view( 'tour.detail', [ 'tour' => $item, 'booking' => $booking, 'ratingArray'=> $ratingArray] );
+				return view( 'tour.detail', [ 'tour' => $item, 'booking' => $booking, 'ratingArray'=> $ratingArray, 'bookingsList' => $bookingsList ] );
 			} else {
 				// dd($item);
-				return view( 'tour.detail', [ 'tour' => $item, 'ratingArray'=> $ratingArray] );
+				return view( 'tour.detail', [ 'tour' => $item, 'ratingArray'=> $ratingArray, 'bookingsList' => $bookingsList] );
 			}
 		}
 
@@ -432,6 +434,8 @@ class TourController extends Controller
 		}
 		$user    = auth()->user();
 		$booking = new Booking();
+
+		
 
 		$booking->user_id          = $user->id;
 		$booking->tour_serial      = $tour->serial;
