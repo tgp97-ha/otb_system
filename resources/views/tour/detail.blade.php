@@ -198,7 +198,7 @@
 
                             {{-- Total Rating --}}
                             <div class="flex flex-col items-center jusity-center px-[10%]">
-                                <h3 class="mb-2 text-xl font-semibold text-gray-900">{{ $tour->tour_rating }} / 5
+                                <h3 class="mb-2 text-xl font-semibold text-gray-900">{{ number_format($tour->tour_rating,2) }} / 5
                                     <svg aria-hidden="true" style="display: inline" class="w-5 h-5 text-yellow-400"
                                         fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                         <title>First star</title>
@@ -307,28 +307,28 @@
                                                 d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
                                             </path>
                                         </svg>
-                                        <svg aria-hidden="true" class="w-5 h-5 text-yellow-400" fill="currentColor"
+                                        <svg aria-hidden="true" class="w-5 h-5 {{((int)$comment->comment_rating>=2)?"text-yellow-400":'text-gray-300 dark:text-gray-500'}}" fill="currentColor"
                                             viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                             <title>Second star</title>
                                             <path
                                                 d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
                                             </path>
                                         </svg>
-                                        <svg aria-hidden="true" class="w-5 h-5 text-yellow-400" fill="currentColor"
+                                        <svg aria-hidden="true" class="w-5 h-5 {{((int)$comment->comment_rating>=3)?"text-yellow-400":'text-gray-300 dark:text-gray-500'}}" fill="currentColor"
                                             viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                             <title>Third star</title>
                                             <path
                                                 d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
                                             </path>
                                         </svg>
-                                        <svg aria-hidden="true" class="w-5 h-5 text-yellow-400" fill="currentColor"
+                                        <svg aria-hidden="true" class="w-5 h-5 {{((int)$comment->comment_rating>=4)?"text-yellow-400":'text-gray-300 dark:text-gray-500'}}" fill="currentColor"
                                             viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                             <title>Fourth star</title>
                                             <path
                                                 d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
                                             </path>
                                         </svg>
-                                        <svg aria-hidden="true" class="w-5 h-5 text-gray-300 dark:text-gray-500"
+                                        <svg aria-hidden="true" class="w-5 h-5 {{((int)$comment->comment_rating>=5)?"text-yellow-400":'text-gray-300 dark:text-gray-500'}}"
                                             fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                             <title>Fifth star</title>
                                             <path
@@ -353,7 +353,7 @@
             {{-- Reviews --}}
 
             {{-- Rate & Comment --}}
-            @if (isset($booking))
+            @if (isset($booking) && Auth::user()->can('tourist'))
                 <div class="p-4 border rounded-lg shadow-lg bg-white">
                     <form method="POST" action="{{ url('tour/comment/' . $tour->serial) }}"
                         enctype="multipart/form-data">
@@ -500,29 +500,16 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($bookingsList as $booking)
+                            @if(isset($booking) && count($booking))
+                                @foreach ($booking as $booking_detail)
                                     <tr class="bg-white border-b hover:bg-gray-50">
-                                        <td class="px-6 py-4">{{ \App\Models\Tourist::where('user_serial', '=', 3)->first()->tourist_name }}</td>
-                                        <td class="px-6 py-4">{{ $booking->tourist->email }}</td>
-                                        <td class="px-6 py-4">{{ $booking->created_at }}</td>
-                                        <td class="px-6 py-4">{{ $booking->isPaid ? 'paid' : 'unpaid' }}</td>
-                                        {{-- <td class="px-6 py-4">
-                                                <div class="flex items-center">
-                                                    <a class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2"
-                                                        href="{{ url('/tour/detail/' . $booking->tours->serial) }}">
-                                                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor"
-                                                            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                                stroke-width="2"
-                                                                d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z">
-                                                            </path>
-                                                        </svg>
-                                                        Detail
-                                                    </a>
-                                                </div>
-                                            </td> --}}
+                                        <td class="underline text-blue-400 px-6 py-4"><a href="{{url('tourist/detail/'.$booking_detail->tourist->id)}}">{{ $booking_detail->tourist->tourist->tourist_name }}</a></td>
+                                        <td class="px-6 py-4">{{ $booking_detail->tourist->email }}</td>
+                                        <td class="px-6 py-4">{{ $booking_detail->created_at }}</td>
+                                        <td class="px-6 py-4">{{ $booking_detail->isPaid ? 'paid' : 'unpaid' }}</td>
                                     </tr>
                                 @endforeach
+                            @endif
                             </tbody>
                         </table>
                     </div>
@@ -546,6 +533,9 @@
                             <input type="number" min="0" max="200" value="0" name="people_number"
                                 class="block w-full p-2.5 text-sm font-medium text-gray-900 bg-gray-50 border border-gray-300 rounded-lg hover:border-blue-500 focus:ring-blue-500 focus:border-blue-500">
                         </div>
+                        @if($errors->any())
+                            <span class="text-red-500">{{$errors->first()}}</span>
+                        @endif
                         <div class="flex justify-end items-center">
                             <button
                                 class="block px-5 py-2.5 rounded-lg text-sm font-medium text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300"
