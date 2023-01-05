@@ -354,7 +354,7 @@
                                     <label class="block mb-2 text-sm font-medium text-gray-900">From</label>
                                     <select
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                                        name="destination" autocomplete="off" id="destination">
+                                        name="departure" autocomplete="off" id="departure">
                                         <option class="text-gray-200">Choose destination</option>
                                         @foreach ($places as $place)
                                             <option value="{{ $place->serial }}">{{ $place->place_name }}</option>
@@ -366,7 +366,7 @@
                                     <select
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                                         name="destination" autocomplete="off">
-                                        <option class="text-gray-200">Choose destination</option>
+                                        <option class="text-gray-200" >Choose destination</option>
                                         @foreach ($places as $place)
                                             <option value="{{ $place->serial }}">{{ $place->place_name }}</option>
                                         @endforeach

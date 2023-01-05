@@ -51,10 +51,10 @@ class LoginController extends Controller{
 			return redirect( '/login' )->withErrors( [ 'message' => 'You are unauthorized to login' ] );
 		}
 		if($request->login_type == 1 && !$user->tourist){
-			return redirect( 'tourist.create');
+			return redirect( '/tourist/create');
 		}
 		if($request->login_type == 2 && !$user->tourOperator){
-			return redirect( 'tour-operator.create');
+			return redirect( '/tour-operator/create');
 		}
 	}
 }
